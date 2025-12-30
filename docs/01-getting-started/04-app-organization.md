@@ -24,6 +24,12 @@ After initialization, you will receive Sidebar, Page, getStaticParams, getMetada
 Global elements - [`RobinProvider`](../03-customization/01-elements/robin-provider.md), [`Header`](../03-customization/01-elements/header.md), [`Footer`](../03-customization/01-elements/footer.md), [`Containers`](../03-customization/01-elements/containers.md) and [`Sidebar`](../03-customization/01-elements/sidebar.md) - should ideally be placed above all pages and reused across all.
 Currently, Robindoc works only with the App Router. Once RSC is available for the Pages Router, Robindoc will automatically support it as well.
 
+### Isolation
+
+Robindoc is fully isolated and does not provide any global styles. It does not affect anything inside the documentation as well, including custom JSX components used within markdown files. This means the package can be safely used inside any other service with any libraries without conflicts or style leakage.
+
+The `RobinProvider` component wraps the documentation in a special `div` with the required `r-root` class. This wrapper is necessary for proper scoping of Robindoc's styles. If for some reason you cannot use this wrapper, you can pass `component={Fragment}` to `RobinProvider` and manually add the `r-root` class to your root element that wraps all documentation parts.
+
 ## Page Setup
 
 Next.js supports dynamic routes, so it is recommended to set up one [dynamic segment](https://nextjs.org/docs/app/building-your-application/routing/dynamic-routes#optional-catch-all-segments) for all documentation pages.

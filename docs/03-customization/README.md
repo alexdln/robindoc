@@ -42,6 +42,9 @@ const DocumentationPage = () => (
 export default DocumentationPage;
 ```
 
+> [!NOTE]
+> Robindoc is fully isolated and does not provide any global styles and does not affect anything inside the documentation. For more details, see the [Isolation](../01-getting-started/04-app-organization.md#isolation) section.
+
 Framework-based logic configuration - search API route, and the current page path - is up to you. For more details, read the [App Organization](../01-getting-started/04-app-organization.md) page.
 
 Robindoc works entirely does not require any modifications to the bundler. The framework is fully built on the capabilities of RSC, allowing you to build documentation as a static site or generate pages dynamically.
