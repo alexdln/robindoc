@@ -43,30 +43,30 @@
   }
 }
 
-.theme-dark:not(.theme-system) .r-theme-switcher::before {
+.r-theme-dark:not(.r-theme-system) .r-theme-switcher::before {
   left: 2px;
 }
 
-.theme-dark:not(.theme-system) .r-theme-switcher-btn__dark {
+.r-theme-dark:not(.r-theme-system) .r-theme-switcher-btn__dark {
   color: var(--r-neutral-950);
   pointer-events: none;
 }
 
 .r-theme-switcher::before,
-.theme-system .r-theme-switcher::before {
+.r-theme-system .r-theme-switcher::before {
   left: 38px;
 }
 
-.theme-system .r-theme-switcher-btn__system {
+.r-theme-system .r-theme-switcher-btn__system {
   color: var(--r-neutral-950);
   pointer-events: none;
 }
 
-.theme-light:not(.theme-system) .r-theme-switcher::before {
+.r-theme-light:not(.r-theme-system) .r-theme-switcher::before {
   left: 74px;
 }
 
-.theme-light:not(.theme-system) .r-theme-switcher-btn__light {
+.r-theme-light:not(.r-theme-system) .r-theme-switcher-btn__light {
   color: var(--r-neutral-950);
   pointer-events: none;
 }
