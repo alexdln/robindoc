@@ -4,6 +4,7 @@
   "description": "",
   "scripts": {
     "lint": "eslint .",
+    "eslint": "eslint",
     "prepare": "husky"
   },
   "repository": {

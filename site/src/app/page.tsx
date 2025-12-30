@@ -1,9 +1,9 @@
-import { PageContainer } from 'robindoc';
+import { PageContainer } from "robindoc";
 
-import { Features } from '../components/sections/features';
-import { Intro } from '../components/sections/intro';
+import { Features } from "../components/sections/features";
+import { Intro } from "../components/sections/intro";
 
-import './home.scss';
+import "./home.scss";
 
 const Home = () => {
     return (
@@ -12,6 +12,6 @@ const Home = () => {
             <Features />
         </PageContainer>
     );
-}
+};
 
 export default Home;

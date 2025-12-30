@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-import './package-links.scss';
+import "./package-links.scss";
 
 export const PackageLinks = () => {
     return (
@@ -11,9 +11,7 @@ export const PackageLinks = () => {
                 target="_blank"
                 rel="noopener noreferrer"
             >
-                <span className="package-links-link-inner">
-                    NPM
-                </span>
+                <span className="package-links-link-inner">NPM</span>
             </a>
             <a
                 href="https://github.com/vordgi/robindoc"
@@ -21,10 +19,8 @@ export const PackageLinks = () => {
                 target="_blank"
                 rel="noopener noreferrer"
             >
-                <span className="package-links-link-inner">
-                    GitHub
-                </span>
+                <span className="package-links-link-inner">GitHub</span>
             </a>
         </div>
-    )
-}
+    );
+};

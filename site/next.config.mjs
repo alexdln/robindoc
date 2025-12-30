@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     outputFileTracingIncludes: {
-        '/api/search': ['../docs/**/*', '../README.md'],
+        "/api/search": ["../docs/**/*", "../README.md"],
     },
 };
 

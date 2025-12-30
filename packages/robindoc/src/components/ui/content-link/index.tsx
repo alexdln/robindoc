@@ -7,8 +7,7 @@ import { ExternalMark } from "../external-mark";
 import "./content-link.scss";
 
 export interface ContentLinkProps
-    extends Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, "href">,
-        React.PropsWithChildren<LinkProps> {
+    extends Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, "href">, React.PropsWithChildren<LinkProps> {
     external?: boolean;
 }
 
