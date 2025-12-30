@@ -1,8 +1,10 @@
 import { Container } from "robindoc/lib/components/ui/container";
 import Image from "next/image";
 import Link from "next/link";
+import nimplTech from "./images/nimpl-tech.png";
+import nextjsDev from "./images/nextjs-dev.png";
 
-import './showcases.scss';
+import "./showcases.scss";
 
 const Showcases = () => (
     <Container className="showcases">
@@ -11,7 +13,7 @@ const Showcases = () => (
         </h1>
         <div className="showcases-btns">
             <Link
-                href="https://github.com/vordgi/robindoc/discussions/278"
+                href="https://github.com/alexdln/robindoc/discussions/278"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="showcases-btn"
@@ -23,21 +25,22 @@ const Showcases = () => (
             </Link>
         </div>
         <div className="showcases-list">
-            <a href="https://nimpl.tech" target="_blank" rel="noopener noreferrer" className="showcases-card">
-                <Image src={require('./images/nimpl-tech.png').default} alt="" className="showcases-img" />
-                <h2 className="showcases-product">
-                    Nimpl
-                </h2>
+            <a href="https://nimpl.dev" target="_blank" rel="noopener noreferrer" className="showcases-card">
+                <Image src={nimplTech} alt="" className="showcases-img" />
+                <h2 className="showcases-product">Nimpl</h2>
             </a>
-            <a href="https://nextjs-dev.robindoc.com/" target="_blank" rel="noopener noreferrer" className="showcases-card">
-                <Image src={require('./images/nextjs-dev.png').default} alt="" className="showcases-img" />
-                <h2 className="showcases-product">
-                    Next.js Contibuting Guide
-                </h2>
+            <a
+                href="https://nextjs-dev.robindoc.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="showcases-card"
+            >
+                <Image src={nextjsDev} alt="" className="showcases-img" />
+                <h2 className="showcases-product">Next.js Contibuting Guide</h2>
                 <div className="showcases-product-badge">Unofficial</div>
             </a>
         </div>
     </Container>
-)
+);
 
 export default Showcases;

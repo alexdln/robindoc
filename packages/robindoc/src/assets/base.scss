@@ -1,4 +1,4 @@
-@import "./_vars";
+@use "./_vars";
 
 :root {
   overflow: hidden;
@@ -55,11 +55,11 @@ body {
   scrollbar-color: var(--r-neutral-400) var(--r-neutral-200);
   white-space: pre-wrap;
 
-  @media screen and (width < $sm) {
+  @media screen and (width < vars.$sm) {
     scroll-padding-top: calc(var(--header-height) + 60px);
   }
 
-  @media screen and (width > $lg) {
+  @media screen and (width > vars.$lg) {
     scroll-behavior: smooth;
     scrollbar-gutter: stable;
   }
@@ -90,13 +90,13 @@ svg {
 }
 
 .body-mobile-lock {
-  @media screen and (width < $sm) {
+  @media screen and (width < vars.$sm) {
     overflow: hidden;
   }
 }
 
 .body-tablet-lock {
-  @media screen and (width < $md) {
+  @media screen and (width < vars.$md) {
     overflow: hidden;
   }
 }

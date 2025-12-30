@@ -1,4 +1,4 @@
-@import "src/assets/_vars";
+@use "src/assets/_vars";
 
 .r-header {
   position: sticky;
@@ -34,7 +34,7 @@
   flex-direction: column;
   gap: 12px 16px;
 
-  @media screen and (width >= $md) {
+  @media screen and (width >= vars.$md) {
     flex-direction: row;
   }
 }
@@ -66,7 +66,7 @@
   gap: 16px;
   align-items: stretch;
 
-  @media screen and (width >= $md) {
+  @media screen and (width >= vars.$md) {
     flex-direction: row;
     align-items: center;
     gap: 28px;
@@ -79,13 +79,13 @@
   gap: 12px;
 
   & .r-dropdown {
-    @media screen and (width < $sm) {
+    @media screen and (width < vars.$sm) {
       flex: 1;
     }
   }
 
   & .r-dropdown-drop {
-    @media screen and (width < $sm) {
+    @media screen and (width < vars.$sm) {
       max-width: none;
       width: 100%;
       left: 0;

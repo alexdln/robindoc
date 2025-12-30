@@ -1,11 +1,11 @@
-@import "src/assets/_vars";
+@use "src/assets/_vars";
 
 .r-header-social {
   display: flex;
   flex: 1;
   justify-content: flex-end;
 
-  @media screen and (width >= $md) {
+  @media screen and (width >= vars.$md) {
     flex: none;
     justify-content: unset;
   }

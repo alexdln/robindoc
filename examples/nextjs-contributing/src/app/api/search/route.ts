@@ -15,7 +15,7 @@ export const GET = async (request: Request) => {
     const docs: { href: string; raw: string; title: string }[] = [];
 
     for await (const staticParam of staticParams) {
-        const pathname = `/${staticParam.segments.join('/')}`;
+        const pathname = `/${staticParam.segments.join("/")}`;
         const { raw, title } = await getPageData(pathname);
         docs.push({ href: pathname, raw, title });
     }

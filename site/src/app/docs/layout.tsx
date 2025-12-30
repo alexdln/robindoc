@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { DocsContainer, KeylinkToNavigation } from 'robindoc';
+import { DocsContainer, KeylinkToNavigation } from "robindoc";
 
 import { Sidebar } from "./robindoc";
 
 export const metadata: Metadata = {
     title: {
-      template: '%s | Robindoc',
-      default: 'Robindoc Documentation',
+        template: "%s | Robindoc",
+        default: "Robindoc Documentation",
     },
     description: "Robindoc Documentation",
 };

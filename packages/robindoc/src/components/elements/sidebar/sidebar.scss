@@ -1,9 +1,9 @@
-@import "src/assets/_vars";
+@use "src/assets/_vars";
 
 .r-sidebar {
   grid-area: sidebar;
 
-  @media screen and (width < $sm) {
+  @media screen and (width < vars.$sm) {
     position: sticky;
     width: calc(100% + 24px);
     top: var(--header-height);
@@ -24,13 +24,13 @@
 }
 
 .r-sidebar-input:not(:checked) ~ .r-sidebar-btn ~ .r-sidebar-nav {
-  @media screen and (width < $sm) {
+  @media screen and (width < vars.$sm) {
     display: none;
   }
 }
 
 .r-sidebar-nav {
-  @media screen and (width < $sm) {
+  @media screen and (width < vars.$sm) {
     overflow: auto;
     max-height: calc(100vh - var(--header-height) - 41px);
   }
@@ -67,11 +67,11 @@
 .r-sidebar-nav {
   padding: 32px 4px 32px 2px;
 
-  @media screen and (width < $sm) {
+  @media screen and (width < vars.$sm) {
     padding: 12px;
   }
 
-  @media screen and (width >= $sm) {
+  @media screen and (width >= vars.$sm) {
     position: sticky;
     top: var(--header-height);
     overflow: auto;
@@ -83,7 +83,7 @@
 }
 
 .r-sidebar-space {
-  @media screen and (width < $sm) {
+  @media screen and (width < vars.$sm) {
     display: block;
     height: 40px;
   }
@@ -103,7 +103,7 @@
   background-color: var(--r-body);
   z-index: 1;
 
-  @media screen and (width >= $sm) {
+  @media screen and (width >= vars.$sm) {
     display: none;
   }
 }

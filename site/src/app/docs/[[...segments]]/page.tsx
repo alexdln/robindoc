@@ -4,7 +4,7 @@ import { PackageLinks } from "../../../components/ui/package-links";
 
 const Docs = async ({ params }: { params: Promise<{ segments?: string[] }> }) => {
     const { segments } = await params;
-    const pathname = '/docs/' + (segments?.join('/') || '');
+    const pathname = "/docs/" + (segments?.join("/") || "");
     const pageInstriction = await getPageInstruction(pathname);
 
     return (
@@ -15,23 +15,23 @@ const Docs = async ({ params }: { params: Promise<{ segments?: string[] }> }) =>
                 PackageLinks,
             }}
             config={{
-                publicDirs: ['public']
+                publicDirs: ["public"],
             }}
-            editUri={`https://github.com/vordgi/robindoc/edit/main/site/${pageInstriction.origPath}`}
+            editUri={`https://github.com/alexdln/robindoc/edit/main/site/${pageInstriction.origPath}`}
         />
     );
-}
+};
 
 export const generateMetadata = async ({ params }: { params: Promise<{ segments?: string[] }> }) => {
     const { segments } = await params;
-    const pathname = '/docs/' + (segments?.join('/') || '');
+    const pathname = "/docs/" + (segments?.join("/") || "");
     const metadata = await getMetadata(pathname);
     return metadata;
 };
 
 export const generateStaticParams = async () => {
-    const staticParams = await getStaticParams('/docs');
+    const staticParams = await getStaticParams("/docs");
     return staticParams;
-}
+};
 
 export default Docs;

@@ -1,11 +1,11 @@
-@import "src/assets/_vars";
+@use "src/assets/_vars";
 
 .r-header-menu {
   display: flex;
   justify-content: flex-end;
   order: 1;
 
-  @media screen and (width >= $md) {
+  @media screen and (width >= vars.$md) {
     flex: 1;
     order: unset;
   }
@@ -22,7 +22,7 @@
   gap: 24px;
   z-index: 1;
 
-  @media screen and (width < $md) {
+  @media screen and (width < vars.$md) {
     flex-direction: column-reverse;
     padding: 12px;
     background-color: var(--r-body);
@@ -33,7 +33,7 @@
     left: 0;
   }
 
-  @media screen and (width >= $md) {
+  @media screen and (width >= vars.$md) {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -51,7 +51,7 @@
   background: none;
   border: none;
 
-  @media screen and (width >= $md) {
+  @media screen and (width >= vars.$md) {
     display: none;
   }
 }

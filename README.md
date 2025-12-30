@@ -48,4 +48,4 @@ Feel free to create issues with requests, ideas, difficulties, etc. All of them 
 
 ## License
 
-[MIT](https://github.com/vordgi/robindoc/blob/main/LICENSE)
+[MIT](https://github.com/alexdln/robindoc/blob/main/LICENSE)

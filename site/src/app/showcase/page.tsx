@@ -1,9 +1,7 @@
 import Showcases from "../../components/sections/showcases";
 
 const Showcase = () => {
-    return (
-        <Showcases />
-    );
-}
+    return <Showcases />;
+};
 
 export default Showcase;

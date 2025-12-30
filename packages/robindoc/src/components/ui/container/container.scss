@@ -1,7 +1,7 @@
-@import "src/assets/_vars";
+@use "src/assets/_vars";
 
 .r-container {
-  max-width: $lg;
+  max-width: vars.$lg;
   padding-right: 12px;
   padding-left: 12px;
   margin-right: auto;

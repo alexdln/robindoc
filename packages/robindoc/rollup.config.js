@@ -1,8 +1,8 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable @typescript-eslint/no-require-imports */
 const commonjs = require("@rollup/plugin-commonjs");
 const typescript = require("@rollup/plugin-typescript");
 const terser = require("@rollup/plugin-terser");
-const scss = require("rollup-plugin-scss");
+const sass = require("rollup-plugin-sass");
 const { default: preserveDirectives } = require("rollup-preserve-directives");
 
 module.exports = {
@@ -36,12 +36,13 @@ module.exports = {
     plugins: [
         commonjs(),
         typescript({ tsconfig: "./tsconfig.json" }),
-        scss({
-            outputStyle: "compressed",
-            output: true,
-            failOnError: true,
-            fileName: "styles.css",
-            sourceMap: true,
+        sass({
+            output: "lib/styles.css",
+            // outputStyle: "compressed",
+            // output: true,
+            // failOnError: true,
+            // fileName: "styles.css",
+            // sourceMap: true,
             exclude: ["node_modules/"],
         }),
         terser(),

@@ -33,15 +33,6 @@ export const { Page, Sidebar, getStaticParams, getMetadata, getPageData, getPage
             },
         },
         {
-            title: "Examples",
-            type: "heading",
-            items: ["auto"],
-            configuration: {
-                basePath: "/examples",
-                sourceRoot: "https://github.com/vercel/next.js/tree/canary/contributing/examples",
-            },
-        },
-        {
             title: "Repository",
             type: "heading",
             items: ["auto"],

@@ -1,6 +1,6 @@
 import matter from "gray-matter";
 import { lexer, Tokens } from "marked";
-import { set } from "dot-prop";
+import { setProperty } from "dot-prop";
 
 import { type BaseProvider } from "../providers/base";
 import { loadContent } from "./load-content";
@@ -27,7 +27,7 @@ export const getMetadata = async (opts: GetMetadataOptions) => {
         const metaKey = key.startsWith("robin.") && key.substring(6);
 
         if (content && metaKey) {
-            set(acc, metaKey, content);
+            setProperty(acc, metaKey, content);
         }
 
         return acc;

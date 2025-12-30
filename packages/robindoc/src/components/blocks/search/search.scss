@@ -1,4 +1,4 @@
-@import "src/assets/_vars";
+@use "src/assets/_vars";
 
 .r-search-btn {
   position: relative;
@@ -11,7 +11,7 @@
   text-align: left;
   cursor: text;
 
-  @media screen and (width >= $sm) {
+  @media screen and (width >= vars.$sm) {
     width: 220px;
     padding: 8px 96px 8px 20px;
   }
@@ -39,7 +39,7 @@
   top: 50%;
   transform: translateY(-50%);
 
-  @media screen and (width >= $sm) {
+  @media screen and (width >= vars.$sm) {
     display: flex;
   }
 }
@@ -58,7 +58,7 @@
   width: 100%;
   font-size: 16px;
 
-  @media screen and (width >= $sm) {
+  @media screen and (width >= vars.$sm) {
     padding: 16px 72px 16px 20px;
   }
 
