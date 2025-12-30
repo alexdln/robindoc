@@ -6,13 +6,13 @@
 
 .r-contents-sticky {
   position: sticky;
-  top: var(--header-height);
+  top: var(--r-header-height);
   width: 100%;
   box-sizing: border-box;
 
   @media screen and (width >= vars.$lg) {
     padding: 0 12px;
-    max-height: calc(100vh - var(--header-height));
+    max-height: calc(100dvh - var(--r-header-height));
     overflow: auto;
     scrollbar-width: thin;
     scrollbar-color: var(--r-neutral-200) transparent;

@@ -1,4 +1,4 @@
-@use "./_vars";
+@use "src/assets/_vars";
 
 .r-root {
   overflow: hidden;
@@ -41,7 +41,7 @@
 }
 
 .r-root {
-  --header-height: 60px;
+  --r-header-height: 60px;
   position: relative;
   padding: 0;
   margin: 0;
@@ -49,15 +49,15 @@
   box-sizing: border-box;
   background-color: var(--r-body);
   color: var(--r-neutral-950);
-  height: 100vh;
+  height: 100dvh;
   overflow: hidden auto;
-  scroll-padding-top: calc(var(--header-height) + 20px);
+  scroll-padding-top: calc(var(--r-header-height) + 20px);
   scrollbar-color: var(--r-neutral-400) var(--r-neutral-200);
   white-space: pre-wrap;
   box-sizing: border-box;
 
   @media screen and (width < vars.$sm) {
-    scroll-padding-top: calc(var(--header-height) + 60px);
+    scroll-padding-top: calc(var(--r-header-height) + 60px);
   }
 
   @media screen and (width > vars.$lg) {

@@ -16,13 +16,15 @@ const typeClassNames = {
 
 export const TabsHeader: React.FC<TabsHeaderProps> = ({ tabs, tabsTypeId, type }) => {
     const changeTabHandler = (tab: string) => {
-        const classNames = Array.from(document.documentElement.classList);
+        const rootElement = document.querySelector<HTMLElement>(".r-root");
+        if (!rootElement) return;
+        const classNames = Array.from(rootElement.classList);
         classNames.forEach((className) => {
             if (className.startsWith(`r-tabs-global__${tabsTypeId}`)) {
-                document.documentElement.classList.remove(className);
+                rootElement.classList.remove(className);
             }
         });
-        document.documentElement.classList.add(`r-tabs-global__${tabsTypeId}`, `r-tabs-global__${tabsTypeId}_${tab}`);
+        rootElement.classList.add(`r-tabs-global__${tabsTypeId}`, `r-tabs-global__${tabsTypeId}_${tab}`);
         saveTab(tabsTypeId, tab);
     };
 

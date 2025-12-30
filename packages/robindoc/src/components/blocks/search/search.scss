@@ -85,7 +85,7 @@
 
 .r-search-results {
   padding: 12px 8px 8px;
-  max-height: min(400px, calc(100vh - 200px));
+  max-height: min(400px, calc(100dvh - 200px));
   overflow-y: auto;
   list-style: none;
   scrollbar-width: thin;

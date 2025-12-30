@@ -6,7 +6,7 @@ const sass = require("rollup-plugin-sass");
 const { default: preserveDirectives } = require("rollup-preserve-directives");
 
 module.exports = {
-    input: ["src/index.tsx", "src/assets/index.ts"],
+    input: ["src/index.tsx"],
     output: [
         {
             dir: "lib",
@@ -38,11 +38,6 @@ module.exports = {
         typescript({ tsconfig: "./tsconfig.json" }),
         sass({
             output: "lib/styles.css",
-            // outputStyle: "compressed",
-            // output: true,
-            // failOnError: true,
-            // fileName: "styles.css",
-            // sourceMap: true,
             exclude: ["node_modules/"],
         }),
         terser(),

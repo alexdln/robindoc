@@ -7,7 +7,7 @@
   @media screen and (width < vars.$sm) {
     position: sticky;
     width: calc(100% + 24px);
-    top: var(--header-height);
+    top: var(--r-header-height);
     left: 0;
     margin: 0 -12px;
     background-color: var(--r-body);
@@ -34,7 +34,7 @@
   box-sizing: border-box;
   @media screen and (width < vars.$sm) {
     overflow: auto;
-    max-height: calc(100vh - var(--header-height) - 41px);
+    max-height: calc(100dvh - var(--r-header-height) - 41px);
   }
 }
 
@@ -77,12 +77,12 @@
 
   @media screen and (width >= vars.$sm) {
     position: sticky;
-    top: var(--header-height);
+    top: var(--r-header-height);
     overflow: auto;
     scrollbar-width: thin;
     scrollbar-color: var(--r-neutral-200) transparent;
     scrollbar-gutter: stable;
-    max-height: calc(100vh - var(--header-height));
+    max-height: calc(100dvh - var(--r-header-height));
   }
 }
 

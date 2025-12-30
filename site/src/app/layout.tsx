@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 };
 
 const RootLayout: React.FC<React.PropsWithChildren> = ({ children }) => (
-    <html lang="en" suppressHydrationWarning className="r-root">
+    <html lang="en">
         <body className={inter.className}>
             <RobinProvider>
                 <KeylinkToContent />

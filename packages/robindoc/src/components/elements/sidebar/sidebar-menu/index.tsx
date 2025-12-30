@@ -18,13 +18,15 @@ export const SidebarMenu: React.FC<SidebarMenuProps> = ({ children, translations
     const sidebarNavRef = useRef<HTMLElement | null>(null);
 
     const openHandler = () => {
-        document.body.classList.add("body-mobile-lock");
+        const rootElement = document.querySelector<HTMLElement>(".r-root");
+        rootElement?.classList.add("body-mobile-lock");
         setOpened(true);
         addListener("closeSidebarMenu", closeHandler);
     };
 
     const closeHandler = () => {
-        document.body.classList.remove("body-mobile-lock");
+        const rootElement = document.querySelector<HTMLElement>(".r-root");
+        rootElement?.classList.remove("body-mobile-lock");
         setOpened(false);
         removeListener("closeSidebarMenu");
     };
