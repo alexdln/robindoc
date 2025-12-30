@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Fragment } from "react";
 import { Analytics } from "@vercel/analytics/react";
 import { Inter } from "next/font/google";
 import { Header, Footer, RobinProvider, KeylinkToContent } from "robindoc";
@@ -21,9 +22,9 @@ export const metadata: Metadata = {
 };
 
 const RootLayout: React.FC<React.PropsWithChildren> = ({ children }) => (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning className="r-root">
         <body className={inter.className}>
-            <RobinProvider>
+            <RobinProvider component={Fragment}>
                 <KeylinkToContent />
                 <Header
                     links={[

@@ -10,18 +10,18 @@ import "./robin-provider.scss";
 
 interface RobinProviderProps {
     theme?: Theme;
-    as?: React.ElementType;
+    component?: React.ElementType;
 }
 
 export const RobinProvider: React.FC<React.PropsWithChildren<RobinProviderProps>> = ({
     children,
     theme,
-    as: As = "div",
+    component: Component = "div",
 }) => (
-    <As suppressHydrationWarning className="r-root">
+    <Component suppressHydrationWarning className="r-root">
         {theme && <ThemeStyles theme={theme} />}
         <ThemeDetector />
         <NavigateProvider>{children}</NavigateProvider>
         <NoJs />
-    </As>
+    </Component>
 );

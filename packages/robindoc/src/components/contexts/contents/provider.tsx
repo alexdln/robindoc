@@ -29,6 +29,8 @@ export const ContentsProvider: React.FC<React.PropsWithChildren> = ({ children }
 
         if (!rootElement) return;
 
+        const scrollElement = rootElement.nodeType === 1 ? window : rootElement;
+
         const scrollHandler = () => {
             if (!scheduledAnimationFrame && window.innerWidth > 1080) {
                 scheduledAnimationFrame = true;
@@ -40,10 +42,10 @@ export const ContentsProvider: React.FC<React.PropsWithChildren> = ({ children }
         };
 
         updateTargetSection(rootElement);
-        rootElement.addEventListener("scroll", scrollHandler);
+        scrollElement.addEventListener("scroll", scrollHandler);
 
         return () => {
-            rootElement.removeEventListener("scroll", scrollHandler);
+            scrollElement.removeEventListener("scroll", scrollHandler);
         };
     }, []);
 
