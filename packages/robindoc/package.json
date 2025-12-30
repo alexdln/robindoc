@@ -1,6 +1,6 @@
 {
   "name": "robindoc",
-  "version": "3.2.1",
+  "version": "3.3.0",
   "description": "Robindoc is a framework for automatically creating documentation websites based on markdown files, built on React.js Server Components",
   "main": "./lib/index.js",
   "scripts": {
