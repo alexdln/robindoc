@@ -17,7 +17,7 @@ const Docs = async ({ params }: { params: Promise<{ segments?: string[] }> }) =>
             config={{
                 publicDirs: ["public"],
             }}
-            editUri={`https://github.com/vordgi/robindoc/edit/main/site/${pageInstriction.origPath}`}
+            editUri={`https://github.com/alexdln/robindoc/edit/main/site/${pageInstriction.origPath}`}
         />
     );
 };

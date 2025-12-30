@@ -13,7 +13,7 @@ const Showcases = () => (
         </h1>
         <div className="showcases-btns">
             <Link
-                href="https://github.com/vordgi/robindoc/discussions/278"
+                href="https://github.com/alexdln/robindoc/discussions/278"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="showcases-btn"

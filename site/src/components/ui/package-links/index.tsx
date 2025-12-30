@@ -14,7 +14,7 @@ export const PackageLinks = () => {
                 <span className="package-links-link-inner">NPM</span>
             </a>
             <a
-                href="https://github.com/vordgi/robindoc"
+                href="https://github.com/alexdln/robindoc"
                 className="package-links-link package-links-link-github"
                 target="_blank"
                 rel="noopener noreferrer"

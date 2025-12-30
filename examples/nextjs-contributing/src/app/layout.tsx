@@ -66,7 +66,7 @@ const RootLayout: React.FC<React.PropsWithChildren> = ({ children }) => (
                             />
                         </svg>
                     }
-                    git="https://github.com/vordgi/robindoc"
+                    git="https://github.com/alexdln/robindoc"
                     searcher="/api/search"
                 />
                 <DocsContainer>
