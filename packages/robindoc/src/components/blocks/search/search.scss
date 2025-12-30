@@ -10,6 +10,7 @@
   width: 100%;
   text-align: left;
   cursor: text;
+  box-sizing: border-box;
 
   @media screen and (width >= vars.$sm) {
     width: 220px;
@@ -57,6 +58,7 @@
   border-bottom: 2px solid var(--r-neutral-300);
   width: 100%;
   font-size: 16px;
+  box-sizing: border-box;
 
   @media screen and (width >= vars.$sm) {
     padding: 16px 72px 16px 20px;
@@ -83,12 +85,13 @@
 
 .r-search-results {
   padding: 12px 8px 8px;
-  max-height: min(400px, calc(100vh - 200px));
+  max-height: min(400px, calc(100dvh - 200px));
   overflow-y: auto;
   list-style: none;
   scrollbar-width: thin;
   scrollbar-color: var(--r-neutral-200) transparent;
   margin: 0;
+  box-sizing: border-box;
 }
 
 .r-search-item {
@@ -100,6 +103,7 @@
   border-radius: 6px;
   width: 100%;
   margin-top: 6px;
+  box-sizing: border-box;
 
   &:hover,
   &:focus {

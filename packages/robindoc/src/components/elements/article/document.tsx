@@ -317,6 +317,7 @@ export const Document: React.FC<ContentProps> = ({
                                     elem.tokens?.length === 1 && elem.tokens[0].type === "paragraph"
                                         ? elem.tokens[0].tokens
                                         : elem.tokens;
+
                                 return (
                                     <TaskListItem key={elem.raw + index} defaultChecked={elem.checked}>
                                         {childTokens ? <DocumentToken token={childTokens} /> : elem.raw}
@@ -330,11 +331,17 @@ export const Document: React.FC<ContentProps> = ({
                 const ListComponent = token.ordered ? OrderedList : UnorderedList;
                 return (
                     <ListComponent start={token.start}>
-                        {token.items.map((elem: Tokens.ListItem, index: number) => (
-                            <ListItem key={elem.raw + index}>
-                                {elem.tokens ? <DocumentToken token={elem.tokens} /> : elem.raw}
-                            </ListItem>
-                        ))}
+                        {token.items.map((elem: Tokens.ListItem, index: number) => {
+                            const childTokens =
+                                elem.tokens?.length === 1 && elem.tokens[0].type === "paragraph"
+                                    ? elem.tokens[0].tokens
+                                    : elem.tokens;
+                            return (
+                                <ListItem key={elem.raw + index}>
+                                    {childTokens ? <DocumentToken token={childTokens} /> : elem.raw}
+                                </ListItem>
+                            );
+                        })}
                     </ListComponent>
                 );
             case "html":

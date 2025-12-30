@@ -1,7 +1,9 @@
 import React from "react";
 
+import "./git-logos.scss";
+
 export const GithubLogo = () => (
-    <svg width="32" height="32" viewBox="0 0 32 32">
+    <svg width="32" height="32" viewBox="0 0 32 32" className="r-git-logo">
         <title>GitHub</title>
         <g clipPath="url(#mark)">
             <path
@@ -24,6 +26,7 @@ export const GitlabLogo = () => (
         width="32"
         height="32"
         viewBox="0 0 24 24"
+        className="r-git-logo"
         fill="currentColor"
         stroke="currentColor"
         strokeWidth="2"
@@ -40,6 +43,7 @@ export const GitLogo = () => (
         width="32"
         height="32"
         viewBox="0 0 24 24"
+        className="r-git-logo"
         fill="currentColor"
         stroke="currentColor"
         strokeWidth="2"

@@ -32,6 +32,7 @@ export const Pagination: React.FC<PaginationProps> = async ({ prev, next, transl
                             strokeWidth="2"
                             strokeLinecap="round"
                             strokeLinejoin="round"
+                            className="r-pagination-svg"
                         >
                             <path d="m15 18-6-6 6-6" />
                         </svg>
@@ -57,6 +58,7 @@ export const Pagination: React.FC<PaginationProps> = async ({ prev, next, transl
                             strokeWidth="2"
                             strokeLinecap="round"
                             strokeLinejoin="round"
+                            className="r-pagination-svg"
                         >
                             <path d="m9 18 6-6-6-6" />
                         </svg>

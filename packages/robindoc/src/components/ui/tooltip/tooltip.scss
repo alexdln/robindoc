@@ -10,8 +10,9 @@
   max-width: 200px;
   transform: translateY(80%);
   transition:
-    transform 0.2s allow-discrete,
-    opacity 0.2s allow-discrete;
+  transform 0.2s allow-discrete,
+  opacity 0.2s allow-discrete;
+  box-sizing: border-box;
 
   &._bottom-start {
     bottom: -8px;

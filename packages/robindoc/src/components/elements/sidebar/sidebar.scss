@@ -2,11 +2,12 @@
 
 .r-sidebar {
   grid-area: sidebar;
+  box-sizing: border-box;
 
   @media screen and (width < vars.$sm) {
     position: sticky;
     width: calc(100% + 24px);
-    top: var(--header-height);
+    top: var(--r-header-height);
     left: 0;
     margin: 0 -12px;
     background-color: var(--r-body);
@@ -30,9 +31,10 @@
 }
 
 .r-sidebar-nav {
+  box-sizing: border-box;
   @media screen and (width < vars.$sm) {
     overflow: auto;
-    max-height: calc(100vh - var(--header-height) - 41px);
+    max-height: calc(100dvh - var(--r-header-height) - 41px);
   }
 }
 
@@ -62,10 +64,12 @@
   background-color: var(--r-neutral-200);
   z-index: 1;
   transition: background-color 0.2s cubic-bezier(0, 0.66, 0.58, 1) 0.05s;
+  box-sizing: border-box;
 }
 
 .r-sidebar-nav {
   padding: 32px 4px 32px 2px;
+  box-sizing: border-box;
 
   @media screen and (width < vars.$sm) {
     padding: 12px;
@@ -73,16 +77,17 @@
 
   @media screen and (width >= vars.$sm) {
     position: sticky;
-    top: var(--header-height);
+    top: var(--r-header-height);
     overflow: auto;
     scrollbar-width: thin;
     scrollbar-color: var(--r-neutral-200) transparent;
     scrollbar-gutter: stable;
-    max-height: calc(100vh - var(--header-height));
+    max-height: calc(100dvh - var(--r-header-height));
   }
 }
 
 .r-sidebar-space {
+  box-sizing: border-box;
   @media screen and (width < vars.$sm) {
     display: block;
     height: 40px;
@@ -102,6 +107,7 @@
   color: var(--r-neutral-800);
   background-color: var(--r-body);
   z-index: 1;
+  box-sizing: border-box;
 
   @media screen and (width >= vars.$sm) {
     display: none;
@@ -112,6 +118,7 @@
   display: inline;
   margin-right: 6px;
   transition: transform 0.2s;
+  box-sizing: border-box;
 }
 
 .r-sidebar-input:checked ~ .r-sidebar-btn .r-sidebar-chevron {
@@ -124,18 +131,21 @@
   padding: 0;
   margin: 0;
   font-size: 14px;
+  box-sizing: border-box;
 }
 
 .r-sidebar-drop[open]::details-content {
   height: var(--drop-height, auto);
+  box-sizing: border-box;
 }
 
 .r-sidebar-drop::details-content {
   height: 0;
   overflow: hidden;
   transition:
-    height 0.3s,
-    content-visibility 0.3s allow-discrete;
+  height 0.3s,
+  content-visibility 0.3s allow-discrete;
+  box-sizing: border-box;
 }
 
 .r-sidebar-sublist {
@@ -146,6 +156,7 @@
   position: relative;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
+  box-sizing: border-box;
 
   &::before {
     content: "";
@@ -156,6 +167,7 @@
     height: calc(100% + 4px);
     background-color: var(--r-neutral-200);
     transition: background-color 0.2s cubic-bezier(0, 0.66, 0.58, 1) 0.05s;
+    box-sizing: border-box;
   }
 }
 

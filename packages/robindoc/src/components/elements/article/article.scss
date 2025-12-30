@@ -19,6 +19,7 @@
   height: 20px;
   margin: 4px;
   vertical-align: middle;
+  box-sizing: border-box;
 }
 
 .r-label {
@@ -35,6 +36,7 @@
   width: 100%;
   padding-top: 2px;
   padding-bottom: 2px;
+  box-sizing: border-box;
 
   &:hover {
     .r-checkbox {

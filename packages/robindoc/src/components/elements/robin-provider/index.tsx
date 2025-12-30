@@ -6,15 +6,22 @@ import { ThemeStyles } from "@src/components/blocks/theme-styles";
 import { ThemeDetector } from "@src/components/blocks/theme-detector";
 import { NoJs } from "@src/components/blocks/no-js";
 
+import "./robin-provider.scss";
+
 interface RobinProviderProps {
     theme?: Theme;
+    component?: React.ElementType;
 }
 
-export const RobinProvider: React.FC<React.PropsWithChildren<RobinProviderProps>> = ({ children, theme }) => (
-    <>
+export const RobinProvider: React.FC<React.PropsWithChildren<RobinProviderProps>> = ({
+    children,
+    theme,
+    component: Component = "div",
+}) => (
+    <Component suppressHydrationWarning className="r-root">
         {theme && <ThemeStyles theme={theme} />}
         <ThemeDetector />
         <NavigateProvider>{children}</NavigateProvider>
         <NoJs />
-    </>
+    </Component>
 );

@@ -1,8 +1,9 @@
 @use "src/assets/_vars";
 
 .r-blog-container {
-  min-height: calc(100vh - var(--header-height));
+  min-height: calc(100dvh - var(--r-header-height));
   overflow-wrap: break-word;
+  box-sizing: border-box;
 
   @media screen and (width >= vars.$lg) {
     display: grid;

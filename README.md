@@ -38,6 +38,7 @@ No additional configuration is needed, while preserving the accessibility and cl
 - Supports loading content from various sources, including GitHub. More details in the section "[Data Source](./docs/02-structure/03-data-source.md)";
 - Supports fully automatic documentation generation, as well as custom generation. More details in the section "[Structure](./docs/02-structure/README.md)";
 - Supports JSX/HTML and special Robin components for all sources. More details in the section "[Writing MD](./docs/01-getting-started/02-writing-md.md)";
+- Fully isolated - does not provide any global styles and does not affect anything extra inside the documentation. Can be safely used inside any other service with any libraries. More details in the section "[Isolation](./docs/01-getting-started/04-app-organization.md#isolation)";
 - Optimized for metrics and accessibility.
 
 ## Additional

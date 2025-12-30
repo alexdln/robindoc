@@ -50,6 +50,7 @@
   cursor: pointer;
   background: none;
   border: none;
+  box-sizing: border-box;
 
   @media screen and (width >= vars.$md) {
     display: none;
@@ -64,6 +65,7 @@
   background-color: var(--r-neutral-700);
   margin: auto;
   transition: transform 0.3s;
+  box-sizing: border-box;
 }
 
 .r-burger-line._top {

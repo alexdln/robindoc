@@ -6,12 +6,13 @@
 
 .r-contents-sticky {
   position: sticky;
-  top: var(--header-height);
+  top: var(--r-header-height);
   width: 100%;
+  box-sizing: border-box;
 
   @media screen and (width >= vars.$lg) {
     padding: 0 12px;
-    max-height: calc(100vh - var(--header-height));
+    max-height: calc(100dvh - var(--r-header-height));
     overflow: auto;
     scrollbar-width: thin;
     scrollbar-color: var(--r-neutral-200) transparent;
@@ -30,6 +31,7 @@
 
 .r-contents-control:checked + .r-contents-details {
   .r-contents-list {
+    box-sizing: border-box;
     @media screen and (width < vars.$lg) {
       visibility: visible;
       height: var(--drop-height, auto);
@@ -50,8 +52,9 @@
 .r-contents-list {
   overflow: hidden;
   transition:
-    height 0.3s allow-discrete,
-    visibility 0.3s allow-discrete;
+  height 0.3s allow-discrete,
+  visibility 0.3s allow-discrete;
+  box-sizing: border-box;
 
   @media screen and (width < vars.$lg) {
     visibility: hidden;
@@ -142,6 +145,7 @@
     border-style: solid;
     border-width: 0 2px 0 0;
     border-color: var(--r-primary-800);
+    box-sizing: border-box;
   }
 
   &::before {
@@ -158,11 +162,13 @@
 
 .r-contents-link._nested {
   margin-left: 16px;
+  box-sizing: border-box;
 
   &::before,
   &::after {
     left: -16px;
     width: 18px;
+    box-sizing: border-box;
   }
 }
 
@@ -170,6 +176,7 @@
   &::before,
   &::after {
     border-top-width: 2px;
+    box-sizing: border-box;
   }
 }
 
@@ -178,6 +185,7 @@
   &::after {
     width: 18px;
     border-width: 2px 0 0 2px;
+    box-sizing: border-box;
   }
   &::after {
     mask-image: linear-gradient(45deg, transparent 50%, #000 50%);
@@ -237,6 +245,7 @@
   padding-bottom: 10px;
   font-size: 14px;
   font-weight: 600;
+  box-sizing: border-box;
 
   &:hover {
     color: var(--r-neutral-900);

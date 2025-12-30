@@ -169,6 +169,7 @@
   color: var(--r-neutral-50);
   border-radius: 6px;
   padding: 8px 16px;
+  box-sizing: border-box;
 
   &:hover {
     background: var(--r-primary-800);
@@ -182,6 +183,7 @@
   padding: 8px 12px;
   background-color: var(--r-neutral-50);
   border: 1px solid var(--r-neutral-300);
+  box-sizing: border-box;
 
   &::before,
   &::after {
@@ -189,6 +191,7 @@
     left: 0;
     color: var(--r-neutral-300);
     pointer-events: none;
+    box-sizing: border-box;
   }
 
   &::before {

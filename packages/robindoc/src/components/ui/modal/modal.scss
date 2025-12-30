@@ -11,10 +11,11 @@
   visibility: hidden;
   pointer-events: none;
   transition:
-    opacity 0.2s 0.1s,
-    transform 0.2s 0.1s,
-    visibility 0.01s 0.2s 0.1s;
+  opacity 0.2s 0.1s,
+  transform 0.2s 0.1s,
+  visibility 0.01s 0.2s 0.1s;
   z-index: 1000;
+  box-sizing: border-box;
 
   @media screen and (width >= vars.$sm) {
     top: 10%;

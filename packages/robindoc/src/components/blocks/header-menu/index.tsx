@@ -19,13 +19,19 @@ export const HeaderMenu: React.FC<HeaderMenuProps> = ({ children, translations }
     const [opened, setOpened] = useState(false);
 
     const openHandler = () => {
-        document.body.classList.add("body-tablet-lock");
+        const root = document.querySelector(".r-root");
+        if (root) {
+            root.classList.add("r-root-tablet-lock");
+        }
         setOpened(true);
         addListener("closeHeaderMenu", closeHandler);
     };
 
     const closeHandler = () => {
-        document.body.classList.remove("body-tablet-lock");
+        const root = document.querySelector(".r-root");
+        if (root) {
+            root.classList.remove("r-root-tablet-lock");
+        }
         setOpened(false);
         removeListener("closeHeaderMenu");
     };

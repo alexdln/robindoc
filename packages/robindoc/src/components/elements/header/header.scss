@@ -7,6 +7,7 @@
   border-bottom: 1px solid var(--r-neutral-300);
   height: 60px;
   z-index: 1000;
+  box-sizing: border-box;
 }
 
 .r-header-body {
@@ -15,6 +16,7 @@
   justify-content: space-between;
   align-items: center;
   gap: 24px;
+  box-sizing: border-box;
 }
 
 .r-header-logo {
@@ -22,6 +24,7 @@
   margin-right: 24px;
   color: var(--r-neutral-700);
   transition: color 0.2s;
+  box-sizing: border-box;
 
   &:hover,
   &:focus {
@@ -44,6 +47,7 @@
   text-decoration: none;
   padding: 4px 0;
   transition: color 0.2s;
+  box-sizing: border-box;
 
   &:hover,
   &:focus-visible {

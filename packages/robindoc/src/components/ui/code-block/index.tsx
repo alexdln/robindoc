@@ -3,9 +3,9 @@ import { createHighlighter, type BuiltinLanguage } from "shiki";
 import clsx from "clsx";
 
 import { githubDynamic } from "./theme";
+import { CodeSpan } from "../code-span";
 
 import "./code-block.scss";
-import { CodeSpan } from "../code-span";
 
 export interface CodeBlockProps {
     code: string;

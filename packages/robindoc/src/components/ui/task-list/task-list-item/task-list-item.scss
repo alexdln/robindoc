@@ -9,6 +9,7 @@
   width: 100%;
   padding-top: 2px;
   padding-bottom: 2px;
+  box-sizing: border-box;
 
   &:hover {
     .r-task-checkbox {
@@ -24,6 +25,7 @@
   inset: -4px;
   margin-inline-end: 8px;
   vertical-align: middle;
+  box-sizing: border-box;
 }
 
 .r-task-label-text {
