@@ -21,7 +21,7 @@ import { type Components, type RobinProps } from "@src/core/types/content";
 import parse, { attributesToProps, DOMNode, domToReact, HTMLReactParserOptions, Text } from "html-react-parser";
 import { type Token, type Tokens, type TokensList } from "marked";
 import React from "react";
-import { type BundledLanguage } from "shiki/langs";
+import { type BundledLanguage } from "shiki";
 
 import { type PagesType } from "./types";
 import {
@@ -312,11 +312,17 @@ export const Document: React.FC<ContentProps> = ({
                     const ListComponent = token.ordered ? TaskOrderedList : TaskUnorderedList;
                     return (
                         <ListComponent start={token.start}>
-                            {token.items.map((elem: Tokens.ListItem, index: number) => (
-                                <TaskListItem key={elem.raw + index} defaultChecked={elem.checked}>
-                                    {elem.tokens ? <DocumentToken token={elem.tokens} /> : elem.raw}
-                                </TaskListItem>
-                            ))}
+                            {token.items.map((elem: Tokens.ListItem, index: number) => {
+                                const childTokens =
+                                    elem.tokens?.length === 1 && elem.tokens[0].type === "paragraph"
+                                        ? elem.tokens[0].tokens
+                                        : elem.tokens;
+                                return (
+                                    <TaskListItem key={elem.raw + index} defaultChecked={elem.checked}>
+                                        {childTokens ? <DocumentToken token={childTokens} /> : elem.raw}
+                                    </TaskListItem>
+                                );
+                            })}
                         </ListComponent>
                     );
                 }
@@ -394,6 +400,8 @@ export const Document: React.FC<ContentProps> = ({
                     return <DocumentToken token={token.tokens || []} />;
                 }
                 return token.raw;
+            case "def":
+                return null;
             default:
                 if (!token.type && "raw" in token) return token.raw;
 

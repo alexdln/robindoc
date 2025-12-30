@@ -1,10 +1,10 @@
-@import "src/assets/_vars";
+@use "src/assets/_vars";
 
 .r-blog-container {
   min-height: calc(100vh - var(--header-height));
   overflow-wrap: break-word;
 
-  @media screen and (width >= $lg) {
+  @media screen and (width >= vars.$lg) {
     display: grid;
     justify-content: space-between;
     column-gap: 40px;

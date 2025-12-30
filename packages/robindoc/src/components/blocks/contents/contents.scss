@@ -1,4 +1,4 @@
-@import "src/assets/_vars";
+@use "src/assets/_vars";
 
 .r-contents {
   grid-area: contents;
@@ -9,7 +9,7 @@
   top: var(--header-height);
   width: 100%;
 
-  @media screen and (width >= $lg) {
+  @media screen and (width >= vars.$lg) {
     padding: 0 12px;
     max-height: calc(100vh - var(--header-height));
     overflow: auto;
@@ -23,21 +23,21 @@
   display: contents;
   visibility: hidden;
 
-  @media screen and (width >= $lg) {
+  @media screen and (width >= vars.$lg) {
     pointer-events: none;
   }
 }
 
 .r-contents-control:checked + .r-contents-details {
   .r-contents-list {
-    @media screen and (width < $lg) {
+    @media screen and (width < vars.$lg) {
       visibility: visible;
       height: var(--drop-height, auto);
     }
   }
 
   .r-contents-title {
-    @media screen and (width < $lg) {
+    @media screen and (width < vars.$lg) {
       color: var(--r-neutral-800);
     }
   }
@@ -53,7 +53,7 @@
     height 0.3s allow-discrete,
     visibility 0.3s allow-discrete;
 
-  @media screen and (width < $lg) {
+  @media screen and (width < vars.$lg) {
     visibility: hidden;
     height: 0;
   }
@@ -64,7 +64,7 @@
 }
 
 .r-contents-details {
-  @media screen and (width < $lg) {
+  @media screen and (width < vars.$lg) {
     background: var(--r-neutral-100);
     border-radius: 4px;
   }
@@ -80,13 +80,13 @@
   color: var(--r-neutral-600);
   z-index: 1;
 
-  @media screen and (width < $lg) {
+  @media screen and (width < vars.$lg) {
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
 
-  @media screen and (width >= $lg) {
+  @media screen and (width >= vars.$lg) {
     color: var(--r-neutral-900);
     background: var(--r-body);
     font-weight: 600;
@@ -96,7 +96,7 @@
   }
 
   &:hover {
-    @media screen and (width < $lg) {
+    @media screen and (width < vars.$lg) {
       color: var(--r-neutral-900);
     }
   }
@@ -108,7 +108,7 @@
   margin-left: 8px;
   transition: transform 0.2s;
 
-  @media screen and (width >= $lg) {
+  @media screen and (width >= vars.$lg) {
     display: none;
   }
 }
@@ -192,19 +192,19 @@
 }
 
 .r-contents-link._passed {
-  @media screen and (width >= $lg) {
+  @media screen and (width >= vars.$lg) {
     color: var(--r-neutral-800);
   }
 
   &::after {
-    @media screen and (width >= $lg) {
+    @media screen and (width >= vars.$lg) {
       mask-position: 0 0 !important;
     }
   }
 }
 
 .r-contents-link._active {
-  @media screen and (width >= $lg) {
+  @media screen and (width >= vars.$lg) {
     color: var(--r-primary-800);
   }
 
@@ -222,7 +222,7 @@
   margin-top: 20px;
   background-color: var(--r-body);
 
-  @media screen and (width < $lg) {
+  @media screen and (width < vars.$lg) {
     display: none;
   }
 }

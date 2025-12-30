@@ -1,4 +1,4 @@
-@import "src/assets/_vars";
+@use "src/assets/_vars";
 
 .r-pagination {
   grid-area: pagination;
@@ -55,7 +55,7 @@
   .r-pagination-item:hover & {
     transform: translate(-4px, -50%);
 
-    @media screen and (width >= $lg) {
+    @media screen and (width >= vars.$lg) {
       transform: translate(-8px, -50%);
     }
   }
@@ -67,7 +67,7 @@
   .r-pagination-item:hover & {
     transform: translate(4px, -50%);
 
-    @media screen and (width >= $lg) {
+    @media screen and (width >= vars.$lg) {
       transform: translate(8px, -50%);
     }
   }
