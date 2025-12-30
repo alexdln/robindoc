@@ -29,7 +29,7 @@ export const ContentsProvider: React.FC<React.PropsWithChildren> = ({ children }
 
         if (!rootElement) return;
 
-        const scrollElement = rootElement.nodeType === 1 ? window : rootElement;
+        const scrollElement = rootElement === document.documentElement ? window : rootElement;
 
         const scrollHandler = () => {
             if (!scheduledAnimationFrame && window.innerWidth > 1080) {
