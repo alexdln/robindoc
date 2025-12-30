@@ -3,6 +3,7 @@
 .r-docs-container {
   min-height: calc(100vh - var(--header-height));
   overflow-wrap: break-word;
+  box-sizing: border-box;
 
   @media screen and (width >= vars.$sm) {
     display: grid;

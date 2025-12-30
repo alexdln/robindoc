@@ -13,6 +13,7 @@
 .showcases-name {
   position: relative;
   color: var(--r-primary-600);
+  box-sizing: border-box;
 
   &::before,
   &::after {
@@ -23,6 +24,7 @@
     transform: translate(-50%, -50%);
     opacity: 0.08;
     z-index: -1;
+    box-sizing: border-box;
   }
 
   &::before {
@@ -108,12 +110,14 @@
   width: 100%;
   height: auto;
   border-radius: 8px;
+  box-sizing: border-box;
 }
 
 .showcases-product {
   margin: 24px 12px 12px;
   line-height: 1;
   font-size: 1.25em;
+  box-sizing: border-box;
 }
 
 .showcases-product-badge {

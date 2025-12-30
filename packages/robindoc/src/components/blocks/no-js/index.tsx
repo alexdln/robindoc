@@ -6,6 +6,7 @@ export const NoJs = () => (
             {`
                 .r-no-js {
                     cursor: not-allowed;
+                    box-sizing: border-box;
                 }
                 .r-no-js:hover,
                 .r-no-js:focus,
@@ -28,6 +29,7 @@ export const NoJs = () => (
                     border-radius: 4px;
                     padding: 4px 12px;
                     pointer-events: none;
+                    box-sizing: border-box;
                 }
                 .r-no-js._to-right::after {
                     right: auto;

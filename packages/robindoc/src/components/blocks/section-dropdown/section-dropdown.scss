@@ -33,11 +33,14 @@
   border: 0;
   background: none;
   z-index: 1;
+  box-sizing: border-box;
 }
 
 .r-dropdown-chevron {
+  display: block;
   margin-left: 6px;
   transition: transform 0.3s 0.1s;
+  box-sizing: border-box;
 }
 
 .r-dropdown-drop {
@@ -59,6 +62,7 @@
   padding: 2px 6px;
   min-width: 120px;
   max-width: 180px;
+  box-sizing: border-box;
 }
 
 .r-dropdown-link {
@@ -71,6 +75,7 @@
   margin-bottom: 4px;
   border-radius: 4px;
   transition: background-color 0.2s;
+  box-sizing: border-box;
 
   &:hover {
     color: var(--r-neutral-900);

@@ -1,29 +1,33 @@
 import React from "react";
 
 const clientLogic = () => {
+    const root = document.querySelector(".r-root");
+
+    if (!root) return;
+
     const userTheme = localStorage.getItem("theme");
     if (userTheme && ["light", "dark"].includes(userTheme)) {
-        document.documentElement.classList.add(`theme-${userTheme}`);
+        root.classList.add(`r-theme-${userTheme}`);
     } else {
-        document.documentElement.classList.add(`theme-system`);
+        root.classList.add(`r-theme-system`);
         if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
-            document.documentElement.classList.add("theme-dark");
+            root.classList.add("r-theme-dark");
         } else {
-            document.documentElement.classList.add("theme-light");
+            root.classList.add("r-theme-light");
         }
     }
 
     const store = localStorage.getItem("r-tabs");
     const items = store?.split(";").filter((item) => item && /[\w-]+=[\w]+/.test(item)) || [];
-    const classNames = Array.from(document.documentElement.classList);
+    const classNames = Array.from(root.classList);
     classNames.forEach((className) => {
         if (className.startsWith(`r-tabs-global`)) {
-            document.documentElement.classList.remove(className);
+            root.classList.remove(className);
         }
     });
     items.forEach((item) => {
         const [tabsKey, tab] = item.split("=");
-        document.documentElement.classList.add(`r-tabs-global__${tabsKey}`, `r-tabs-global__${tabsKey}_${tab}`);
+        root.classList.add(`r-tabs-global__${tabsKey}`, `r-tabs-global__${tabsKey}_${tab}`);
     });
 };
 

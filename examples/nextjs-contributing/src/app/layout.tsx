@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 };
 
 const RootLayout: React.FC<React.PropsWithChildren> = ({ children }) => (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className="r-root">
         <body className={geistSans.className}>
             <RobinProvider theme={robinTheme}>
                 <KeylinkToContent />

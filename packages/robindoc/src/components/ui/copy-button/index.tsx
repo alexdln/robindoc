@@ -46,6 +46,7 @@ export const CopyButton: React.FC<CopyButtonProps> = ({ translations, raw, class
                 strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
+                className="r-copy-button-svg"
             >
                 <title>{copy}</title>
                 <g className="r-copy-button-success">
