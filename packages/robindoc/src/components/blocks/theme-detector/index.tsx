@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useEffect } from "react";
 
 const clientLogic = () => {
     const root = document.querySelector(".r-root");
@@ -29,14 +31,27 @@ const clientLogic = () => {
         const [tabsKey, tab] = item.split("=");
         root.classList.add(`r-tabs-global__${tabsKey}`, `r-tabs-global__${tabsKey}_${tab}`);
     });
+    root.classList.add("r-ready");
 };
 
-export const ThemeDetector: React.FC = () => (
-    <script
-        id="detect-theme"
-        dangerouslySetInnerHTML={{
-            __html: `(${clientLogic})()`,
-        }}
-        async
-    />
-);
+export const ThemeDetector: React.FC = () => {
+    useEffect(() => {
+        const root = document.querySelector(".r-root");
+        if (!root || root.classList.contains("r-ready")) return;
+        clientLogic();
+
+        return () => {
+            root.classList.remove("r-ready");
+        };
+    }, []);
+
+    return (
+        <script
+            id="detect-theme"
+            dangerouslySetInnerHTML={{
+                __html: `(${clientLogic})()`,
+            }}
+            async
+        />
+    );
+};
