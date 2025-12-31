@@ -82,19 +82,21 @@ export const isNewCodeToken = (
     return false;
 };
 
-export const formatLinkHref = (href: string, pathname: string, pages?: PagesType) => {
+export const formatLinkHref = (href: string, currentPathname: string, pages?: PagesType) => {
     let finalHref: string = href;
     const external = /^(https?:\/\/|\/)/.test(href);
 
     if (pages && !external) {
-        const currentPageData = pages.find((item) => item.clientPath === pathname);
+        const pseudoUrl = new URL(href, "http://r");
+        const currentPageData = pages.find((item) => item.clientPath === currentPathname);
 
         if (currentPageData) {
-            const linkOrigPath = join(dirname(currentPageData.origPath), href).replace(/\\/g, "/");
+            const linkOrigPath = join(dirname(currentPageData.origPath), pseudoUrl.pathname).replace(/\\/g, "/");
             const linkData = pages.find((item) => item.origPath === linkOrigPath);
 
             if (linkData) {
-                finalHref = linkData?.clientPath;
+                pseudoUrl.pathname = linkData.clientPath;
+                finalHref = pseudoUrl.toString().replace("http://r", "");
             }
         }
     }
