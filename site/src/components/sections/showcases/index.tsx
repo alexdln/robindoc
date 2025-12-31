@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import nimplTech from "./images/nimpl-tech.png";
 import nextjsDev from "./images/nextjs-dev.png";
+import slidebook from "./images/slidebook.png";
 
 import "./showcases.scss";
 
@@ -38,6 +39,10 @@ const Showcases = () => (
                 <Image src={nextjsDev} alt="" className="showcases-img" />
                 <h2 className="showcases-product">Next.js Contibuting Guide</h2>
                 <div className="showcases-product-badge">Unofficial</div>
+            </a>
+            <a href="https://slidebook.dev/docs" target="_blank" rel="noopener noreferrer" className="showcases-card">
+                <Image src={slidebook} alt="" className="showcases-img" />
+                <h2 className="showcases-product">Slidebook</h2>
             </a>
         </div>
     </Container>
