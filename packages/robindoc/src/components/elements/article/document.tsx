@@ -407,7 +407,11 @@ export const Document: React.FC<ContentProps> = ({
                     return <DocumentToken token={token.tokens || []} />;
                 }
                 return token.raw;
+            // Definitions should not be rendered, they are used only as comments or meta data
             case "def":
+                return null;
+            // br are inserted between elements. In our case, sufficient indentation is set everywhere, so we ignore them
+            case "br":
                 return null;
             default:
                 if (!token.type && "raw" in token) return token.raw;
