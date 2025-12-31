@@ -30,6 +30,34 @@ Robindoc is fully isolated and does not provide any global styles. It does not a
 
 The `RobinProvider` component wraps the documentation in a special `div` with the required `r-root` class. This wrapper is necessary for proper scoping of Robindoc's styles. If for some reason you cannot use this wrapper, you can pass `component={Fragment}` to `RobinProvider` and manually add the `r-root` class to your root element that wraps all documentation parts.
 
+### Global Styles
+
+Robindoc does not change any global styles by default, including very basic global ones such as margin, padding, or box-sizing resets. It is recommended to add these minimal global styles to ensure consistent rendering across different browsers:
+
+```css filename="app/globals.css"
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+```
+
+Alternatively, you can import the default global styles provided by Robindoc:
+
+```tsx filename="app/layout.tsx" switcher tab="TypeScript"
+import "robindoc/lib/global.css";
+```
+
+```jsx filename="app/layout.jsx" switcher tab="JavaScript"
+import "robindoc/lib/global.css";
+```
+
 ## Page Setup
 
 Next.js supports dynamic routes, so it is recommended to set up one [dynamic segment](https://nextjs.org/docs/app/building-your-application/routing/dynamic-routes#optional-catch-all-segments) for all documentation pages.
@@ -203,6 +231,7 @@ import { Sidebar } from "./robindoc";
 import Logo from "./logo";
 
 import "robindoc/lib/styles.css";
+import "robindoc/lib/global.css";
 
 const Layout: React.FC<React.PropsWithChildren> = ({ children }) => (
   <RobinProvider>
@@ -224,6 +253,7 @@ import { Sidebar } from "./robindoc";
 import Logo from "./logo";
 
 import "robindoc/lib/styles.css";
+import "robindoc/lib/global.css";
 
 const Layout = ({ children }) => (
   <RobinProvider>
