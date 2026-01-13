@@ -86,6 +86,8 @@ export const formatLinkHref = (href: string, currentPathname: string, pages?: Pa
     let finalHref: string = href;
     const external = /^(https?:\/\/|\/)/.test(href);
 
+    if (finalHref.startsWith("#")) return { href, external: false };
+
     if (pages && !external) {
         const currentPageData = pages.find((item) => item.clientPath === currentPathname);
 
