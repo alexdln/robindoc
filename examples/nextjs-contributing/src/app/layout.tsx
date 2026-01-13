@@ -73,7 +73,7 @@ const RootLayout: React.FC<React.PropsWithChildren> = ({ children }) => (
                     {children}
                     <KeylinkToNavigation />
                 </DocsContainer>
-                <Footer copyright="© 2024 All rights reserved" />
+                <Footer copyright="© 2026 All rights reserved" />
             </RobinProvider>
         </body>
     </html>

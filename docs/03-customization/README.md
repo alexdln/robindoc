@@ -16,7 +16,7 @@ const DocumentationPage: React.FC = () => (
       <Sidebar pathname="/docs" />
       <Page pathname="/docs" />
     </DocsContainer>
-    <Footer copyright="© 2024 All rights reserved" />
+    <Footer copyright="© 2026 All rights reserved" />
   </RobinProvider>
 );
 
@@ -35,7 +35,7 @@ const DocumentationPage = () => (
       <Sidebar pathname="/docs" />
       <Page pathname="/docs" />
     </DocsContainer>
-    <Footer copyright="© 2024 All rights reserved" />
+    <Footer copyright="© 2026 All rights reserved" />
   </RobinProvider>
 );
 

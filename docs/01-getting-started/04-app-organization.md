@@ -240,7 +240,7 @@ const Layout: React.FC<React.PropsWithChildren> = ({ children }) => (
       <Sidebar />
       {children}
     </DocsContainer>
-    <Footer copyright="© 2024 All rights reserved" />
+    <Footer copyright="© 2026 All rights reserved" />
   </RobinProvider>
 );
 
@@ -262,7 +262,7 @@ const Layout = ({ children }) => (
       <Sidebar />
       {children}
     </DocsContainer>
-    <Footer copyright="© 2024 All rights reserved" />
+    <Footer copyright="© 2026 All rights reserved" />
   </RobinProvider>
 );
 
