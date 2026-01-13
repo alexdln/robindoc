@@ -14,13 +14,13 @@
   align-content: space-between;
   border-radius: 12px;
   padding: 48px 32px;
-  background: var(--r-main-50);
+  background: var(--r-main-100);
 }
 
 .features-card-1 {
   background: radial-gradient(50.69% 38.39% at 10.59% 64.42%,
-      var(--r-primary-50) 0%,
-      var(--r-main-50) 100%);
+      var(--r-main-200) 0%,
+      var(--r-main-100) 100%);
 
   @media screen and (width >=768px) {
     grid-column-start: 1;
@@ -30,8 +30,8 @@
 
 .features-card-2 {
   background: radial-gradient(64.59% 64.59% at 46.08% 31.57%,
-      var(--r-primary-50) 0%,
-      var(--r-main-50) 100%);
+      var(--r-main-200) 0%,
+      var(--r-main-100) 100%);
 
   @media screen and (width >=768px) {
     grid-column-start: 6;
@@ -41,8 +41,8 @@
 
 .features-card-3 {
   background: radial-gradient(34.95% 63.28% at 96.22% 96.73%,
-      var(--r-primary-50) 0%,
-      var(--r-main-50) 100%);
+      var(--r-main-200) 0%,
+      var(--r-main-100) 100%);
 
   @media screen and (width >=768px) {
     grid-column-start: 1;
@@ -52,8 +52,8 @@
 
 .features-card-4 {
   background: radial-gradient(54.17% 69.64% at 46.8% 78.55%,
-      var(--r-primary-50) 0%,
-      var(--r-main-50) 100%);
+      var(--r-main-200) 0%,
+      var(--r-main-100) 100%);
 
   @media screen and (width >=768px) {
     grid-column-start: 1;
@@ -63,8 +63,8 @@
 
 .features-card-5 {
   background: radial-gradient(75% 75.87% at 78.57% 45.14%,
-      var(--r-primary-50) 0%,
-      var(--r-main-50) 100%);
+      var(--r-main-200) 0%,
+      var(--r-main-100) 100%);
 
   @media screen and (width >=768px) {
     grid-column-start: 5;
@@ -89,11 +89,11 @@
 
 .features-sources._visible {
   .features-source {
-    stroke: var(--r-primary-500);
+    stroke: var(--r-main-300);
   }
 
   .features-source-box {
-    fill: var(--r-primary-500);
+    fill: var(--r-main-300);
   }
 }
 
@@ -106,12 +106,12 @@
 }
 
 .features-source {
-  stroke: var(--r-main-50);
+  stroke: var(--r-main-200);
   transition: stroke 0.3s;
 }
 
 .features-source-box {
-  fill: var(--r-main-50);
+  fill: var(--r-main-200);
   transition: fill 0.3s;
 }
 

@@ -34,10 +34,19 @@ export const Intro: React.FC = () => {
             <pre className="intro-code">
                 <code>
                     <span className="row">#Interface for your documentation on the fly</span>
+                    <span className="row">&nbsp;</span>
                     <span className="row">
                         Write the documentation however you want, **Robindoc** will build it on top
                     </span>
+                    <span className="row">&nbsp;</span>
                     <span className="row">_Fast, simple, easy_</span>
+                    <span className="row">&nbsp;</span>
+                    <span className="row">{"<Row>"}</span>
+                    <span className="row">{"    <GetStarted />"}</span>
+                    <span className="row">{"    ```bash"}</span>
+                    <span className="row">{"    npm install robindoc"}</span>
+                    <span className="row">{"    ```"}</span>
+                    <span className="row">{"</Row>"}</span>
                 </code>
             </pre>
         </div>
