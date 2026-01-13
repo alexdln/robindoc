@@ -4,23 +4,13 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { CurrentHeadingContext, HeadingsContext } from "./context";
 
 export const ContentsProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
-    const [activeIndex, setActiveIndex] = useState<number | null>(null);
+    const [activeIndex, setActiveIndex] = useState<{ from: number; to: number }>({ from: 0, to: 0 });
     const headings = useRef<HTMLHeadingElement[]>([]);
 
-    const updateTargetSection = useCallback((rootElement: HTMLElement) => {
-        if (rootElement.scrollTop + 20 > rootElement.scrollHeight - window.innerHeight) {
-            setActiveIndex(headings.current.length - 1);
-        } else {
-            const headingIndex = headings.current.findLastIndex((el) => el.offsetTop < rootElement.scrollTop + 100);
-            if (
-                rootElement.scrollTop + 100 > rootElement.scrollHeight - window.innerHeight &&
-                headingIndex < headings.current.length - 2
-            ) {
-                setActiveIndex(headings.current.length - 2);
-            } else {
-                setActiveIndex(headingIndex);
-            }
-        }
+    const updateTargetSection = useCallback(() => {
+        const fromIndex = headings.current.findLastIndex((el) => el.getBoundingClientRect().top < 40);
+        const toIndex = headings.current.findLastIndex((el) => el.getBoundingClientRect().top < window.innerHeight);
+        setActiveIndex({ from: fromIndex, to: toIndex === -1 ? headings.current.length : toIndex });
     }, []);
 
     useEffect(() => {
@@ -35,13 +25,13 @@ export const ContentsProvider: React.FC<React.PropsWithChildren> = ({ children }
             if (!scheduledAnimationFrame && window.innerWidth > 1080) {
                 scheduledAnimationFrame = true;
                 setTimeout(() => {
-                    updateTargetSection(rootElement);
+                    updateTargetSection();
                     scheduledAnimationFrame = false;
                 }, 100);
             }
         };
 
-        updateTargetSection(rootElement);
+        updateTargetSection();
         scrollElement.addEventListener("scroll", scrollHandler);
 
         return () => {

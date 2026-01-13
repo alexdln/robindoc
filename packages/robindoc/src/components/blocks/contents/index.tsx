@@ -23,8 +23,9 @@ export const Contents: React.FC<ContentsProps> = ({ headings, hideContents, edit
     const containerRef = useRef<HTMLDivElement>(null);
     const dropdownRef = useRef<HTMLDivElement>(null);
     const dropdownContentRef = useRef<HTMLDivElement>(null);
-    const headingIndex = useHeadingIndex();
+    const { from, to } = useHeadingIndex();
     const { onThisPage = "On this page", editOnService = "Edit on {service}" } = translations || {};
+    console.log(from, to);
 
     useEffect(() => {
         if (dropdownContentRef.current && dropdownRef.current) {
@@ -64,8 +65,9 @@ export const Contents: React.FC<ContentsProps> = ({ headings, hideContents, edit
                                             className={clsx(
                                                 "r-contents-link",
                                                 heading.nested && "_nested",
-                                                headingIndex !== null && index <= headingIndex && "_passed",
-                                                headingIndex === index && "_active",
+                                                index <= from && "_passed",
+                                                index <= to && "_visited",
+                                                index >= from && index <= to && "_active",
                                             )}
                                             ref={(node) => {
                                                 if (
@@ -73,7 +75,7 @@ export const Contents: React.FC<ContentsProps> = ({ headings, hideContents, edit
                                                     containerRef.current &&
                                                     containerRef.current.scrollHeight >
                                                         containerRef.current.clientHeight &&
-                                                    headingIndex === index
+                                                    from === index
                                                 ) {
                                                     containerRef.current.scrollTo({
                                                         top: Math.max(
