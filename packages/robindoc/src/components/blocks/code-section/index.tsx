@@ -7,7 +7,7 @@ import "./code-section.scss";
 
 export interface CodeSectionProps extends CodeBlockProps {
     filename?: string;
-    translations: CopyButtonProps["translations"] & CopyTextProps["translations"];
+    translations?: CopyButtonProps["translations"] & CopyTextProps["translations"];
 }
 
 export const CodeSection: React.FC<CodeSectionProps> = ({ filename, code, ...props }) => (

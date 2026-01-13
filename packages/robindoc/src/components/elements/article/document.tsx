@@ -53,6 +53,9 @@ export const DocumentJSX: React.FC<DocumentJSXProps> = ({ raw, components, ...ba
 
             if (domNode.name === "a" && "attribs" in domNode) {
                 const { href, external } = formatLinkHref(domNode.attribs.href, baseProps.pathname, baseProps.pages);
+
+                if (href === "") return domToReact(domNode.children as DOMNode[], parseOptions);
+
                 return (
                     <NavContentLink {...attributesToProps(domNode.attribs)} href={href} external={external}>
                         {domToReact(domNode.children as DOMNode[], parseOptions)}
@@ -211,6 +214,8 @@ export const Document: React.FC<ContentProps> = ({
                 );
             case "link":
                 const { href, external } = formatLinkHref(token.href, pathname, pages);
+
+                if (href === "") return token.tokens ? <DocumentToken token={token.tokens} /> : token.raw;
 
                 return (
                     <NavContentLink href={href} external={external}>

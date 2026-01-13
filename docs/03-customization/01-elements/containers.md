@@ -42,8 +42,6 @@ export default DocsLayout;
 
 A special container designed for a blog. It differs in that it does not involve the use of `[Sidebar](./sidebar.md)` on the page
 
-<a href="./sidebar.md">some text</a>
-
 ```tsx filename="app/blog/layout.tsx" switcher tab="TypeScript"
 import { BlogContainer } from "robindoc";
 

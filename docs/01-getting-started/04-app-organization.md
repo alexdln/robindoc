@@ -19,7 +19,7 @@ However, when using the automatic mode for generating the structure, the documen
 
 You can initialize Robindoc on any subpath of your site, as long as you specify the [`basePath`](../02-structure/01-configuration.md) in the project initialization and pass the correct path in the Robindoc components.
 
-After initialization, you will receive Sidebar, Page, getStaticParams, getMetadata, and getPageData. Read more on the [Initialization](../03-initialization.md) page.
+After initialization, you will receive Sidebar, Page, getStaticParams, getMetadata, and getPageData. Read more on the [Initialization](./03-initialization.md) page.
 
 Global elements - [`RobinProvider`](../03-customization/01-elements/robin-provider.md), [`Header`](../03-customization/01-elements/header.md), [`Footer`](../03-customization/01-elements/footer.md), [`Containers`](../03-customization/01-elements/containers.md) and [`Sidebar`](../03-customization/01-elements/sidebar.md) - should ideally be placed above all pages and reused across all.
 Currently, Robindoc works only with the App Router. Once RSC is available for the Pages Router, Robindoc will automatically support it as well.

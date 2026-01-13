@@ -87,17 +87,21 @@ export const formatLinkHref = (href: string, currentPathname: string, pages?: Pa
     const external = /^(https?:\/\/|\/)/.test(href);
 
     if (pages && !external) {
-        const pseudoUrl = new URL(href, "http://r");
         const currentPageData = pages.find((item) => item.clientPath === currentPathname);
 
         if (currentPageData) {
-            const linkOrigPath = join(dirname(currentPageData.origPath), pseudoUrl.pathname).replace(/\\/g, "/");
+            const [, linkMain, linkAdditional] = href.match(/^([^?#]+)([?#].+)?/) || [href, href];
+            const linkOrigPath = join(dirname(currentPageData.origPath), linkMain).replace(/\\/g, "/");
             const linkData = pages.find((item) => item.origPath === linkOrigPath);
 
             if (linkData) {
-                pseudoUrl.pathname = linkData.clientPath;
-                finalHref = pseudoUrl.toString().replace("http://r", "");
+                finalHref = linkData.clientPath + (linkAdditional || "");
+            } else {
+                console.error(`Can not find link to internal file: "${href}"`);
+                finalHref = "";
             }
+        } else {
+            throw new Error("Can not find requested page in parsed data");
         }
     }
     return { href: finalHref, external };
