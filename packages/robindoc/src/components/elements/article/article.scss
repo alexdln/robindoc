@@ -1,15 +1,19 @@
 @use "src/assets/_vars";
 
 .r-article {
-  padding: 20px 0 80px;
+  padding: 20px 0 40px;
   grid-area: content;
 
-  @media screen and (width >= vars.$lg) {
-    padding: 32px 0 80px;
+  @media screen and (width >=vars.$lg) {
+    padding: 32px 0 40px;
   }
 
-  & > *:first-child {
+  &>*:first-child {
     margin-top: 0;
+  }
+
+  &>*:last-child {
+    margin-bottom: 0;
   }
 }
 

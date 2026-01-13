@@ -23,7 +23,10 @@ export const SidebarDrop: React.FC<React.PropsWithChildren<SidebarDropProps>> = 
     }, [openedByDefault]);
 
     useEffect(() => {
-        detailsRef.current?.style.setProperty("--drop-height", dropdownRef.current?.offsetHeight.toString() + "px");
+        detailsRef.current?.style.setProperty(
+            "--drop-height",
+            (dropdownRef.current?.offsetHeight || 0).toString() + "px",
+        );
     }, []);
 
     return (

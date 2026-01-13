@@ -11,11 +11,11 @@
   transition: opacity 0.3s allow-discrete;
   padding-inline: 8px;
   margin-inline-start: -4px;
-  color: var(--r-neutral-600);
+  color: var(--r-main-600);
   text-decoration: none;
 
   &:hover {
-    color: var(--r-link-base-hovered);
+    color: var(--r-primary-800);
   }
 
   &::after {

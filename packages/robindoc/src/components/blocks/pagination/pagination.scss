@@ -5,7 +5,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(148px, 1fr));
   gap: 16px;
-  margin-bottom: 80px;
+  margin-bottom: 40px;
 }
 
 .r-pagination-item {
@@ -14,20 +14,20 @@
   padding-bottom: 8px;
   text-decoration: none;
   font-size: 14px;
-  color: var(--r-neutral-700);
+  color: var(--r-main-800);
 
   &:hover {
-    color: var(--r-neutral-900);
+    color: var(--r-main-950);
   }
 }
 
 .r-pagination-item._prev {
-  padding-left: 32px;
+  padding-left: 28px;
 }
 
 .r-pagination-item._next {
   text-align: right;
-  padding-right: 32px;
+  padding-right: 28px;
 }
 
 .r-pagination-text {
@@ -37,8 +37,7 @@
 
 .r-pagination-title {
   font-weight: 600;
-  font-size: 18px;
-  color: var(--r-neutral-950);
+  font-size: 16px;
 }
 
 .r-pagination-icon {
@@ -46,7 +45,6 @@
   top: 50%;
   transform: translateY(-50%);
   transition: transform 0.2s;
-  margin: -4px;
 }
 
 .r-pagination-icon._prev {
@@ -55,7 +53,7 @@
   .r-pagination-item:hover & {
     transform: translate(-4px, -50%);
 
-    @media screen and (width >= vars.$lg) {
+    @media screen and (width >=vars.$lg) {
       transform: translate(-8px, -50%);
     }
   }
@@ -67,7 +65,7 @@
   .r-pagination-item:hover & {
     transform: translate(4px, -50%);
 
-    @media screen and (width >= vars.$lg) {
+    @media screen and (width >=vars.$lg) {
       transform: translate(8px, -50%);
     }
   }

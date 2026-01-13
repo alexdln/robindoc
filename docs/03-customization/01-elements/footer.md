@@ -8,7 +8,7 @@ import { RobinProvider, Footer } from "robindoc";
 const Layout: React.FC<React.PropsWithChildren> = ({ children }) => (
   <RobinProvider>
     {/* ... */}
-    <Footer copyright="© 2024 All rights reserved" />
+    <Footer copyright="© 2026 All rights reserved" />
   </RobinProvider>
 );
 
@@ -21,7 +21,7 @@ import { RobinProvider, Footer } from "robindoc";
 const Layout = ({ children }) => (
   <RobinProvider>
     {/* ... */}
-    <Footer copyright="© 2024 All rights reserved" />
+    <Footer copyright="© 2026 All rights reserved" />
   </RobinProvider>
 );
 
@@ -34,7 +34,7 @@ All customization in Robindoc happens through the structure and props of the com
 
 `hidePoweredBy` [`boolean`] - hides the "Powered By Robindoc" label. However, I would appreciate it if you keep this flag enabled. It helps the service grow and improve;
 
-`copyright` [`string`] - the copyright text (usually in the form of "© 2024 All rights reserved");
+`copyright` [`string`] - the copyright text (usually in the form of "© 2026 All rights reserved");
 
 `translations` [`{ [key: string]: string }`] - translations for the current component. The key is the term identifier, and the value is the corresponding translation. _For the latest list of terms, check the editor hints_.
 

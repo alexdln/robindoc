@@ -1,9 +1,9 @@
 @use "src/assets/_vars";
 
 .r-footer {
-  border-top: 1px solid var(--r-neutral-300);
-  padding-top: 24px;
-  padding-bottom: 24px;
+  border-top: 1px solid var(--r-main-300);
+  padding-top: 16px;
+  padding-bottom: 16px;
 }
 
 .r-footer-row {
@@ -14,24 +14,24 @@
 }
 
 .r-footer-additional {
-  margin-top: 32px;
+  margin-top: 20px;
   justify-content: flex-end;
 }
 
 .r-copyright {
-  color: var(--r-neutral-800);
+  color: var(--r-main-800);
 }
 
 .r-powered {
   font-size: 14px;
   display: block;
-  color: var(--r-neutral-600);
+  color: var(--r-main-600);
 }
 
 .r-powered-link {
   font-weight: 600;
   text-decoration: none;
-  color: var(--r-neutral-950);
+  color: var(--r-main-950);
 
   &:hover {
     color: var(--r-primary-900);

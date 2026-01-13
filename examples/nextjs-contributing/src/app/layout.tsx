@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Header, Footer, RobinProvider, KeylinkToContent, DocsContainer, KeylinkToNavigation } from "robindoc";
 
-import { robinTheme } from "./robin-theme";
 import { Sidebar } from "./robindoc";
 
 import "robindoc/lib/styles.css";
@@ -25,7 +24,7 @@ export const metadata: Metadata = {
 const RootLayout: React.FC<React.PropsWithChildren> = ({ children }) => (
     <html lang="en">
         <body className={geistSans.className}>
-            <RobinProvider theme={robinTheme}>
+            <RobinProvider>
                 <KeylinkToContent />
                 <Header
                     logo={
@@ -74,7 +73,7 @@ const RootLayout: React.FC<React.PropsWithChildren> = ({ children }) => (
                     {children}
                     <KeylinkToNavigation />
                 </DocsContainer>
-                <Footer copyright="© 2024 All rights reserved" />
+                <Footer copyright="© 2026 All rights reserved" />
             </RobinProvider>
         </body>
     </html>

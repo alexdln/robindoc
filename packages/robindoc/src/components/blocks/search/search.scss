@@ -3,25 +3,25 @@
 .r-search-btn {
   position: relative;
   border-radius: 6px;
-  background-color: var(--r-neutral-100);
-  color: var(--r-neutral-600);
+  background-color: var(--r-main-100);
+  color: var(--r-main-600);
   padding: 8px 20px;
-  border: 1px solid var(--r-neutral-200);
+  border: 1px solid var(--r-main-200);
   width: 100%;
   text-align: left;
   cursor: text;
   box-sizing: border-box;
 
-  @media screen and (width >= vars.$sm) {
+  @media screen and (width >=vars.$sm) {
     width: 220px;
     padding: 8px 96px 8px 20px;
   }
 
   &:hover {
-    border-color: var(--r-neutral-600);
+    border-color: var(--r-main-600);
 
     & .r-search-kbd {
-      color: var(--r-neutral-950);
+      color: var(--r-main-950);
     }
   }
 }
@@ -40,27 +40,27 @@
   top: 50%;
   transform: translateY(-50%);
 
-  @media screen and (width >= vars.$sm) {
+  @media screen and (width >=vars.$sm) {
     display: flex;
   }
 }
 
 .r-search-popup-header {
   position: relative;
-  border-bottom: 1px solid var(--r-neutral-200);
+  border-bottom: 1px solid var(--r-main-200);
 }
 
 .r-search-input {
   border-radius: 12px 12px 0 0;
-  background-color: var(--r-neutral-50);
+  background-color: var(--r-main-50);
   padding: 16px 20px;
   border: none;
-  border-bottom: 2px solid var(--r-neutral-300);
+  border-bottom: 2px solid var(--r-main-300);
   width: 100%;
   font-size: 16px;
   box-sizing: border-box;
 
-  @media screen and (width >= vars.$sm) {
+  @media screen and (width >=vars.$sm) {
     padding: 16px 72px 16px 20px;
   }
 
@@ -74,12 +74,12 @@
   }
 
   &::placeholder {
-    color: var(--r-neutral-500);
+    color: var(--r-main-500);
   }
 }
 
 .r-search-popup-kbd {
-  color: var(--r-neutral-600);
+  color: var(--r-main-600);
   right: 20px;
 }
 
@@ -89,7 +89,7 @@
   overflow-y: auto;
   list-style: none;
   scrollbar-width: thin;
-  scrollbar-color: var(--r-neutral-200) transparent;
+  scrollbar-color: var(--r-main-200) transparent;
   margin: 0;
   box-sizing: border-box;
 }
@@ -97,9 +97,9 @@
 .r-search-item {
   display: block;
   text-decoration: none;
-  color: var(--r-neutral-700);
+  color: var(--r-main-700);
   padding: 8px 12px;
-  border: 1px solid var(--r-neutral-100);
+  border: 1px solid var(--r-main-100);
   border-radius: 6px;
   width: 100%;
   margin-top: 6px;
@@ -107,8 +107,8 @@
 
   &:hover,
   &:focus {
-    color: var(--r-neutral-950);
-    background-color: var(--r-neutral-50);
+    color: var(--r-main-950);
+    background-color: var(--r-main-50);
   }
 }
 
@@ -118,6 +118,6 @@
 
 .r-search-item-desc {
   font-size: 14px;
-  color: var(--r-neutral-600);
+  color: var(--r-main-600);
   margin: 12px 0 0;
 }

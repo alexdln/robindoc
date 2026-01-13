@@ -1,13 +1,20 @@
 .r-content-link {
   text-decoration: none;
-  color: var(--r-link);
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--r-primary-500);
+  text-underline-offset: 3px;
+  transition: text-decoration-offset .2s ease;
 
   &:hover {
-    color: var(--r-link-hovered);
+    color: var(--r-main-700);
+    text-decoration-color: var(--r-primary-400);
+    text-underline-offset: 2px;
+    text-decoration-thickness: 2px;
   }
 
   &:active {
-    color: var(--r-link-active);
+    color: var(--r-primary-600);
   }
 }
 

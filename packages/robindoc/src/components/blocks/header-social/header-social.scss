@@ -5,18 +5,18 @@
   flex: 1;
   justify-content: flex-end;
 
-  @media screen and (width >= vars.$md) {
+  @media screen and (width >=vars.$md) {
     flex: none;
     justify-content: unset;
   }
 }
 
 .r-header-social-git {
-  color: var(--r-neutral-700);
+  color: var(--r-main-700);
   transition: color 0.2s;
 
   &:hover,
   &:focus {
-    color: var(--r-neutral-950);
+    color: var(--r-main-950);
   }
 }

@@ -4,7 +4,7 @@
   text-align: center;
   overflow-x: hidden;
 
-  @media screen and (width >= 768px) {
+  @media screen and (width >=768px) {
     padding-top: 160px;
     padding-bottom: 160px;
   }
@@ -39,8 +39,8 @@
     right: -200px;
     bottom: -140px;
     border-radius: 10% 25% 15% 80% / 60% 20% 25% 50%;
-    background-color: var(--r-neutral-700);
-    box-shadow: 0 0 80px 100px var(--r-neutral-700);
+    background-color: var(--r-main-700);
+    box-shadow: 0 0 80px 100px var(--r-main-700);
   }
 }
 
@@ -50,13 +50,13 @@
   justify-content: center;
   margin-top: 32px;
 
-  @media screen and (width >= 768px) {
+  @media screen and (width >=768px) {
     grid-auto-flow: column;
   }
 }
 
 .showcases-btn {
-  --main-color: var(--r-neutral-900);
+  --main-color: var(--r-main-900);
   display: block;
   text-decoration: none;
   border-radius: 6px;
@@ -70,7 +70,7 @@
 
   &:hover {
     background-color: var(--main-color);
-    color: var(--r-neutral-100);
+    color: var(--r-main-100);
   }
 }
 
@@ -83,7 +83,7 @@
   gap: 24px;
   margin-top: 120px;
 
-  @media screen and (width >= 1080px) {
+  @media screen and (width >=1080px) {
     grid-template-columns: repeat(3, 1fr);
   }
 }
@@ -93,7 +93,7 @@
   display: block;
   border-radius: 12px;
   text-decoration: none;
-  background-color: var(--r-neutral-50);
+  background-color: var(--r-main-50);
   padding: 16px;
   color: inherit;
   text-align: left;
@@ -102,7 +102,7 @@
 
   &:hover {
     filter: grayscale(0);
-    background-color: var(--r-neutral-100);
+    background-color: var(--r-main-100);
   }
 }
 
@@ -126,7 +126,7 @@
   top: 16px;
   right: 16px;
   padding: 6px 10px;
-  background-color: var(--r-neutral-100);
+  background-color: var(--r-main-100);
   backdrop-filter: opacity(0.4);
   border-top-right-radius: 8px;
   border-bottom-left-radius: 8px;

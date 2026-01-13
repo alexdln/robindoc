@@ -2,7 +2,7 @@
   padding-top: 80px;
   padding-bottom: 80px;
 
-  @media screen and (width >= 768px) {
+  @media screen and (width >=768px) {
     display: flex;
     gap: 60px;
     padding-top: 160px;
@@ -21,7 +21,7 @@
     content: "#";
     position: absolute;
     left: -32px;
-    color: var(--r-neutral-300);
+    color: var(--r-main-300);
     pointer-events: none;
   }
 }
@@ -35,7 +35,7 @@
     content: "**";
     position: absolute;
     top: -10px;
-    color: var(--r-neutral-300);
+    color: var(--r-main-300);
     pointer-events: none;
   }
 
@@ -56,7 +56,7 @@
   &::after {
     content: "_";
     position: absolute;
-    color: var(--r-neutral-300);
+    color: var(--r-main-300);
     pointer-events: none;
   }
 
@@ -73,7 +73,7 @@
   display: none;
   margin: -72px;
 
-  @media screen and (width >= 768px) {
+  @media screen and (width >=768px) {
     display: block;
   }
 }
@@ -88,13 +88,16 @@
   0% {
     opacity: 0;
   }
+
   10% {
     opacity: 0;
     transform: rotate(0);
   }
+
   70% {
     transform: rotate(1080deg);
   }
+
   100% {
     transform: rotate(1080deg);
     opacity: 1;
@@ -111,13 +114,16 @@
   0% {
     opacity: 0;
   }
+
   10% {
     opacity: 0;
     transform: rotate(0);
   }
+
   70% {
     transform: rotate(-1080deg);
   }
+
   100% {
     transform: rotate(-1080deg);
     opacity: 1;
@@ -130,7 +136,7 @@
   gap: 80px;
   margin-top: 106px;
 
-  @media screen and (width >= 600px) {
+  @media screen and (width >=600px) {
     flex-direction: row;
     gap: 48px;
   }
@@ -146,7 +152,7 @@
   &::after {
     position: absolute;
     left: 0;
-    color: var(--r-neutral-300);
+    color: var(--r-main-300);
     pointer-events: none;
   }
 
@@ -166,7 +172,7 @@
   display: block;
   text-decoration: none;
   background: var(--r-primary-700);
-  color: var(--r-neutral-50);
+  color: var(--r-main-50);
   border-radius: 6px;
   padding: 8px 16px;
   box-sizing: border-box;
@@ -181,15 +187,15 @@
   line-height: 22px;
   border-radius: 6px;
   padding: 8px 12px;
-  background-color: var(--r-neutral-50);
-  border: 1px solid var(--r-neutral-300);
+  background-color: var(--r-main-50);
+  border: 1px solid var(--r-main-300);
   box-sizing: border-box;
 
   &::before,
   &::after {
     position: absolute;
     left: 0;
-    color: var(--r-neutral-300);
+    color: var(--r-main-300);
     pointer-events: none;
     box-sizing: border-box;
   }
@@ -207,4 +213,19 @@
 
 .intro-cmd-tool {
   color: var(--r-cl-56);
+}
+
+.intro-code {
+  position: relative;
+  font-size: inherit;
+  max-width: 420px;
+  text-wrap: wrap;
+  padding: 1rem;
+  background: var(--r-main-50);
+  border: 4px solid var(--r-main-100);
+  border-radius: 0.75rem;
+
+  .row {
+    display: block;
+  }
 }

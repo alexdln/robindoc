@@ -36,7 +36,7 @@ const RootLayout: React.FC<React.PropsWithChildren> = ({ children }) => (
                     searcher="/api/search"
                 />
                 {children}
-                <Footer copyright="© 2024 All rights reserved" />
+                <Footer copyright="© 2026 All rights reserved" />
             </RobinProvider>
             <Analytics />
         </body>

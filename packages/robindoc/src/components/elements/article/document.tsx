@@ -53,6 +53,9 @@ export const DocumentJSX: React.FC<DocumentJSXProps> = ({ raw, components, ...ba
 
             if (domNode.name === "a" && "attribs" in domNode) {
                 const { href, external } = formatLinkHref(domNode.attribs.href, baseProps.pathname, baseProps.pages);
+
+                if (href === "") return domToReact(domNode.children as DOMNode[], parseOptions);
+
                 return (
                     <NavContentLink {...attributesToProps(domNode.attribs)} href={href} external={external}>
                         {domToReact(domNode.children as DOMNode[], parseOptions)}
@@ -212,6 +215,8 @@ export const Document: React.FC<ContentProps> = ({
             case "link":
                 const { href, external } = formatLinkHref(token.href, pathname, pages);
 
+                if (href === "") return token.tokens ? <DocumentToken token={token.tokens} /> : token.raw;
+
                 return (
                     <NavContentLink href={href} external={external}>
                         {token.tokens ? <DocumentToken token={token.tokens} /> : token.raw}
@@ -312,18 +317,11 @@ export const Document: React.FC<ContentProps> = ({
                     const ListComponent = token.ordered ? TaskOrderedList : TaskUnorderedList;
                     return (
                         <ListComponent start={token.start}>
-                            {token.items.map((elem: Tokens.ListItem, index: number) => {
-                                const childTokens =
-                                    elem.tokens?.length === 1 && elem.tokens[0].type === "paragraph"
-                                        ? elem.tokens[0].tokens
-                                        : elem.tokens;
-
-                                return (
-                                    <TaskListItem key={elem.raw + index} defaultChecked={elem.checked}>
-                                        {childTokens ? <DocumentToken token={childTokens} /> : elem.raw}
-                                    </TaskListItem>
-                                );
-                            })}
+                            {token.items.map((elem: Tokens.ListItem, index: number) => (
+                                <TaskListItem key={elem.raw + index} defaultChecked={elem.checked}>
+                                    {elem.tokens ? <DocumentToken token={elem.tokens} /> : elem.raw}
+                                </TaskListItem>
+                            ))}
                         </ListComponent>
                     );
                 }
@@ -331,17 +329,11 @@ export const Document: React.FC<ContentProps> = ({
                 const ListComponent = token.ordered ? OrderedList : UnorderedList;
                 return (
                     <ListComponent start={token.start}>
-                        {token.items.map((elem: Tokens.ListItem, index: number) => {
-                            const childTokens =
-                                elem.tokens?.length === 1 && elem.tokens[0].type === "paragraph"
-                                    ? elem.tokens[0].tokens
-                                    : elem.tokens;
-                            return (
-                                <ListItem key={elem.raw + index}>
-                                    {childTokens ? <DocumentToken token={childTokens} /> : elem.raw}
-                                </ListItem>
-                            );
-                        })}
+                        {token.items.map((elem: Tokens.ListItem, index: number) => (
+                            <ListItem key={elem.raw + index}>
+                                {elem.tokens ? <DocumentToken token={elem.tokens} /> : elem.raw}
+                            </ListItem>
+                        ))}
                     </ListComponent>
                 );
             case "html":
