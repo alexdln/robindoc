@@ -19,6 +19,10 @@
   color: var(--r-main-700);
 }
 
+.r-code-section-block._space-right {
+  padding-right: 3rem;
+}
+
 .r-code-section-header+.r-code-section-block {
   border: 0;
   margin-block-start: 0;
@@ -34,6 +38,9 @@
   right: 9px;
   top: 9px;
   opacity: 0;
+  background: color-mix(in oklab, var(--r-main-100) 90%, transparent);
+  border: 2px solid var(--r-main-50);
+  backdrop-filter: blur(2px);
   transition:
     opacity 0.2s,
     color 0.2s,

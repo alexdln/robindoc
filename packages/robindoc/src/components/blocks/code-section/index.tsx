@@ -20,6 +20,6 @@ export const CodeSection: React.FC<CodeSectionProps> = ({ filename, code, ...pro
         ) : (
             <CopyButton raw={code} className="r-code-section-copy" />
         )}
-        <CodeBlock className="r-code-section-block" code={code} {...props} />
+        <CodeBlock className={`r-code-section-block${filename ? "" : " _space-right"}`} code={code} {...props} />
     </div>
 );
