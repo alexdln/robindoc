@@ -2,8 +2,8 @@
   position: relative;
   padding: 8px;
   background: none;
-  color: var(--r-neutral-700);
-  background-color: var(--r-neutral-100);
+  color: var(--r-main-700);
+  background-color: var(--r-main-100);
   border: 0;
   border-radius: 6px;
   cursor: pointer;
@@ -25,8 +25,8 @@
 }
 
 .r-copy-button:hover {
-  color: var(--r-neutral-950);
-  background-color: var(--r-neutral-200);
+  color: var(--r-main-950);
+  background-color: var(--r-main-200);
 }
 
 .r-copy-button:active,

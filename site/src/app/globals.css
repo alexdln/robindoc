@@ -3,6 +3,14 @@ html, body {
     padding: 0;
 }
 
+html.r-root.theme-dark {
+    background-color: rgb(12,12,12);
+}
+
+html.r-root.theme-light {
+    background-color: rgb(242,242,242);
+}
+
 *,
 *:before,
 *:after {

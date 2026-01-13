@@ -10,8 +10,8 @@
     top: var(--r-header-height);
     left: 0;
     margin: 0 -12px;
-    background-color: var(--r-body);
-    border-bottom: 1px solid var(--r-neutral-200);
+    background-color: var(--r-main-50);
+    border-bottom: 1px solid var(--r-main-200);
     z-index: 10;
     opacity: 0.98;
     padding: 0;
@@ -24,7 +24,7 @@
   grid-column-start: 1;
 }
 
-.r-sidebar-input:not(:checked) ~ .r-sidebar-btn ~ .r-sidebar-nav {
+.r-sidebar-input:not(:checked)~.r-sidebar-btn~.r-sidebar-nav {
   @media screen and (width < vars.$sm) {
     display: none;
   }
@@ -32,6 +32,7 @@
 
 .r-sidebar-nav {
   box-sizing: border-box;
+
   @media screen and (width < vars.$sm) {
     overflow: auto;
     max-height: calc(100dvh - var(--r-header-height) - 41px);
@@ -61,7 +62,7 @@
   right: 0;
   height: 2px;
   border-bottom-left-radius: 2px;
-  background-color: var(--r-neutral-200);
+  background-color: var(--r-main-200);
   z-index: 1;
   transition: background-color 0.2s cubic-bezier(0, 0.66, 0.58, 1) 0.05s;
   box-sizing: border-box;
@@ -75,12 +76,12 @@
     padding: 12px;
   }
 
-  @media screen and (width >= vars.$sm) {
+  @media screen and (width >=vars.$sm) {
     position: sticky;
     top: var(--r-header-height);
     overflow: auto;
     scrollbar-width: thin;
-    scrollbar-color: var(--r-neutral-200) transparent;
+    scrollbar-color: var(--r-main-200) transparent;
     scrollbar-gutter: stable;
     max-height: calc(100dvh - var(--r-header-height));
   }
@@ -88,6 +89,7 @@
 
 .r-sidebar-space {
   box-sizing: border-box;
+
   @media screen and (width < vars.$sm) {
     display: block;
     height: 40px;
@@ -104,12 +106,12 @@
   padding: 12px;
   background: none;
   cursor: pointer;
-  color: var(--r-neutral-800);
-  background-color: var(--r-body);
+  color: var(--r-main-800);
+  background-color: var(--r-main-50);
   z-index: 1;
   box-sizing: border-box;
 
-  @media screen and (width >= vars.$sm) {
+  @media screen and (width >=vars.$sm) {
     display: none;
   }
 }
@@ -121,12 +123,12 @@
   box-sizing: border-box;
 }
 
-.r-sidebar-input:checked ~ .r-sidebar-btn .r-sidebar-chevron {
+.r-sidebar-input:checked~.r-sidebar-btn .r-sidebar-chevron {
   transform: rotate(90deg);
 }
 
 .r-sidebar-list {
-  color: var(--r-neutral-700);
+  color: var(--r-main-700);
   list-style: none;
   padding: 0;
   margin: 0;
@@ -143,8 +145,8 @@
   height: 0;
   overflow: hidden;
   transition:
-  height 0.3s,
-  content-visibility 0.3s allow-discrete;
+    height 0.3s,
+    content-visibility 0.3s allow-discrete;
   box-sizing: border-box;
 }
 
@@ -165,7 +167,7 @@
     top: -1px;
     width: 2px;
     height: calc(100% + 4px);
-    background-color: var(--r-neutral-200);
+    background-color: var(--r-main-200);
     transition: background-color 0.2s cubic-bezier(0, 0.66, 0.58, 1) 0.05s;
     box-sizing: border-box;
   }
@@ -179,11 +181,11 @@
 }
 
 .r-sidebar-li._separator {
-  background: var(--r-neutral-200);
+  background: var(--r-main-200);
   padding: 1px;
 }
 
-.r-sidebar-li._droppable > a {
+.r-sidebar-li._droppable>a {
   padding-right: 32px;
 }
 
@@ -197,7 +199,7 @@
 }
 
 .r-sidebar-heading {
-  color: var(--r-neutral-900);
+  color: var(--r-main-900);
   font-weight: 600;
   margin-block-end: 4px;
 
@@ -220,12 +222,12 @@
 
 .r-sidebar-link._target {
   color: var(--r-primary-950);
-  background-color: var(--r-neutral-50);
+  background-color: var(--r-main-50);
 }
 
 .r-sidebar-link:hover {
   color: var(--r-primary-800);
-  background-color: var(--r-neutral-100);
+  background-color: var(--r-main-100);
   transition-delay: initial;
 
   &::before {
@@ -236,7 +238,7 @@
 
 .r-sidebar-link._active {
   color: var(--r-primary-700);
-  background-color: var(--r-neutral-50);
+  background-color: var(--r-main-50);
 
   &::before {
     background-color: currentColor;
@@ -249,15 +251,12 @@
   top: 5px;
   border-radius: 4px;
   padding: 4px;
-  background-color: var(--r-neutral-200);
   list-style: none;
   cursor: pointer;
   transition:
-    background-color 0.2s cubic-bezier(0, 0.66, 0.58, 1) 0.05s,
     color 0.2s cubic-bezier(0, 0.66, 0.58, 1) 0.05s;
 
   &:hover {
-    background-color: var(--r-neutral-300);
     color: var(--r-primary-500);
     transition-delay: initial;
   }
@@ -278,6 +277,6 @@
   transition: transform 0.2s;
 }
 
-.r-sidebar-drop[open] > .r-sidebar-drop-btn > .r-sidebar-drop-icon {
+.r-sidebar-drop[open]>.r-sidebar-drop-btn>.r-sidebar-drop-icon {
   transform: rotate(90deg);
 }

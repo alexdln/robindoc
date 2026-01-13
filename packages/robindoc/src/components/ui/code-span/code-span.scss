@@ -1,10 +1,12 @@
 .r-code-span {
   font-family: var(--monospace-font, monospace, monospace);
-  background-color: var(--r-neutral-200);
-  color: var(--r-primary-900);
+  background-color: var(--r-main-100);
+  border: 1px solid var(--r-main-200);
+  color: var(--r-main-950);
   border-radius: 4px;
   padding: 2px 6px;
   font-size: 16px;
+  font-weight: 500;
   letter-spacing: .5px;
 }
 

@@ -1,11 +1,11 @@
 .r-dropdown {
   position: relative;
-  color: var(--r-neutral-600);
+  color: var(--r-main-600);
   transition: color 0.2s 0.1s;
 
   &:hover,
   &:focus-within {
-    color: var(--r-neutral-950);
+    color: var(--r-main-950);
 
     & .r-dropdown-drop {
       visibility: visible;
@@ -55,8 +55,8 @@
     transform 0.3s 0.1s,
     opacity 0.3s 0.1s,
     visibility 0.3s 0.1s;
-  background-color: var(--r-neutral-50);
-  border: 1px solid var(--r-neutral-100);
+  background-color: var(--r-main-50);
+  border: 1px solid var(--r-main-100);
   border-radius: 8px;
   margin: 0;
   padding: 2px 6px;
@@ -69,7 +69,7 @@
   display: block;
   width: 100%;
   text-decoration: none;
-  color: var(--r-neutral-700);
+  color: var(--r-main-700);
   padding: 4px 8px;
   margin-top: 4px;
   margin-bottom: 4px;
@@ -78,8 +78,8 @@
   box-sizing: border-box;
 
   &:hover {
-    color: var(--r-neutral-900);
-    background-color: var(--r-neutral-100);
+    color: var(--r-main-900);
+    background-color: var(--r-main-100);
   }
 }
 

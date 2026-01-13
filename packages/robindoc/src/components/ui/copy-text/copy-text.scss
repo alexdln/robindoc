@@ -7,7 +7,7 @@
   font: inherit;
 
   &:hover {
-    color: var(--r-neutral-950);
+    color: var(--r-main-950);
   }
 
   &::before {
@@ -17,14 +17,11 @@
     left: 0;
     width: 100%;
     height: 1px;
-    background: linear-gradient(
-        to right,
+    background: linear-gradient(to right,
         currentColor 30%,
         transparent 0%,
         transparent 80%,
-        currentColor 80%
-      )
-      repeat-x 0px/8px;
+        currentColor 80%) repeat-x 0px/8px;
     transition: background 0.2s;
     box-sizing: border-box;
   }

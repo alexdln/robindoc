@@ -24,8 +24,8 @@ export const NoJs = () => (
                     width: 100%;
                     min-width: 120px;
                     transform: translateY(-50%);
-                    background-color: var(--r-neutral-900);
-                    color: var(--r-neutral-100);
+                    background-color: var(--r-main-900);
+                    color: var(--r-main-100);
                     border-radius: 4px;
                     padding: 4px 12px;
                     pointer-events: none;

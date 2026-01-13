@@ -4,7 +4,7 @@
   padding-top: 60px;
   padding-bottom: 140px;
 
-  @media screen and (width >= 768px) {
+  @media screen and (width >=768px) {
     grid-template-columns: repeat(12, 1fr);
   }
 }
@@ -14,69 +14,59 @@
   align-content: space-between;
   border-radius: 12px;
   padding: 48px 32px;
-  background: var(--r-neutral-50);
+  background: var(--r-main-50);
 }
 
 .features-card-1 {
-  background: radial-gradient(
-    50.69% 38.39% at 10.59% 64.42%,
-    var(--r-primary-50) 0%,
-    var(--r-neutral-50) 100%
-  );
+  background: radial-gradient(50.69% 38.39% at 10.59% 64.42%,
+      var(--r-primary-50) 0%,
+      var(--r-main-50) 100%);
 
-  @media screen and (width >= 768px) {
+  @media screen and (width >=768px) {
     grid-column-start: 1;
     grid-column-end: 6;
   }
 }
 
 .features-card-2 {
-  background: radial-gradient(
-    64.59% 64.59% at 46.08% 31.57%,
-    var(--r-primary-50) 0%,
-    var(--r-neutral-50) 100%
-  );
+  background: radial-gradient(64.59% 64.59% at 46.08% 31.57%,
+      var(--r-primary-50) 0%,
+      var(--r-main-50) 100%);
 
-  @media screen and (width >= 768px) {
+  @media screen and (width >=768px) {
     grid-column-start: 6;
     grid-column-end: 13;
   }
 }
 
 .features-card-3 {
-  background: radial-gradient(
-    34.95% 63.28% at 96.22% 96.73%,
-    var(--r-primary-50) 0%,
-    var(--r-neutral-50) 100%
-  );
+  background: radial-gradient(34.95% 63.28% at 96.22% 96.73%,
+      var(--r-primary-50) 0%,
+      var(--r-main-50) 100%);
 
-  @media screen and (width >= 768px) {
+  @media screen and (width >=768px) {
     grid-column-start: 1;
     grid-column-end: 5;
   }
 }
 
 .features-card-4 {
-  background: radial-gradient(
-    54.17% 69.64% at 46.8% 78.55%,
-    var(--r-primary-50) 0%,
-    var(--r-neutral-50) 100%
-  );
+  background: radial-gradient(54.17% 69.64% at 46.8% 78.55%,
+      var(--r-primary-50) 0%,
+      var(--r-main-50) 100%);
 
-  @media screen and (width >= 768px) {
+  @media screen and (width >=768px) {
     grid-column-start: 1;
     grid-column-end: 5;
   }
 }
 
 .features-card-5 {
-  background: radial-gradient(
-    75% 75.87% at 78.57% 45.14%,
-    var(--r-primary-50) 0%,
-    var(--r-neutral-50) 100%
-  );
+  background: radial-gradient(75% 75.87% at 78.57% 45.14%,
+      var(--r-primary-50) 0%,
+      var(--r-main-50) 100%);
 
-  @media screen and (width >= 768px) {
+  @media screen and (width >=768px) {
     grid-column-start: 5;
     grid-column-end: 13;
     grid-row-start: 2;
@@ -108,6 +98,7 @@
 }
 
 .features-sources._unvisible {
+
   .features-source,
   .features-source-box {
     transition: all 0.3s !important;
@@ -115,12 +106,12 @@
 }
 
 .features-source {
-  stroke: var(--r-body);
+  stroke: var(--r-main-50);
   transition: stroke 0.3s;
 }
 
 .features-source-box {
-  fill: var(--r-body);
+  fill: var(--r-main-50);
   transition: fill 0.3s;
 }
 

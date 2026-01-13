@@ -12,12 +12,12 @@
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
   padding: 6px 20px;
-  background-color: var(--r-neutral-100);
-  border: 1px solid var(--r-neutral-300);
-  color: var(--r-neutral-700);
+  background-color: var(--r-main-100);
+  border: 1px solid var(--r-main-300);
+  color: var(--r-main-700);
 }
 
-.r-code-section-header + .r-code-section-block {
+.r-code-section-header+.r-code-section-block {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
   border-top: 0;

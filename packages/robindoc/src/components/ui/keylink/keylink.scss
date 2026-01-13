@@ -2,10 +2,10 @@
   display: block;
   position: relative;
   padding: 8px 12px;
-  border: 2px solid var(--r-neutral-500);
+  border: 2px solid var(--r-main-500);
   border-radius: 6px;
   text-decoration: none;
-  background: var(--r-body);
+  background: var(--r-main-50);
 }
 
 .r-keylink:not(:focus) {

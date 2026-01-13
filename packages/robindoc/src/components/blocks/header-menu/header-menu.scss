@@ -5,13 +5,13 @@
   justify-content: flex-end;
   order: 1;
 
-  @media screen and (width >= vars.$md) {
+  @media screen and (width >=vars.$md) {
     flex: 1;
     order: unset;
   }
 }
 
-.r-header-input:checked ~ .r-header-burger ~ .r-header-responsive {
+.r-header-input:checked~.r-header-burger~.r-header-responsive {
   display: flex;
 }
 
@@ -25,7 +25,7 @@
   @media screen and (width < vars.$md) {
     flex-direction: column-reverse;
     padding: 12px;
-    background-color: var(--r-body);
+    background-color: var(--r-main-50);
     position: fixed;
     top: 60px;
     right: 0;
@@ -33,7 +33,7 @@
     left: 0;
   }
 
-  @media screen and (width >= vars.$md) {
+  @media screen and (width >=vars.$md) {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -52,7 +52,7 @@
   border: none;
   box-sizing: border-box;
 
-  @media screen and (width >= vars.$md) {
+  @media screen and (width >=vars.$md) {
     display: none;
   }
 }
@@ -62,7 +62,7 @@
   width: 20px;
   height: 1.5px;
   position: absolute;
-  background-color: var(--r-neutral-700);
+  background-color: var(--r-main-700);
   margin: auto;
   transition: transform 0.3s;
   box-sizing: border-box;
@@ -72,7 +72,7 @@
   transform: translateY(-3px);
 }
 
-.r-header-input:checked ~ .r-header-burger .r-burger-line._top {
+.r-header-input:checked~.r-header-burger .r-burger-line._top {
   transform: translateY(0) rotate(45deg);
   margin-top: 0;
 }
@@ -81,7 +81,7 @@
   transform: translateY(3px);
 }
 
-.r-header-input:checked ~ .r-header-burger .r-burger-line._bottom {
+.r-header-input:checked~.r-header-burger .r-burger-line._bottom {
   transform: translateY(0) rotate(-45deg);
   margin-top: 0;
 }

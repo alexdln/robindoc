@@ -14,10 +14,10 @@
   padding-bottom: 8px;
   text-decoration: none;
   font-size: 14px;
-  color: var(--r-neutral-700);
+  color: var(--r-main-700);
 
   &:hover {
-    color: var(--r-neutral-900);
+    color: var(--r-main-900);
   }
 }
 
@@ -38,7 +38,7 @@
 .r-pagination-title {
   font-weight: 600;
   font-size: 18px;
-  color: var(--r-neutral-950);
+  color: var(--r-main-950);
 }
 
 .r-pagination-icon {
@@ -55,7 +55,7 @@
   .r-pagination-item:hover & {
     transform: translate(-4px, -50%);
 
-    @media screen and (width >= vars.$lg) {
+    @media screen and (width >=vars.$lg) {
       transform: translate(-8px, -50%);
     }
   }
@@ -67,7 +67,7 @@
   .r-pagination-item:hover & {
     transform: translate(4px, -50%);
 
-    @media screen and (width >= vars.$lg) {
+    @media screen and (width >=vars.$lg) {
       transform: translate(8px, -50%);
     }
   }
