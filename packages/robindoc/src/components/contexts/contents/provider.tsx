@@ -9,8 +9,19 @@ export const ContentsProvider: React.FC<React.PropsWithChildren> = ({ children }
 
     const updateTargetSection = useCallback(() => {
         const fromIndex = headings.current.findLastIndex((el) => el.getBoundingClientRect().top < 40);
-        const toIndex = headings.current.findLastIndex((el) => el.getBoundingClientRect().top < window.innerHeight);
-        setActiveIndex({ from: fromIndex, to: toIndex === -1 ? headings.current.length : toIndex });
+        const searchToStartIndex = fromIndex + 1;
+        let toIndex = headings.current.length - 1;
+
+        for (let i = searchToStartIndex; i < headings.current.length; i++) {
+            if (headings.current[i].getBoundingClientRect().top > window.innerHeight) {
+                toIndex = i - 1;
+                break;
+            }
+        }
+
+        setActiveIndex((prev) =>
+            prev.from !== fromIndex || prev.to !== toIndex ? { from: fromIndex, to: toIndex } : prev,
+        );
     }, []);
 
     useEffect(() => {
