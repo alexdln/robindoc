@@ -25,7 +25,6 @@ export const Contents: React.FC<ContentsProps> = ({ headings, hideContents, edit
     const dropdownContentRef = useRef<HTMLDivElement>(null);
     const { from, to } = useHeadingIndex();
     const { onThisPage = "On this page", editOnService = "Edit on {service}" } = translations || {};
-    console.log(from, to);
 
     useEffect(() => {
         if (dropdownContentRef.current && dropdownRef.current) {

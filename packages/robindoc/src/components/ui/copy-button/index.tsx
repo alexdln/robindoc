@@ -7,7 +7,7 @@ import { Tooltip } from "../tooltip";
 
 import "./copy-button.scss";
 
-interface CopyButtonProps {
+export interface CopyButtonProps {
     raw: string;
     className?: string;
     translations?: {

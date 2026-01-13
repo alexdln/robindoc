@@ -2,6 +2,10 @@
   position: relative;
   margin-block-start: 1.5em;
   margin-block-end: 1.75em;
+  background-color: var(--r-main-100);
+  padding: 3px;
+  border-radius: 8px;
+  border: 1px solid var(--r-main-200);
 }
 
 .r-code-section-header {
@@ -11,16 +15,12 @@
   align-items: center;
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
-  padding: 6px 20px;
-  background-color: var(--r-main-100);
-  border: 1px solid var(--r-main-300);
+  padding-left: 20px;
   color: var(--r-main-700);
 }
 
 .r-code-section-header+.r-code-section-block {
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-  border-top: 0;
+  border: 0;
   margin-block-start: 0;
   margin-block-end: 0;
 }

@@ -1,9 +1,8 @@
 .r-copy-button {
   position: relative;
-  padding: 8px;
+  padding: 6px;
   background: none;
   color: var(--r-main-700);
-  background-color: var(--r-main-100);
   border: 0;
   border-radius: 6px;
   cursor: pointer;
@@ -16,17 +15,15 @@
 .r-copy-button-success {
   opacity: 0;
   transform: scale(0.7);
-
-  transition: 0.2s;
+  transition: transform 0.2s;
 }
 
 .r-copy-button-base {
-  transition: 0.2s;
+  transition: transform 0.2s;
 }
 
 .r-copy-button:hover {
   color: var(--r-main-950);
-  background-color: var(--r-main-200);
 }
 
 .r-copy-button:active,

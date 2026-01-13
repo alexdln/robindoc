@@ -13,11 +13,13 @@ export interface CopyTextProps {
     translations?: {
         /** Filename Copied */
         filenameCopied?: string;
+        /** Copy */
+        copy?: string;
     };
 }
 
 export const CopyText: React.FC<CopyTextProps> = ({ translations, text, className }) => {
-    const { filenameCopied = "Filename Copied" } = translations || {};
+    const { filenameCopied = "Filename Copied", copy = "Copy" } = translations || {};
     const [copyTimeout, setCopyTimeout] = useState<NodeJS.Timeout | null>(null);
     const clickHandler = () => {
         if (copyTimeout) clearTimeout(copyTimeout);
@@ -34,6 +36,7 @@ export const CopyText: React.FC<CopyTextProps> = ({ translations, text, classNam
             tabIndex={-1}
             onClick={clickHandler}
             className={clsx("r-copy-text r-no-js _to-right", copyTimeout && "_active", className)}
+            title={copy}
         >
             {text}
             <Tooltip position="bottom-start" visible={Boolean(copyTimeout)}>

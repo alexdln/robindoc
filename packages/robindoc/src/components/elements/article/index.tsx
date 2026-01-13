@@ -48,13 +48,7 @@ export const Article: React.FC<ArticleProps> = async ({
     pages = [],
     translations,
 }) => {
-    const {
-        lastModifiedOn = "Last modified on",
-        editOnService,
-        onThisPage,
-        next: nextTranslation,
-        previous,
-    } = translations || {};
+    const { lastModifiedOn = "Last modified on", editOnService, onThisPage } = translations || {};
     const { data, provider: targetProvider } =
         content || !uri ? { data: content, provider: null } : await loadContent(uri, provider);
 
@@ -88,9 +82,7 @@ export const Article: React.FC<ArticleProps> = async ({
                 />
                 {lastModified && <LastModified date={lastModified}>{lastModifiedOn}</LastModified>}
             </div>
-            {(prev || next) && (
-                <Pagination prev={prev} next={next} translations={{ next: nextTranslation, previous }} />
-            )}
+            {(prev || next) && <Pagination prev={prev} next={next} />}
         </ContentsProvider>
     );
 };
