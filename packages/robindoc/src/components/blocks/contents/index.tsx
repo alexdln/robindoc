@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import clsx from "clsx";
 import { useHeadingIndex } from "@src/components/contexts/contents/use-heading-index";
 import { detectGitType } from "@src/core/utils/git-tools";
@@ -26,18 +26,25 @@ export const Contents: React.FC<ContentsProps> = ({ headings, hideContents, edit
     const { from, to } = useHeadingIndex();
     const { onThisPage = "On this page", editOnService = "Edit on {service}" } = translations || {};
 
-    useEffect(() => {
+    const recalculateOffset = useCallback(() => {
         if (dropdownContentRef.current && dropdownRef.current) {
             dropdownRef.current.style.setProperty("--drop-height", dropdownContentRef.current.offsetHeight + "px");
         }
     }, []);
+
+    useEffect(recalculateOffset, []);
 
     return (
         <div className="r-contents">
             <div className="r-contents-sticky" ref={containerRef}>
                 {headings.length > 0 && !hideContents && (
                     <>
-                        <input type="checkbox" className="r-contents-control" id="r-contents" />
+                        <input
+                            type="checkbox"
+                            className="r-contents-control"
+                            id="r-contents"
+                            onClick={recalculateOffset}
+                        />
                         <div className="r-contents-details">
                             <label className="r-contents-title" htmlFor="r-contents">
                                 {onThisPage}
