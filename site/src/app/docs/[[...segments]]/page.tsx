@@ -1,3 +1,5 @@
+import { notFound } from "next/navigation";
+
 import { Page, getMetadata, getPageInstruction, getStaticParams } from "../robindoc";
 import { Note } from "../../../components/ui/note";
 import { PackageLinks } from "../../../components/ui/package-links";
@@ -6,6 +8,8 @@ const Docs = async ({ params }: { params: Promise<{ segments?: string[] }> }) =>
     const { segments } = await params;
     const pathname = "/docs/" + (segments?.join("/") || "");
     const pageInstriction = await getPageInstruction(pathname);
+
+    if (!pageInstriction) return notFound();
 
     return (
         <Page
