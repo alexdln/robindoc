@@ -16,8 +16,8 @@ export const GET = async (request: Request) => {
 
     for await (const staticParam of staticParams) {
         const pathname = `/${staticParam.segments.join("/")}`;
-        const { raw, title } = await getPageData(pathname);
-        docs.push({ href: pathname, raw, title });
+        const pageData = await getPageData(pathname);
+        if (pageData) docs.push({ href: pathname, raw: pageData.raw, title: pageData.title });
     }
 
     const searchResults = matchSorter(docs, search, { keys: ["content", "title"] });

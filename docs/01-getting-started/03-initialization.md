@@ -22,6 +22,49 @@ export const { Page, Sidebar, getStaticParams, getMetadata, getPageData } =
 
 Now, use these elements in the necessary places. For more details, read the "[App Organization](./04-app-organization.md)" section.
 
+## Options
+
+The `initializeRobindoc` function accepts an optional second parameter with configuration options:
+
+### `processError`
+
+A function to handle errors in your preferred way. This allows you to use framework-specific error handling tools, custom error processors, or logging mechanisms.
+
+The function receives two parameters:
+- `status: number` - The HTTP status code (typically 404)
+- `statusText: string` - A descriptive error message
+
+### `matcher`
+
+An array of regular expression patterns as strings to validate routes before processing. If a route doesn't match any of the patterns, the error handler is called immediately without parsing the documentation structure. This helps return errors much faster and improves performance.
+
+**Recommended configuration for Next.js:**
+
+```tsx filename="app/docs/robindoc.ts" tab="TypeScript" switcher clone="jsx|JavaScript|app/docs/robindoc.js"
+import { notFound } from "next/navigation";
+import { initializeRobindoc } from "robindoc";
+
+export const { Page, Sidebar, getStaticParams, getMetadata, getPageData } =
+  initializeRobindoc(
+    {
+      configuration: {
+        sourceRoot: "../docs",
+        basePath: "/docs",
+        gitToken: "YOUR_TOKEN",
+      },
+      items: "auto",
+    },
+    {
+      processError: notFound,
+      matcher: ["/(?!.*\\..+).*"],
+    },
+  );
+```
+
+In this example:
+- `processError: notFound` uses Next.js's `notFound()` function to handle 404 errors
+- `matcher: ["/(?!.*\\..+).*"]` ensures only routes that don't contain file extensions (like `.ico`, `.md`, etc.) are processed, preventing static asset requests from being handled and processed by Robindoc
+
 ## File Location
 
 The location of the initialization file does not matter, as you will import the elements from this file later.

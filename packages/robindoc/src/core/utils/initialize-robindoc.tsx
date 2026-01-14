@@ -3,7 +3,7 @@ import React from "react";
 import { Article as ArticleBase, type ArticleProps as ArticlePropsBase } from "@src/components/elements/article";
 import { Sidebar as SidebarBase, type SidebarProps as SidebarPropsBase } from "@src/components/elements/sidebar";
 
-import { type Structure } from "../types/structure";
+import { type StructureTemplate, type Options } from "../types/initialize";
 import { parseStructure } from "./parse-structure";
 import { getConfiguration } from "./get-configuration";
 import { getMetadata as getMetadataBase } from "./get-metadata";
@@ -16,26 +16,38 @@ type PageProps = Omit<Partial<ArticlePropsBase>, "uri" | "content" | "provider" 
 
 type SidebarProps = Omit<SidebarPropsBase, "tree">;
 
-const loadStructure = async (structureTemplate: Structure | (() => Structure | Promise<Structure>)) => {
+const loadStructure = async (structureTemplate: StructureTemplate) => {
+    let structure;
     if (typeof structureTemplate === "function") {
-        return structureTemplate();
+        structure = await structureTemplate();
     } else {
-        return structureTemplate;
+        structure = structureTemplate;
     }
+
+    const configuration = getConfiguration(structure.configuration || {});
+
+    return parseStructure(structure.items || [], configuration);
 };
 
-export const initializeRobindoc = (structureTemplate: Structure | (() => Structure | Promise<Structure>)) => {
-    const structureParsedPromise = loadStructure(structureTemplate).then((structure) =>
-        parseStructure(structure.items || [], getConfiguration(structure.configuration || {})),
-    );
+export const initializeRobindoc = (structureTemplate: StructureTemplate, options: Options = {}) => {
+    const structureParsedPromise = loadStructure(structureTemplate);
+    const matchingRules = options.matcher?.map((rule) => new RegExp(`^${rule.replace(/^\^|\$$/g, "")}$`));
 
     const Page: React.FC<PageProps> = async ({ pathname, ...props }) => {
-        const { pages } = await structureParsedPromise;
         const pathnameNormalized = normalizePathname(pathname);
+        if (matchingRules && !matchingRules.every((rule) => rule.test(pathname))) {
+            const errorMessage = `Pathname "${pathnameNormalized}" doesn't pass matcher rules check`;
+            if (options.processError) return options.processError(404, errorMessage) || null;
+            throw new Error(errorMessage);
+        }
+
+        const { pages } = await structureParsedPromise;
         const pageInstruction = pages[pathnameNormalized];
 
         if (!pageInstruction) {
-            throw new Error(`Can not find data for "${pathnameNormalized}". Please check structure`);
+            const errorMessage = `Can not find data for "${pathnameNormalized}". Please check structure`;
+            if (options.processError) return options.processError(404, errorMessage) || null;
+            throw new Error(errorMessage);
         }
 
         const paths = Object.keys(pages);
@@ -95,12 +107,20 @@ export const initializeRobindoc = (structureTemplate: Structure | (() => Structu
     };
 
     const getMetadata = async (pathname: string) => {
-        const { pages } = await structureParsedPromise;
         const pathnameNormalized = normalizePathname(pathname);
+        if (matchingRules && !matchingRules.every((rule) => rule.test(pathname))) {
+            const errorMessage = `Pathname "${pathnameNormalized}" doesn't pass matcher rules check`;
+            if (options.processError) return options.processError(404, errorMessage) || null;
+            throw new Error(errorMessage);
+        }
+
+        const { pages } = await structureParsedPromise;
         const pageInstruction = pages[pathnameNormalized];
 
         if (!pageInstruction) {
-            throw new Error(`Can not find data for "${pathnameNormalized}". Please check structure`);
+            const errorMessage = `Can not find data for "${pathnameNormalized}". Please check structure`;
+            if (options.processError) return options.processError(404, errorMessage) || null;
+            throw new Error(errorMessage);
         }
 
         const metadata = await getMetadataBase({
@@ -111,12 +131,20 @@ export const initializeRobindoc = (structureTemplate: Structure | (() => Structu
     };
 
     const getPageData = async (pathname: string) => {
-        const { pages } = await structureParsedPromise;
         const pathnameNormalized = normalizePathname(pathname);
+        if (matchingRules && !matchingRules.every((rule) => rule.test(pathname))) {
+            const errorMessage = `Pathname "${pathnameNormalized}" doesn't pass matcher rules check`;
+            if (options.processError) return options.processError(404, errorMessage) || null;
+            throw new Error(errorMessage);
+        }
+
+        const { pages } = await structureParsedPromise;
         const pageInstruction = pages[pathnameNormalized];
 
         if (!pageInstruction) {
-            throw new Error(`Can not find data for "${pathnameNormalized}". Please check structure`);
+            const errorMessage = `Can not find data for "${pathnameNormalized}". Please check structure`;
+            if (options.processError) return options.processError(404, errorMessage) || null;
+            throw new Error(errorMessage);
         }
 
         const title = pageInstruction.title;
@@ -126,12 +154,20 @@ export const initializeRobindoc = (structureTemplate: Structure | (() => Structu
     };
 
     const getPageInstruction = async (pathname: string) => {
-        const { pages } = await structureParsedPromise;
         const pathnameNormalized = normalizePathname(pathname);
+        if (matchingRules && !matchingRules.every((rule) => rule.test(pathname))) {
+            const errorMessage = `Pathname "${pathnameNormalized}" doesn't pass matcher rules check`;
+            if (options.processError) return options.processError(404, errorMessage) || null;
+            throw new Error(errorMessage);
+        }
+
+        const { pages } = await structureParsedPromise;
         const pageInstruction = pages[pathnameNormalized];
 
         if (!pageInstruction) {
-            throw new Error(`Can not find data for "${pathnameNormalized}". Please check structure`);
+            const errorMessage = `Can not find data for "${pathnameNormalized}". Please check structure`;
+            if (options.processError) return options.processError(404, errorMessage) || null;
+            throw new Error(errorMessage);
         }
 
         return pageInstruction;
