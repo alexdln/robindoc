@@ -8,7 +8,9 @@
     "prepare": "husky"
   },
   "lint-staged": {
-    "*.{ts,tsx,js,jsx}": ["eslint"]
+    "*.{ts,tsx,js,jsx}": [
+      "eslint"
+    ]
   },
   "repository": {
     "type": "git",
@@ -25,7 +27,7 @@
     "eslint-plugin-prettier": "5.5.4",
     "husky": "9.1.7",
     "prettier": "3.7.4",
-    "typescript-eslint": "8.51.0"
+    "typescript-eslint": "8.53.0"
   },
   "resolutions": {
     "nextjs-contributing>robindoc": "workspace:*"
