@@ -1,0 +1,29 @@
+.action {
+    display: inline-block;
+    padding: 12px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 16px;
+    transition: all 0.2s;
+}
+
+.action-primary {
+    background: var(--r-primary-600);
+    color: var(--r-main-50);
+
+    &:hover {
+        background: var(--r-primary-700);
+    }
+}
+
+.action-secondary {
+    background: transparent;
+    color: var(--r-main-700);
+    border: 1px solid var(--r-main-300);
+
+    &:hover {
+        background: var(--r-main-50);
+        border-color: var(--r-main-400);
+    }
+}
