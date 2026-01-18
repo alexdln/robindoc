@@ -24,13 +24,21 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v4
 
-      - name: Install dependencies and build
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build robindoc
         run: |
-          pnpm install
           pnpm run build
           cp ../../README.md .
           cp ../../LICENSE .
         working-directory: ./packages/robindoc
+
+      - name: Build robindoc-minisearch
+        run: |
+          pnpm run build
+          cp ../../LICENSE .
+        working-directory: ./packages/robindoc-minisearch
 
       - name: Compute experimental version
         id: version
@@ -38,7 +46,7 @@ jobs:
           HASH=$(git rev-parse --short HEAD)
           echo "version=0.0.0-experimental-${HASH}" >> $GITHUB_OUTPUT
 
-      - name: Publish experimental packages
+      - name: Publish experimental robindoc
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
@@ -46,3 +54,12 @@ jobs:
           npm version --no-git-tag-version ${{ steps.version.outputs.version }}
           npm publish --tag experimental --access public
         working-directory: ./packages/robindoc
+
+      - name: Publish experimental robindoc-minisearch
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          npm set //registry.npmjs.org/:_authToken=$NPM_TOKEN
+          npm version --no-git-tag-version ${{ steps.version.outputs.version }}
+          npm publish --tag experimental --access public
+        working-directory: ./packages/robindoc-minisearch
