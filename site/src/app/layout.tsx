@@ -4,6 +4,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { Inter } from "next/font/google";
 import { Header, Footer, RobinProvider, KeylinkToContent } from "robindoc";
 
+import { searchProvider } from "./search-provider";
 import { Logo } from "../components/ui/logo";
 
 import "robindoc/lib/styles.css";
@@ -33,7 +34,7 @@ const RootLayout: React.FC<React.PropsWithChildren> = ({ children }) => (
                     ]}
                     logo={<Logo />}
                     git="https://github.com/alexdln/robindoc"
-                    searcher="/api/search"
+                    searcher={searchProvider}
                 />
                 {children}
                 <Footer copyright="© 2026 All rights reserved" />

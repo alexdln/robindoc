@@ -20,15 +20,23 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v4
 
-      - name: Install dependencies and build
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build robindoc
         run: |
-          pnpm install
           pnpm run build
           cp ../../README.md .
           cp ../../LICENSE .
         working-directory: ./packages/robindoc
 
-      - name: Publish on main
+      - name: Build robindoc-minisearch
+        run: |
+          pnpm run build
+          cp ../../LICENSE .
+        working-directory: ./packages/robindoc-minisearch
+
+      - name: Publish robindoc on main
         if: "!contains(github.ref_name, 'canary')"
         run: |
           npm set //registry.npmjs.org/:_authToken=${{secrets.NPM_TOKEN}}
@@ -36,10 +44,26 @@ jobs:
           npm publish --access public
         working-directory: ./packages/robindoc
 
-      - name: Publish on canary
+      - name: Publish robindoc on canary
         if: contains(github.ref_name, 'canary')
         run: |
           npm set //registry.npmjs.org/:_authToken=${{secrets.NPM_TOKEN}}
           npm version --no-git-tag-version ${{github.ref_name}}
           npm publish --tag canary --access public
         working-directory: ./packages/robindoc
+
+      - name: Publish robindoc-minisearch on main
+        if: "!contains(github.ref_name, 'canary')"
+        run: |
+          npm set //registry.npmjs.org/:_authToken=${{secrets.NPM_TOKEN}}
+          npm version --no-git-tag-version ${{github.ref_name}}
+          npm publish --access public
+        working-directory: ./packages/robindoc-minisearch
+
+      - name: Publish robindoc-minisearch on canary
+        if: contains(github.ref_name, 'canary')
+        run: |
+          npm set //registry.npmjs.org/:_authToken=${{secrets.NPM_TOKEN}}
+          npm version --no-git-tag-version ${{github.ref_name}}
+          npm publish --tag canary --access public
+        working-directory: ./packages/robindoc-minisearch

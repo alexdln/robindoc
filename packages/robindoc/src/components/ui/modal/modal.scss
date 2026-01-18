@@ -5,7 +5,8 @@
   left: 0;
   bottom: 0;
   width: 100%;
-  background-color: var(--r-main-50);
+  background-color: color-mix(in srgb, var(--r-main-50) 95%, transparent);
+  border: 2px solid var(--r-main-200);
   border-radius: 12px 12px 0 0;
   opacity: 0;
   visibility: hidden;
