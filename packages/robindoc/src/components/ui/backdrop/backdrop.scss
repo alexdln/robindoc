@@ -4,11 +4,11 @@
   right: 0;
   bottom: 0;
   left: 0;
-  background: rgba(0, 0, 0, 0);
+  background: color-mix(in srgb, var(--r-main-900) 0%, transparent 100%);
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  backdrop-filter: blur(1px);
+  backdrop-filter: blur(4px);
   transition:
     background 0.05s,
     opacity 0.2s,
@@ -18,7 +18,7 @@
 
 .r-backdrop._visible {
   opacity: 1;
-  background: rgba(0, 0, 0, 0.3);
+  background: color-mix(in srgb, var(--r-main-900) 10%, transparent 100%);
   visibility: visible;
   transition:
     background 0.05s,
