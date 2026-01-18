@@ -5,7 +5,7 @@ const terser = require("@rollup/plugin-terser");
 const { default: preserveDirectives } = require("rollup-preserve-directives");
 
 module.exports = {
-    input: ["src/index.ts", "src/cli.ts"],
+    input: ["src/index.ts", "src/cli.ts", "src/provider.ts"],
     output: [
         {
             dir: "lib",
