@@ -14,10 +14,10 @@ const loadSearchIndex = async (indexUrl: string): Promise<MiniSearch<SearchIndex
 
     const data: AsPlainObject = await response.json();
     const searchIndex = await MiniSearch.loadJSAsync(data, {
-        fields: ["title", "content", "description"],
-        storeFields: ["id", "title", "href", "description"],
+        fields: ["title", "content", "headings", "description"],
+        storeFields: ["id", "title", "href", "headings", "description"],
         searchOptions: {
-            boost: { title: 2, description: 1.5 },
+            boost: { title: 5, headings: 3, description: 2 },
             fuzzy: 0.2,
         },
     });
@@ -39,7 +39,7 @@ export const createStaticSearcher = (indexUrl: string): Searcher => {
             const results = searchIndex.search(search, {
                 fuzzy: 0.2,
                 prefix: true,
-                boost: { title: 2, description: 1.5 },
+                boost: { title: 5, headings: 3, description: 2 },
             });
 
             if (abortController.signal.aborted) return [];

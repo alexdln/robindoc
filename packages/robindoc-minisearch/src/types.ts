@@ -7,9 +7,10 @@ export type Searcher = (search: string, abortController: AbortController) => Pro
 export type SearchIndexItem = {
     id: string;
     title: string;
-    href: string;
-    content: string;
+    headings: string;
     description?: string;
+    content: string;
+    href: string;
 };
 
 export type GetStaticParamsFunction = () => Promise<Array<{ segments: string[] }>>;

@@ -36,7 +36,9 @@
   },
   "license": "MIT",
   "dependencies": {
-    "minisearch": "7.2.0"
+    "minisearch": "7.2.0",
+    "marked": "17.0.1",
+    "gray-matter": "^4.0.3"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "29.0.0",

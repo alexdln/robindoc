@@ -14,6 +14,6 @@ module.exports = {
             preserveModules: true,
         },
     ],
-    external: ["minisearch", "fs", "fs/promises", "path", "url", "tsx"],
+    external: ["minisearch", "fs", "fs/promises", "path", "node:url", "gray-matter", "marked", "tsx"],
     plugins: [commonjs(), typescript({ tsconfig: "./tsconfig.json" }), terser(), preserveDirectives()],
 };
