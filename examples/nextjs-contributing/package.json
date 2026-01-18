@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "pnpm run prebuild && next dev",
+    "prebuild": "robindoc-minisearch --template src/app/robindoc.ts",
     "build": "next build",
     "start": "next start"
   },
@@ -12,7 +13,8 @@
     "next": "16.1.1",
     "react": "19.2.3",
     "react-dom": "19.2.3",
-    "robindoc": "latest"
+    "robindoc": "latest",
+    "@robindoc/minisearch": "latest"
   },
   "devDependencies": {
     "@types/node": "^25.0.8",

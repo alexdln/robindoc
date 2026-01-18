@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Header, Footer, RobinProvider, KeylinkToContent, DocsContainer, KeylinkToNavigation } from "robindoc";
 
+import { searchProvider } from "./search-provider";
 import { Sidebar } from "./robindoc";
 
 import "robindoc/lib/styles.css";
@@ -66,7 +67,7 @@ const RootLayout: React.FC<React.PropsWithChildren> = ({ children }) => (
                         </svg>
                     }
                     git="https://github.com/alexdln/robindoc"
-                    searcher="/api/search"
+                    searcher={searchProvider}
                 />
                 <DocsContainer>
                     <Sidebar />

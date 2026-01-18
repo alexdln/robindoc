@@ -6,6 +6,7 @@ settings:
 
 overrides:
   nextjs-contributing>robindoc: workspace:*
+  nextjs-contributing>@robindoc/minisearch: workspace:*
 
 importers:
 
@@ -32,6 +33,9 @@ importers:
 
   examples/nextjs-contributing:
     dependencies:
+      '@robindoc/minisearch':
+        specifier: workspace:*
+        version: link:../../packages/robindoc-minisearch
       match-sorter:
         specifier: 8.2.0
         version: 8.2.0
