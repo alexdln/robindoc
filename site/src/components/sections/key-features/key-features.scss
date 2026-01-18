@@ -1,0 +1,54 @@
+.key-features {
+  padding: 100px 0;
+}
+
+.key-features-header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+.key-features-title {
+  font-size: 36px;
+  font-weight: 700;
+  margin: 0 0 16px;
+
+  @media screen and (width >=768px) {
+    font-size: 48px;
+  }
+}
+
+.key-features-subtitle {
+  font-size: 18px;
+  color: var(--r-main-600);
+}
+
+.key-features-grid {
+  display: grid;
+  gap: 24px;
+
+  @media screen and (width >=768px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+  }
+
+  @media screen and (width >=1024px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.key-feature-card {
+  padding: 24px;
+  background: var(--r-main-100);
+  border: 1px solid var(--r-main-200);
+  border-radius: 12px;
+}
+
+.key-feature-title {
+  font-weight: 600;
+  margin: 0 0 12px;
+}
+
+.key-feature-description {
+  color: var(--r-main-600);
+  margin: 0;
+}

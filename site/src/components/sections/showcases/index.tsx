@@ -1,6 +1,8 @@
 import { Container } from "robindoc/lib/components/ui/container";
 import Image from "next/image";
-import Link from "next/link";
+
+import { Action } from "@/components/ui/action";
+
 import nimplTech from "./images/nimpl-tech.png";
 import nextjsDev from "./images/nextjs-dev.png";
 import slidebook from "./images/slidebook.png";
@@ -13,17 +15,17 @@ const Showcases = () => (
             Tools chosen <span className="showcases-name">Robindoc</span> for their documentation
         </h1>
         <div className="showcases-btns">
-            <Link
+            <Action
                 href="https://github.com/alexdln/robindoc/discussions/278"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="showcases-btn"
+                variant="secondary"
             >
                 Add Yours
-            </Link>
-            <Link href="/docs" className="showcases-btn showcases-btn_primary">
+            </Action>
+            <Action href="/docs" variant="primary">
                 Getting Started
-            </Link>
+            </Action>
         </div>
         <div className="showcases-list">
             <a href="https://nimpl.dev" target="_blank" rel="noopener noreferrer" className="showcases-card">
