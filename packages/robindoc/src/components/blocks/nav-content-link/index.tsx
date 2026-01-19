@@ -2,7 +2,7 @@
 
 import React from "react";
 
-import { useNavigate } from "@src/components/contexts/navigate/use-navigate";
+import { useNavigate } from "@src/components/stores/navigate/use-navigate";
 import { ContentLink, type ContentLinkProps } from "@src/components/ui/content-link";
 
 type NavContentLinkProps = ContentLinkProps;

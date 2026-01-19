@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { useHeadingRegister } from "@src/components/contexts/contents/use-heading-register";
+import { useHeadingRegister } from "@src/components/stores/contents/use-heading-register";
 import { Heading } from "@src/components/ui/heading";
 
 import "./anchor-heading.scss";

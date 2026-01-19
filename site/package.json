@@ -16,6 +16,7 @@
     "react-dom": "19.2.3",
     "robindoc": "workspace:*",
     "@robindoc/minisearch": "workspace:*",
+    "@robindoc/next": "workspace:*",
     "sass": "1.97.2"
   },
   "devDependencies": {

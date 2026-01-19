@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname } from "@src/components/stores/navigation/hooks";
 
 export interface SidebarDropProps {
     childHrefs: string[];

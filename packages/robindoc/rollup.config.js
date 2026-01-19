@@ -7,7 +7,7 @@ const { default: preserveDirectives } = require("rollup-preserve-directives");
 const copy = require("rollup-plugin-copy");
 
 module.exports = {
-    input: ["src/index.tsx"],
+    input: ["src/index.tsx", "src/client.tsx"],
     output: [
         {
             dir: "lib",
@@ -20,8 +20,6 @@ module.exports = {
     external: [
         "react",
         "react-dom",
-        "next/link",
-        "next/navigation",
         "html-react-parser",
         "gray-matter",
         "marked",

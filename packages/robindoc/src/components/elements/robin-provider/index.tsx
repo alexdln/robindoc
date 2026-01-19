@@ -1,6 +1,6 @@
 import React from "react";
 
-import { NavigateProvider } from "@src/components/contexts/navigate/provider";
+import { NavigateProvider } from "@src/components/stores/navigate/provider";
 import { ThemeDetector } from "@src/components/blocks/theme-detector";
 import { NoJs } from "@src/components/blocks/no-js";
 

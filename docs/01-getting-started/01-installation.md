@@ -22,4 +22,24 @@ yarn add robindoc
 bun add robindoc
 ```
 
+If you're using Next.js, you should also install the `@robindoc/next` integration package:
+
+```bash switcher tab="npm"
+npm i @robindoc/next
+```
+
+```bash switcher tab="pnpm"
+pnpm add @robindoc/next
+```
+
+```bash switcher tab="yarn"
+yarn add @robindoc/next
+```
+
+```bash switcher tab="bun"
+bun add @robindoc/next
+```
+
+For Next.js applications, see the [Next.js Integration](./05-nextjs-integration.md) guide for setup instructions.
+
 Now you can fully integrate it into your application by [initializing Robindoc](./03-initialization.md) guide.

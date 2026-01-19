@@ -2,8 +2,8 @@
 
 import React, { useEffect, useRef, useState } from "react";
 
-import { useNavigate } from "@src/components/contexts/navigate/use-navigate";
-import { ReferenceProvider } from "@src/components/contexts/reference/provider";
+import { useNavigate } from "@src/components/stores/navigate/use-navigate";
+import { ReferenceProvider } from "@src/components/stores/reference/provider";
 
 export type SidebarMenuProps = React.PropsWithChildren<{
     translations?: {
