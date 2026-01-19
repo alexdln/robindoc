@@ -1,4 +1,5 @@
 import Link from "next/link";
+
 import "./action.scss";
 
 export interface ActionProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {

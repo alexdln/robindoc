@@ -3,6 +3,7 @@ import { Fragment } from "react";
 import { Analytics } from "@vercel/analytics/react";
 import { Inter } from "next/font/google";
 import { Header, Footer, RobinProvider, KeylinkToContent } from "robindoc";
+import { NavigationProvider } from "@robindoc/next";
 
 import { searchProvider } from "./search-provider";
 import { Logo } from "../components/ui/logo";
@@ -26,18 +27,20 @@ const RootLayout: React.FC<React.PropsWithChildren> = ({ children }) => (
     <html lang="en" suppressHydrationWarning className="r-root">
         <body className={inter.className}>
             <RobinProvider component={Fragment}>
-                <KeylinkToContent />
-                <Header
-                    links={[
-                        { href: "/docs", title: "Docs" },
-                        { href: "/showcase", title: "Showcase" },
-                    ]}
-                    logo={<Logo />}
-                    git="https://github.com/alexdln/robindoc"
-                    searcher={searchProvider}
-                />
-                {children}
-                <Footer copyright="© 2026 All rights reserved" />
+                <NavigationProvider>
+                    <KeylinkToContent />
+                    <Header
+                        links={[
+                            { href: "/docs", title: "Docs" },
+                            { href: "/showcase", title: "Showcase" },
+                        ]}
+                        logo={<Logo />}
+                        git="https://github.com/alexdln/robindoc"
+                        searcher={searchProvider}
+                    />
+                    {children}
+                    <Footer copyright="© 2026 All rights reserved" />
+                </NavigationProvider>
             </RobinProvider>
             <Analytics />
         </body>

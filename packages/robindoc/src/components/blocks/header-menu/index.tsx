@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 
-import { useNavigate } from "@src/components/contexts/navigate/use-navigate";
+import { useNavigate } from "@src/components/stores/navigate/use-navigate";
 
 import "./header-menu.scss";
 

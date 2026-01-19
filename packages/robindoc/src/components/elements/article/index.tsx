@@ -4,7 +4,7 @@ import React from "react";
 import { type Components } from "@src/core/types/content";
 import { type BaseProvider } from "@src/core/providers/base";
 import { loadContent } from "@src/core/utils/load-content";
-import { ContentsProvider } from "@src/components/contexts/contents/provider";
+import { ContentsProvider } from "@src/components/stores/contents/provider";
 import { Contents, type ContentsProps } from "@src/components/blocks/contents";
 import { Breadcrumbs, type BreadcrumbsProps } from "@src/components/blocks/breadcrumbs";
 import { Pagination, type PaginationProps } from "@src/components/blocks/pagination";

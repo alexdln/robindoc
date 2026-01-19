@@ -1,11 +1,11 @@
 "use client";
 
 import React, { useRef } from "react";
-import { usePathname } from "next/navigation";
 import clsx from "clsx";
 
-import { useReference } from "@src/components/contexts/reference/use-reference";
+import { useReference } from "@src/components/stores/reference/use-reference";
 import { NavLink } from "@src/components/blocks/nav-link";
+import { usePathname } from "@src/components/stores/navigation/hooks";
 
 import { type TreeItem } from "../types";
 import { checkIsTargetPathname, collectItems } from "../tools";
