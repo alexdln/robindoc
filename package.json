@@ -32,6 +32,7 @@
   "resolutions": {
     "nextjs-contributing>robindoc": "workspace:*",
     "nextjs-contributing>@robindoc/minisearch": "workspace:*",
+    "nextjs-contributing>@robindoc/next": "workspace:*",
     "@robindoc/next>robindoc": "workspace:*"
   },
   "license": "MIT",
