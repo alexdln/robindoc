@@ -7,6 +7,7 @@ export const NoJs = () => (
                 .r-no-js {
                     cursor: not-allowed;
                     box-sizing: border-box;
+                    text-wrap: wrap;
                 }
                 .r-no-js:hover,
                 .r-no-js:focus,
