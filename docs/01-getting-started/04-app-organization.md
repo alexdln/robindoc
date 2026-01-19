@@ -227,6 +227,7 @@ The Next.js Layout should be placed one level up so that it remains static for a
 
 ```tsx filename="app/docs/layout.tsx" switcher tab="TypeScript"
 import { RobinProvider, Header, Footer, DocsContainer } from "robindoc";
+import { NavigationProvider } from "@robindoc/next";
 import { Sidebar } from "./robindoc";
 import Logo from "./logo";
 
@@ -235,12 +236,14 @@ import "robindoc/lib/global.css";
 
 const Layout: React.FC<React.PropsWithChildren> = ({ children }) => (
   <RobinProvider>
-    <Header logo={<Logo />} />
-    <DocsContainer>
-      <Sidebar />
-      {children}
-    </DocsContainer>
-    <Footer copyright="© 2026 All rights reserved" />
+    <NavigationProvider>
+      <Header logo={<Logo />} />
+      <DocsContainer>
+        <Sidebar />
+        {children}
+      </DocsContainer>
+      <Footer copyright="© 2026 All rights reserved" />
+    </NavigationProvider>
   </RobinProvider>
 );
 
@@ -249,6 +252,7 @@ export default Layout;
 
 ```jsx filename="app/docs/layout.jsx" switcher tab="JavaScript"
 import { RobinProvider, Header, Footer, DocsContainer } from "robindoc";
+import { NavigationProvider } from "@robindoc/next";
 import { Sidebar } from "./robindoc";
 import Logo from "./logo";
 
@@ -257,12 +261,14 @@ import "robindoc/lib/global.css";
 
 const Layout = ({ children }) => (
   <RobinProvider>
-    <Header logo={<Logo />} />
-    <DocsContainer>
-      <Sidebar />
-      {children}
-    </DocsContainer>
-    <Footer copyright="© 2026 All rights reserved" />
+    <NavigationProvider>
+      <Header logo={<Logo />} />
+      <DocsContainer>
+        <Sidebar />
+        {children}
+      </DocsContainer>
+      <Footer copyright="© 2026 All rights reserved" />
+    </NavigationProvider>
   </RobinProvider>
 );
 
@@ -310,8 +316,10 @@ export const GET = async (request) => {
 ```tsx switcher filename="app/docs/layout.tsx" tab="TypeScript"
 const Layout: React.FC<React.PropsWithChildren> = ({ children }) => (
   <RobinProvider>
-    <Header logo={<Logo />} searcher="/api/search" />
-    {/* ... */}
+    <NavigationProvider>
+      <Header logo={<Logo />} searcher="/api/search" />
+      {/* ... */}
+    </NavigationProvider>
   </RobinProvider>
 );
 
@@ -321,8 +329,10 @@ export default Layout;
 ```js switcher filename="app/docs/layout.jsx" tab="JavaScript"
 const Layout = ({ children }) => (
   <RobinProvider>
-    <Header logo={<Logo />} searcher="/api/search" />
-    {/* ... */}
+    <NavigationProvider>
+      <Header logo={<Logo />} searcher="/api/search" />
+      {/* ... */}
+    </NavigationProvider>
   </RobinProvider>
 );
 

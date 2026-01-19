@@ -1,8 +1,10 @@
+"use client";
+
 import React from "react";
 import clsx from "clsx";
 
-import { ExternalMark } from "../external-mark";
 import { useLink } from "@src/components/stores/navigation/hooks";
+import { ExternalMark } from "@src/components/ui/external-mark";
 
 import "./content-link.scss";
 

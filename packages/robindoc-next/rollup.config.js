@@ -14,6 +14,6 @@ module.exports = {
             preserveModules: true,
         },
     ],
-    external: ["react", "react-dom", "next/navigation", "next/link", "robindoc"],
+    external: ["react", "react-dom", "next/navigation", "next/link", "robindoc/lib/client"],
     plugins: [commonjs(), typescript({ tsconfig: "./tsconfig.json" }), terser(), preserveDirectives()],
 };
