@@ -18,7 +18,7 @@
   display: flex;
   margin: 0 12px;
   text-wrap: nowrap;
-  overflow-x: auto;
+  overflow: auto hidden;
   scrollbar-width: thin;
 }
 

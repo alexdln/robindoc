@@ -29,7 +29,7 @@ $cl-orange-950: oklch(0.266 0.079 36.259);
   position: relative;
   padding: 0;
   margin: 0;
-  accent-color: var(--r-primary-600, #ea580c);
+  accent-color: var(--r-primary-600, #{$cl-orange-600});
   box-sizing: border-box;
   background-color: var(--r-main-50);
   color: var(--r-main-950);
@@ -66,6 +66,7 @@ $cl-orange-950: oklch(0.266 0.079 36.259);
   overflow: hidden;
 }
 
+.r-root,
 .r-root.r-theme-light {
   color-scheme: light;
   --r-main-50: var(--rb-body-50);
