@@ -2,31 +2,67 @@
 
 import "./search.scss";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import clsx from "clsx";
 
-import { SearchModal, type SearchModalProps } from "./search-modal";
 import { useSystemType } from "@src/core/hooks/use-system-type";
 import { KbdContainer, KbdKey } from "@src/components/ui/kbd";
-import { useModal } from "@src/components/ui/modal/use-modal";
+import { createBaseSearcher } from "@src/core/utils/create-base-searcher";
+import { useDebouncer } from "@src/core/hooks/use-debouncer";
+import { Searcher, SearchResults } from "@src/core/types/search";
+import { Backdrop } from "@src/components/ui/backdrop";
+import { NavLink } from "@src/components/blocks/nav-link";
 
 export interface SearchProps {
-    searcher: SearchModalProps["searcher"];
+    searcher: Searcher | string;
     translations?: {
         /** Search... */
         search?: string;
-    } & SearchModalProps["translations"];
+        /** Type something... */
+        typeSomething?: string;
+        /** Nothing found */
+        nothingFound?: string;
+    };
 }
 
-export const Search: React.FC<SearchProps> = ({ searcher, translations }) => {
-    const { search = "Search...", ...modalTranslations } = translations || {};
+export const Search: React.FC<SearchProps> = ({ searcher, translations = {} }) => {
+    const { search = "Search...", typeSomething = "Type something...", nothingFound = "Nothing found" } = translations;
     const titleRef = useRef<HTMLSpanElement>(null);
-    const { opened, closeHandler, openHandler } = useModal();
+    const inputRef = useRef<HTMLInputElement | null>(null);
+    const dialogRef = useRef<HTMLDialogElement | null>(null);
+    const firstItem = useRef<HTMLAnchorElement | null>(null);
+    const [results, setResults] = useState<SearchResults | null>(null);
     const system = useSystemType();
 
-    const keyDownHandler = (e: React.KeyboardEvent<HTMLElement>) => {
-        if (e.key.length === 1 && e.code !== "Space") {
-            openHandler();
+    const targetSearcher = useMemo(
+        () => (typeof searcher === "string" ? createBaseSearcher(searcher) : searcher),
+        [searcher],
+    );
+
+    const { handler } = useDebouncer(async (abortController, e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        inputHandler(value);
+        let newResults = null;
+        if (value) {
+            newResults = await targetSearcher(value, abortController);
         }
+        setResults(newResults);
+    });
+
+    const openHandler = () => {
+        const root = document.querySelector(".r-root");
+        if (root) {
+            root.classList.add("r-root_lock");
+        }
+        inputRef.current?.focus();
+        dialogRef.current?.showModal();
+    };
+    const closeHandler = () => {
+        const root = document.querySelector(".r-root");
+        if (root) {
+            root.classList.remove("r-root_lock");
+        }
+        dialogRef.current?.close();
     };
 
     useEffect(() => {
@@ -49,9 +85,16 @@ export const Search: React.FC<SearchProps> = ({ searcher, translations }) => {
         }
     };
 
+    const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        if (firstItem.current) {
+            firstItem.current.focus();
+        }
+    };
+
     return (
         <>
-            <button type="button" className="r-search-btn r-no-js" onClick={openHandler} onKeyDown={keyDownHandler}>
+            <button type="button" className="r-search-btn r-no-js" onClick={openHandler}>
                 <span className="r-search-title" ref={titleRef}>
                     {search}
                 </span>
@@ -62,13 +105,51 @@ export const Search: React.FC<SearchProps> = ({ searcher, translations }) => {
                     </KbdContainer>
                 )}
             </button>
-            <SearchModal
-                open={opened}
-                translations={modalTranslations}
-                searcher={searcher}
+            <dialog
                 onClose={closeHandler}
-                onInput={inputHandler}
-            />
+                className={clsx("r-search-dialog", Boolean(results?.length) && "_active")}
+                ref={dialogRef}
+            >
+                <Backdrop open onClose={closeHandler} />
+                <div className="r-search-popup _visible">
+                    <form className="r-search-popup-header" onSubmit={submitHandler} autoComplete="off">
+                        <input
+                            type="text"
+                            name="search"
+                            placeholder={typeSomething}
+                            className="r-search-input"
+                            onChange={handler}
+                            ref={inputRef}
+                        />
+                        <KbdContainer className="r-search-kbd r-search-popup-kbd" onClick={closeHandler}>
+                            <KbdKey>ESC</KbdKey>
+                        </KbdContainer>
+                    </form>
+                    {results && (
+                        <ul className="r-search-results">
+                            {results.length > 0 ? (
+                                results.map((item, index) => (
+                                    <li key={item.href}>
+                                        <NavLink
+                                            href={item.href}
+                                            onClick={closeHandler}
+                                            className="r-search-item"
+                                            ref={index === 0 ? firstItem : undefined}
+                                        >
+                                            <p className="r-search-item-title">{item.title}</p>
+                                            {item.description && (
+                                                <p className="r-search-item-desc">{item.description}</p>
+                                            )}
+                                        </NavLink>
+                                    </li>
+                                ))
+                            ) : (
+                                <p>{nothingFound}</p>
+                            )}
+                        </ul>
+                    )}
+                </div>
+            </dialog>
         </>
     );
 };
