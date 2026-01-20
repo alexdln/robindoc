@@ -5,7 +5,7 @@
   border-radius: 6px;
   background-color: var(--r-main-100);
   color: var(--r-main-600);
-  padding: 8px 20px;
+  padding: 8px 16px;
   border: 1px solid var(--r-main-200);
   width: 100%;
   text-align: left;
@@ -14,7 +14,7 @@
 
   @media screen and (width >=vars.$sm) {
     width: 220px;
-    padding: 8px 96px 8px 20px;
+    padding: 8px 96px 8px 16px;
   }
 
   &:hover {
@@ -45,17 +45,83 @@
   }
 }
 
+.r-search-dialog {
+  width: 100%;
+  height: 100%;
+  background: none;
+  max-width: none;
+  max-height: none;
+  border: none;
+  padding: unset;
+  transition: opacity 0.3s ease, overlay 0.4s ease-out allow-discrete, display 0.4s ease-out allow-discrete;
+  opacity: 0;
+
+  &::backdrop {
+    backdrop-filter: blur(0);
+    background: color-mix(in srgb, var(--r-main-900) 0%, transparent 100%);
+    transition: backdrop-filter 0.4s ease-out, background 0.4s ease-out;
+  }
+}
+
+.r-search-dialog[open] {
+  opacity: 1;
+
+  @starting-style {
+    opacity: 0;
+  }
+
+  &::backdrop {
+    backdrop-filter: blur(4px);
+    background: color-mix(in srgb, var(--r-main-900) 40%, transparent 100%);
+  }
+}
+
+.r-search-popup {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  top: calc(var(--r-header-height) + 20px);
+  z-index: 200;
+  width: 100%;
+  max-width: 540px;
+  background-color: color-mix(in srgb, var(--r-main-50) 95%, transparent);
+  border: 2px solid var(--r-main-200);
+  border-bottom-width: 0;
+  border-radius: 12px 12px 0 0;
+  opacity: 0;
+  transform: translateX(-50%) translateY(-20px);
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.r-search-dialog[open] .r-search-popup {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+
+  @starting-style {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px);
+  }
+}
+
+.r-search-dialog._active .r-search-popup {
+  border-radius: 12px;
+  border-bottom-width: 2px;
+}
+
+.r-search-popup:has(.r-search-input:focus) {
+  border-color: var(--r-main-300);
+}
+
 .r-search-popup-header {
   position: relative;
   border-bottom: 1px solid var(--r-main-200);
 }
 
 .r-search-input {
-  border-radius: 12px 12px 0 0;
-  background-color: var(--r-main-50);
+  background: none;
   padding: 16px 20px;
   border: none;
-  border-bottom: 2px solid var(--r-main-300);
+  border-bottom: 2px solid var(--r-main-100);
   width: 100%;
   font-size: 16px;
   box-sizing: border-box;
@@ -65,7 +131,7 @@
   }
 
   &:hover {
-    border-bottom-color: var(--r-primary-800);
+    border-bottom-color: var(--r-main-300);
   }
 
   &:focus {
@@ -100,7 +166,7 @@
   color: var(--r-main-700);
   padding: 8px 12px;
   border: 1px solid var(--r-main-100);
-  border-radius: 6px;
+  border-radius: 10px;
   width: 100%;
   margin-top: 6px;
   box-sizing: border-box;
@@ -108,7 +174,7 @@
   &:hover,
   &:focus {
     color: var(--r-main-950);
-    background-color: var(--r-main-100);
+    background-color: var(--r-main-50);
     border-color: var(--r-main-200);
   }
 }
