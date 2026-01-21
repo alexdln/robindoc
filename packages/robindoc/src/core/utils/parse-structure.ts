@@ -5,153 +5,100 @@ import { getConfiguration } from "./get-configuration";
 import { getMetadata } from "./get-metadata";
 import { generatePseudoTitle, checkIsLinkExternal, mergePathname, normalizePathname } from "./path-tools";
 import { loadContent } from "./load-content";
+import { createPage, createTreeItem, shouldSpread } from "./structure-tools";
 
-const parseJSONStructure = async (
-    parentConfiguration: Configuration = {},
-    parentPathname = "",
-    crumbs: Crumbs = [],
-    nestingLevel: number,
-) => {
+const parseJSONStructure = async (configuration: Configuration, parentPathname: string, crumbs: Crumbs) => {
+    if (!configuration.provider) return null;
+
+    const branchFiles = await configuration.provider.filesPromise;
+    const structurePath = `${parentPathname}/structure.json`;
+
+    if (!branchFiles.structures.includes(structurePath)) return null;
+
+    const content = await loadContent(structurePath, configuration.provider);
+    let structure: { [segment: string]: { title: string } };
+
+    try {
+        structure = JSON.parse(content.data);
+    } catch {
+        throw new Error(`Can't parse structure "${structurePath}"`);
+    }
+
     const pages: Pages = {};
     const tree: TreeItem[] = [];
 
-    if (!parentConfiguration.provider) return { pages, tree };
+    for (const segment in structure) {
+        const { title } = structure[segment];
+        const clientPath = normalizePathname(segment === "index" ? parentPathname : `${parentPathname}/${segment}`);
+        const pathnameNormalized = normalizePathname(mergePathname(configuration.basePath, clientPath));
 
-    const branchFiles = await parentConfiguration.provider.filesPromise;
-
-    if (branchFiles.structures.includes(`${parentPathname}/structure.json`)) {
-        const content = await loadContent(`${parentPathname}/structure.json`, parentConfiguration.provider);
-        try {
-            const structure: { [segment: string]: { title: string } } = JSON.parse(content.data);
-            for (const segment in structure) {
-                const data = structure[segment];
-                const clientPath = normalizePathname(
-                    segment === "index" ? parentPathname : parentPathname + "/" + segment,
-                );
-                const pathname = mergePathname(parentConfiguration.basePath, clientPath);
-                const pathnameNormalized = normalizePathname(pathname);
-
-                if (!checkIsLinkExternal(pathnameNormalized)) {
-                    const origPath = await parentConfiguration.provider?.getPageSourcePathname(
-                        clientPath,
-                        pathnameNormalized,
-                    );
-                    if (origPath) {
-                        pages[pathnameNormalized] = {
-                            title: data.title,
-                            uri: clientPath,
-                            configuration: parentConfiguration,
-                            origPath,
-                            crumbs,
-                        };
-                    }
-                }
-
-                let subTree: TreeItem[] | undefined;
-                if (segment !== "index") {
-                    const subItemsData = await parseAutoStructure(
-                        parentConfiguration,
-                        [...crumbs, pathnameNormalized],
-                        clientPath,
-                        nestingLevel + 1,
-                    );
-                    subTree = subItemsData.tree;
-                    Object.assign(pages, subItemsData.pages);
-                }
-
-                tree.push({
-                    title: data.title,
-                    href: pathnameNormalized,
-                    items: subTree,
-                    type: "row",
-                });
-            }
-        } catch {
-            throw new Error(`Can't parse structure "${parentPathname}/structure.json"`);
+        const pageData = await createPage(pathnameNormalized, clientPath, title, configuration, crumbs);
+        if (pageData) {
+            pages[pageData.pathname] = pageData.page;
         }
-        return { pages, tree };
+
+        let subTree: TreeItem[] | undefined;
+        if (segment !== "index") {
+            const subResult = await parseAutoStructure(
+                configuration,
+                pageData ? [...crumbs, pathnameNormalized] : crumbs,
+                clientPath,
+            );
+            subTree = subResult.tree;
+            Object.assign(pages, subResult.pages);
+        }
+
+        tree.push(createTreeItem(title, pathnameNormalized, "row", subTree));
     }
+
+    return { pages, tree };
 };
 
-const parseAutoStructure = async (
-    parentConfiguration: Configuration = {},
-    crumbs: Crumbs = [],
-    parentPathname = "",
-    nestingLevel: number,
-) => {
+const parseAutoStructure = async (configuration: Configuration, crumbs: Crumbs, parentPathname: string) => {
+    if (!configuration.provider) return { pages: {}, tree: [] };
+
+    const jsonResult = await parseJSONStructure(configuration, parentPathname, crumbs);
+    if (jsonResult) return jsonResult;
+
     const pages: Pages = {};
     const tree: TreeItem[] = [];
+    const parentSegments = parentPathname.split("/");
+    const nestingLevel = parentSegments.length;
 
-    if (!parentConfiguration.provider) return { pages, tree };
+    const branchFiles = await configuration.provider.filesPromise;
 
-    const branchFiles = await parentConfiguration.provider.filesPromise;
+    for await (const { clientPath } of branchFiles.docs) {
+        const segments = clientPath.split("/");
+        const isDirectChild = segments.length === parentSegments.length + 1;
+        const isUnderParent = clientPath.startsWith(parentPathname);
 
-    if (branchFiles.structures.includes(`${parentPathname}/structure.json`)) {
-        const jsonStructureData = await parseJSONStructure(
-            parentConfiguration,
-            parentPathname,
-            crumbs,
-            nestingLevel + 1,
-        );
-        if (jsonStructureData) {
-            return jsonStructureData;
-        }
-    }
-
-    for await (const generatedItem of branchFiles.docs) {
-        const linkLevel = generatedItem.clientPath.split("/").filter(Boolean).length;
-        const topLevelLink = linkLevel < 2;
-
-        if (
-            (!parentPathname && !topLevelLink) ||
-            (parentPathname &&
-                !generatedItem.clientPath.match(new RegExp(`^${parentPathname.replace(/\/$/, "")}/[^/]+$`)))
-        ) {
+        if (!isDirectChild || !isUnderParent) {
             continue;
         }
 
-        const { clientPath } = generatedItem;
-        const pathname = mergePathname(parentConfiguration.basePath, clientPath);
-        const pathnameNormalized = normalizePathname(pathname);
-
-        const metadata = await getMetadata({ provider: parentConfiguration.provider, uri: clientPath });
+        const pathnameNormalized = normalizePathname(mergePathname(configuration.basePath, clientPath));
+        const metadata = await getMetadata({ provider: configuration.provider, uri: clientPath });
         const title = metadata.title || generatePseudoTitle(pathnameNormalized);
-        const origPath = await parentConfiguration.provider?.getPageSourcePathname(clientPath, pathnameNormalized);
-        if (origPath) {
-            pages[pathnameNormalized] = {
-                title,
-                uri: clientPath,
-                configuration: parentConfiguration,
-                origPath,
-                crumbs,
-            };
+
+        const pageData = await createPage(pathnameNormalized, clientPath, title, configuration, crumbs);
+        if (pageData) {
+            pages[pageData.pathname] = pageData.page;
         }
 
-        const subItemsData = await parseAutoStructure(
-            parentConfiguration,
-            [...crumbs, pathnameNormalized],
+        const subResult = await parseAutoStructure(
+            configuration,
+            pageData ? [...crumbs, pathnameNormalized] : crumbs,
             clientPath,
-            nestingLevel + 1,
         );
-        Object.assign(pages, subItemsData.pages);
+        const itemType = nestingLevel <= 1 ? "heading" : "row";
 
-        if (nestingLevel < (parentConfiguration.spreadedLevel || 1)) {
-            tree.push(
-                {
-                    title,
-                    href: pathnameNormalized,
-                    type: nestingLevel === 0 ? "heading" : "row",
-                },
-                ...subItemsData.tree,
-            );
+        if (shouldSpread(nestingLevel, configuration.spreadedLevel)) {
+            tree.push(createTreeItem(title, pathnameNormalized, itemType), ...subResult.tree);
         } else {
-            tree.push({
-                title,
-                href: pathnameNormalized,
-                items: subItemsData.tree,
-                type: nestingLevel === 0 ? "heading" : "row",
-            });
+            tree.push(createTreeItem(title, pathnameNormalized, itemType, subResult.tree));
         }
+
+        Object.assign(pages, subResult.pages);
     }
 
     return { pages, tree };
@@ -159,81 +106,62 @@ const parseAutoStructure = async (
 
 const parseStaticStructure = async (
     items: DocItem[],
-    parentConfiguration: Configuration = {},
-    crumbs: Crumbs = [],
+    configuration: Configuration,
+    crumbs: Crumbs,
     parentPathname: string,
-    nestingLevel: number,
-): Promise<{
-    pages: Pages;
-    tree: TreeItem[];
-}> => {
+) => {
     const pages: Pages = {};
     const tree: TreeItem[] = [];
+    const nestingLevel = parentPathname.split("/").length;
 
     for await (const item of items) {
         if (typeof item === "string") {
-            const subItemsData = await parseStructure(item, parentConfiguration, crumbs, parentPathname, nestingLevel);
-            Object.assign(pages, subItemsData.pages);
-            tree.push(...subItemsData.tree);
+            const result = await parseStructure(item, configuration, crumbs, parentPathname);
+            Object.assign(pages, result.pages);
+            tree.push(...result.tree);
             continue;
         }
+
         if (item.type === "separator") {
             tree.push({ type: "separator" });
-
             continue;
         }
+
+        const itemConfiguration = getConfiguration(item.configuration || {}, configuration);
+        const clientPath = item.href || "";
+        const pathnameNormalized = normalizePathname(mergePathname(itemConfiguration.basePath, clientPath));
+
         let subCrumbs = crumbs;
-        const configuration = getConfiguration(item.configuration || {}, parentConfiguration);
-        const clientPath = item.href;
-        const pathname = mergePathname(configuration.basePath, clientPath);
-        const pathnameNormalized = normalizePathname(pathname);
-
-        if (!checkIsLinkExternal(pathnameNormalized) && clientPath) {
-            const origPath = await configuration.provider?.getPageSourcePathname(clientPath, pathnameNormalized);
-
-            if (origPath) {
-                pages[pathnameNormalized] = {
-                    title: item.title || "",
-                    uri: clientPath,
-                    configuration,
-                    origPath,
-                    crumbs,
-                };
+        if (clientPath && !checkIsLinkExternal(pathnameNormalized)) {
+            const pageData = await createPage(
+                pathnameNormalized,
+                clientPath,
+                item.title || "",
+                itemConfiguration,
+                crumbs,
+            );
+            if (pageData) {
+                pages[pageData.pathname] = pageData.page;
                 subCrumbs = [...crumbs, pathnameNormalized];
             }
         }
 
         let subTree: TreeItem[] = [];
         if (item.items) {
-            const subItemsData = await parseStructure(
-                item.items,
-                configuration,
-                subCrumbs,
-                item.href,
-                nestingLevel + 1,
-            );
-            subTree = subItemsData.tree;
-            Object.assign(pages, subItemsData.pages);
+            const result = await parseStructure(item.items, itemConfiguration, subCrumbs, item.href || "");
+            subTree = result.tree;
+            Object.assign(pages, result.pages);
         }
 
-        if (!item.hidden) {
-            if (nestingLevel < (parentConfiguration.spreadedLevel || 1)) {
-                tree.push(
-                    {
-                        title: item.title || generatePseudoTitle(pathnameNormalized),
-                        href: item.href ? pathnameNormalized : undefined,
-                        type: item.type,
-                    },
-                    ...subTree,
-                );
-            } else {
-                tree.push({
-                    title: item.title || generatePseudoTitle(pathnameNormalized),
-                    href: item.href ? pathnameNormalized : undefined,
-                    items: subTree,
-                    type: item.type,
-                });
-            }
+        if (item.hidden) continue;
+
+        const title = item.title || generatePseudoTitle(pathnameNormalized);
+        const href = item.href ? pathnameNormalized : undefined;
+
+        if (shouldSpread(nestingLevel, configuration.spreadedLevel)) {
+            tree.push(createTreeItem(title, href, item.type), ...subTree);
+        } else {
+            tree.push(createTreeItem(title, href, item.type, subTree));
         }
     }
 
@@ -242,16 +170,13 @@ const parseStaticStructure = async (
 
 export const parseStructure = async (
     items: DocItem[] | "auto",
-    parentConfiguration: Configuration = {},
+    configuration: Configuration = {},
     crumbs: Crumbs = [],
     pathname: string = "",
-    nestingLevel: number = 0,
 ) => {
     if (items === "auto") {
-        const structureParsed = await parseAutoStructure(parentConfiguration, crumbs, pathname, nestingLevel);
-        return structureParsed;
+        return parseAutoStructure(configuration, crumbs, pathname);
     }
 
-    const structureParsed = await parseStaticStructure(items, parentConfiguration, crumbs, pathname, nestingLevel);
-    return structureParsed;
+    return parseStaticStructure(items, configuration, crumbs, pathname);
 };
