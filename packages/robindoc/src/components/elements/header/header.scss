@@ -10,13 +10,15 @@
   box-sizing: border-box;
 }
 
-.r-header-body {
+.r-header-body.r-header-body {
   height: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 24px;
   box-sizing: border-box;
+  padding-left: 24px;
+  padding-right: 24px;
 }
 
 .r-header-logo {

@@ -17,7 +17,7 @@
   @media screen and (width >=vars.$lg) {
     column-gap: 40px;
     grid-template-areas: "sidebar breadcrumbs contents" "sidebar content contents" "sidebar pagination contents";
-    grid-template-columns: 200px 640px 1fr;
+    grid-template-columns: 200px 640px 238px;
     grid-template-rows: auto 1fr auto;
   }
 }

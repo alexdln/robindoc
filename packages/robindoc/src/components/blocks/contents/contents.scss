@@ -205,7 +205,7 @@
 
 .r-contents-link._visited {
   @media screen and (width >=vars.$lg) {
-    color: var(--r-main-600);
+    color: var(--r-main-900);
   }
 
   &::after {
@@ -220,9 +220,15 @@
   }
 }
 
+.r-contents-link._passed {
+  @media screen and (width >=vars.$lg) {
+    color: var(--r-main-700);
+  }
+}
+
 .r-contents-link._active {
   @media screen and (width >=vars.$lg) {
-    color: var(--r-main-900);
+    color: var(--r-primary-800);
   }
 }
 
