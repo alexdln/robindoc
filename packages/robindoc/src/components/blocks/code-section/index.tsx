@@ -1,4 +1,6 @@
 import React from "react";
+import clsx from "clsx";
+
 import { CodeBlock, type CodeBlockProps } from "@src/components/ui/code-block";
 import { CopyButton, type CopyButtonProps } from "@src/components/ui/copy-button";
 import { CopyText, type CopyTextProps } from "../../ui/copy-text";
@@ -20,6 +22,6 @@ export const CodeSection: React.FC<CodeSectionProps> = ({ filename, code, ...pro
         ) : (
             <CopyButton raw={code} className="r-code-section-copy" />
         )}
-        <CodeBlock className={`r-code-section-block${filename ? "" : " _space-right"}`} code={code} {...props} />
+        <CodeBlock className={clsx("r-code-section-block", !filename && "_space-right")} code={code} {...props} />
     </div>
 );

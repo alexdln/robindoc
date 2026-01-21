@@ -27,6 +27,9 @@
   color: var(--r-main-700);
   transition: color 0.2s;
   box-sizing: border-box;
+  font-size: 1.25rem;
+  font-weight: 600;
+  text-decoration: none;
 
   &:hover,
   &:focus {

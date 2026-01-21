@@ -1,15 +1,11 @@
 "use client";
 
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useSyncExternalStore } from "react";
+
 import { navigationStore } from "./stores";
 
 const usePathnameDefault = () => {
-    const [pathname, setPathname] = useState("/");
-
-    useEffect(() => {
-        setPathname(navigationStore.get());
-        return navigationStore.subscribe(setPathname);
-    }, []);
+    const pathname = useSyncExternalStore(navigationStore.subscribe, navigationStore.get, () => "");
 
     return pathname;
 };

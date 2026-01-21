@@ -5,8 +5,9 @@ import React, { useEffect } from "react";
 const clientLogic = () => {
     const root = document.querySelector(".r-root");
 
-    if (!root) return;
+    if (!root || root.classList.contains("r-ready")) return;
 
+    root.classList.add("r-ready");
     const userTheme = localStorage.getItem("theme");
     if (userTheme && ["light", "dark"].includes(userTheme)) {
         root.classList.add(`r-theme-${userTheme}`);
@@ -31,7 +32,6 @@ const clientLogic = () => {
         const [tabsKey, tab] = item.split("=");
         root.classList.add(`r-tabs-global__${tabsKey}`, `r-tabs-global__${tabsKey}_${tab}`);
     });
-    root.classList.add("r-ready");
 };
 
 export const ThemeDetector: React.FC = () => {

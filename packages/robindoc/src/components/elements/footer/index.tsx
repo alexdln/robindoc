@@ -12,7 +12,7 @@ export type FooterProps = {
 
 export const Footer: React.FC<FooterProps> = ({ copyright, hidePoweredBy }) => (
     <footer className="r-footer">
-        <Container>
+        <Container className="r-footer-container">
             <div className="r-footer-row">
                 <div className="r-copyright">{copyright}</div>
                 <ThemeSwitcher />
