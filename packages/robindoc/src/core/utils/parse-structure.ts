@@ -7,7 +7,12 @@ import { generatePseudoTitle, checkIsLinkExternal, mergePathname, normalizePathn
 import { loadContent } from "./load-content";
 import { createPage, createTreeItem, shouldSpread } from "./structure-tools";
 
-const parseJSONStructure = async (configuration: Configuration, parentPathname: string, crumbs: Crumbs) => {
+const parseJSONStructure = async (
+    configuration: Configuration,
+    parentPathname: string,
+    crumbs: Crumbs,
+    nestingLevel: number,
+) => {
     if (!configuration.provider) return null;
 
     const branchFiles = await configuration.provider.filesPromise;
@@ -43,6 +48,7 @@ const parseJSONStructure = async (configuration: Configuration, parentPathname: 
                 configuration,
                 pageData ? [...crumbs, pathnameNormalized] : crumbs,
                 clientPath,
+                nestingLevel + 1,
             );
             subTree = subResult.tree;
             Object.assign(pages, subResult.pages);
@@ -54,16 +60,20 @@ const parseJSONStructure = async (configuration: Configuration, parentPathname: 
     return { pages, tree };
 };
 
-const parseAutoStructure = async (configuration: Configuration, crumbs: Crumbs, parentPathname: string) => {
+const parseAutoStructure = async (
+    configuration: Configuration,
+    crumbs: Crumbs,
+    parentPathname: string,
+    nestingLevel: number,
+) => {
     if (!configuration.provider) return { pages: {}, tree: [] };
 
-    const jsonResult = await parseJSONStructure(configuration, parentPathname, crumbs);
+    const jsonResult = await parseJSONStructure(configuration, parentPathname, crumbs, nestingLevel + 1);
     if (jsonResult) return jsonResult;
 
     const pages: Pages = {};
     const tree: TreeItem[] = [];
     const parentSegments = parentPathname.split("/");
-    const nestingLevel = parentSegments.length;
 
     const branchFiles = await configuration.provider.filesPromise;
 
@@ -89,8 +99,9 @@ const parseAutoStructure = async (configuration: Configuration, crumbs: Crumbs, 
             configuration,
             pageData ? [...crumbs, pathnameNormalized] : crumbs,
             clientPath,
+            nestingLevel + 1,
         );
-        const itemType = nestingLevel <= 1 ? "heading" : "row";
+        const itemType = nestingLevel === 0 ? "heading" : "row";
 
         if (shouldSpread(nestingLevel, configuration.spreadedLevel)) {
             tree.push(createTreeItem(title, pathnameNormalized, itemType), ...subResult.tree);
@@ -109,14 +120,14 @@ const parseStaticStructure = async (
     configuration: Configuration,
     crumbs: Crumbs,
     parentPathname: string,
+    nestingLevel: number,
 ) => {
     const pages: Pages = {};
     const tree: TreeItem[] = [];
-    const nestingLevel = parentPathname.split("/").length;
 
     for await (const item of items) {
         if (typeof item === "string") {
-            const result = await parseStructure(item, configuration, crumbs, parentPathname);
+            const result = await parseStructure(item, configuration, crumbs, parentPathname, nestingLevel);
             Object.assign(pages, result.pages);
             tree.push(...result.tree);
             continue;
@@ -148,7 +159,13 @@ const parseStaticStructure = async (
 
         let subTree: TreeItem[] = [];
         if (item.items) {
-            const result = await parseStructure(item.items, itemConfiguration, subCrumbs, item.href || "");
+            const result = await parseStructure(
+                item.items,
+                itemConfiguration,
+                subCrumbs,
+                item.href || "",
+                nestingLevel + 1,
+            );
             subTree = result.tree;
             Object.assign(pages, result.pages);
         }
@@ -173,10 +190,11 @@ export const parseStructure = async (
     configuration: Configuration = {},
     crumbs: Crumbs = [],
     pathname: string = "",
+    nestingLevel: number = 0,
 ) => {
     if (items === "auto") {
-        return parseAutoStructure(configuration, crumbs, pathname);
+        return parseAutoStructure(configuration, crumbs, pathname, nestingLevel);
     }
 
-    return parseStaticStructure(items, configuration, crumbs, pathname);
+    return parseStaticStructure(items, configuration, crumbs, pathname, nestingLevel);
 };

@@ -30,6 +30,6 @@ export const createTreeItem = (
     return items ? { title, href, type, items } : { title, href, type };
 };
 
-export const shouldSpread = (nestingLevel: number, spreadedLevel: number = 2) => {
+export const shouldSpread = (nestingLevel: number, spreadedLevel: number = 1) => {
     return nestingLevel < spreadedLevel;
 };
