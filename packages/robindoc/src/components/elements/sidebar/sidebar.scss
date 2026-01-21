@@ -136,22 +136,41 @@
   box-sizing: border-box;
 }
 
-.r-sidebar-drop[open]::details-content {
-  height: var(--drop-height, auto);
-  box-sizing: border-box;
-}
-
 .r-sidebar-drop::details-content {
-  height: 0;
   overflow: hidden;
   transition:
-    height 0.3s,
-    content-visibility 0.3s allow-discrete;
+    content-visibility 0.4s allow-discrete;
   box-sizing: border-box;
 }
 
 .r-sidebar-sublist {
   margin-left: 12px;
+}
+
+.r-sidebar-drop>.r-sidebar-sublist {
+  opacity: 0;
+  transition:
+    opacity 0.2s ease;
+}
+
+.r-sidebar-drop[open]>.r-sidebar-sublist {
+  opacity: 1;
+}
+
+.r-sidebar-drop>.r-sidebar-sublist>.r-sidebar-li {
+  margin-top: -4rem;
+  transition:
+    margin-top 0.3s ease;
+}
+
+.r-sidebar-drop[open]._starting-style>.r-sidebar-sublist>.r-sidebar-li {
+  @starting-style {
+    margin-top: -4rem;
+  }
+}
+
+.r-sidebar-drop[open]>.r-sidebar-sublist>.r-sidebar-li {
+  margin-top: 0;
 }
 
 .r-sidebar-sublist .r-sidebar-link {
@@ -165,7 +184,7 @@
     position: absolute;
     left: 0;
     top: -1px;
-    width: 2px;
+    width: 1px;
     height: calc(100% + 4px);
     background-color: var(--r-main-200);
     transition: background-color 0.2s cubic-bezier(0, 0.66, 0.58, 1) 0.05s;
@@ -175,8 +194,6 @@
 
 .r-sidebar-li {
   position: relative;
-  padding-top: 2px;
-  padding-bottom: 2px;
   line-height: 1.5;
 }
 
@@ -209,12 +226,15 @@
 }
 
 .r-sidebar-link {
-  display: block;
   padding: 4px 10px;
   color: inherit;
   border-bottom: 2px solid transparent;
   border-radius: 2px;
   text-decoration: none;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
   transition:
     background-color 0.2s cubic-bezier(0, 0.66, 0.58, 1) 0.05s,
     color 0.2s cubic-bezier(0, 0.66, 0.58, 1) 0.05s;

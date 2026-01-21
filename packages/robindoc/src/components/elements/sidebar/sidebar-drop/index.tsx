@@ -1,6 +1,8 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
+import clsx from "clsx";
+
 import { usePathname } from "@src/components/stores/navigation/hooks";
 
 export interface SidebarDropProps {
@@ -12,25 +14,18 @@ export interface SidebarDropProps {
 
 export const SidebarDrop: React.FC<React.PropsWithChildren<SidebarDropProps>> = ({ childHrefs, label, children }) => {
     const pathname = usePathname();
-    const openedByDefault = childHrefs.includes(pathname);
-    const [opened, setOpened] = useState(openedByDefault);
-    const dropdownRef = useRef<HTMLUListElement>(null);
-    const detailsRef = useRef<HTMLDetailsElement>(null);
-
-    useEffect(() => {
-        if (openedByDefault && !opened) setOpened(true);
-        if (openedByDefault && detailsRef.current && !detailsRef.current?.open) detailsRef.current.open = true;
-    }, [openedByDefault]);
-
-    useEffect(() => {
-        detailsRef.current?.style.setProperty(
-            "--drop-height",
-            (dropdownRef.current?.offsetHeight || 0).toString() + "px",
-        );
-    }, []);
+    const [openedByDefault] = useState(childHrefs.includes(pathname));
 
     return (
-        <details className="r-sidebar-drop" open={opened} ref={detailsRef}>
+        <details
+            className={clsx("r-sidebar-drop", !openedByDefault && "_starting-style")}
+            open={openedByDefault ? true : undefined}
+            ref={(node) => {
+                if (node && childHrefs.includes(pathname)) {
+                    node.open = true;
+                }
+            }}
+        >
             <summary className="r-sidebar-drop-btn" aria-label={label}>
                 <svg
                     className="r-sidebar-drop-icon"
@@ -46,9 +41,7 @@ export const SidebarDrop: React.FC<React.PropsWithChildren<SidebarDropProps>> = 
                     <path d="m9 18 6-6-6-6" />
                 </svg>
             </summary>
-            <ul className="r-sidebar-list r-sidebar-sublist" ref={dropdownRef}>
-                {children}
-            </ul>
+            <ul className="r-sidebar-list r-sidebar-sublist">{children}</ul>
         </details>
     );
 };

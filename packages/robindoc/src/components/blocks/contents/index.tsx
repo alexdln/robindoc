@@ -73,7 +73,7 @@ export const Contents: React.FC<ContentsProps> = ({ headings, hideContents, edit
                                                 heading.nested && "_nested",
                                                 index <= from && "_passed",
                                                 index <= to && "_visited",
-                                                index >= from && index <= to && "_active",
+                                                index === from && "_active",
                                             )}
                                             ref={(node) => {
                                                 if (
