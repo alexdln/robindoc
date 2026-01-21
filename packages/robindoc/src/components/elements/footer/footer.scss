@@ -2,8 +2,10 @@
 
 .r-footer {
   border-top: 1px solid var(--r-main-300);
-  padding-top: 16px;
-  padding-bottom: 16px;
+}
+
+.r-footer-container.r-footer-container {
+  padding: 16px 24px;
 }
 
 .r-footer-row {

@@ -29,18 +29,17 @@ export const createNavigationStore = () => {
 
         history.pushState = (...args: Parameters<typeof history.pushState>) => {
             const ret = pushState.apply(history, args);
-            window.dispatchEvent(new Event("locationchange"));
+            requestAnimationFrame(notify);
             return ret;
         };
 
         history.replaceState = (...args: Parameters<typeof history.replaceState>) => {
             const ret = replaceState.apply(history, args);
-            window.dispatchEvent(new Event("locationchange"));
+            requestAnimationFrame(notify);
             return ret;
         };
 
-        window.addEventListener("popstate", notify);
-        window.addEventListener("locationchange", notify);
+        window.addEventListener("popstate", () => requestAnimationFrame(notify));
     };
 
     init();
