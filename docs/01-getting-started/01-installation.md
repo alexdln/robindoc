@@ -1,5 +1,29 @@
 # Installation
 
+## Quick Start
+
+The fastest way to get started with Robindoc is using `create-robindoc-app`:
+
+```bash switcher tab="npx"
+npx create-robindoc-app
+```
+
+```bash switcher tab="pnpm"
+pnpm create robindoc-app
+```
+
+```bash switcher tab="yarn"
+yarn create robindoc-app
+```
+
+```bash switcher tab="bun"
+bun create robindoc-app
+```
+
+This will bootstrap a minimal Next.js app with Robindoc already configured.
+
+## Manual Installation
+
 Robindoc is simply a helper framework, meaning it does not include React itself or its frameworks.
 
 If you do not yet have an application, initialize it according to the [Next.js guide](https://nextjs.org/docs/app/getting-started/installation).

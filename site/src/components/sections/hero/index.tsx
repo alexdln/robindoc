@@ -26,9 +26,9 @@ export const Hero: React.FC = () => {
                     </Action>
                 </div>
                 <div className="hero-install">
-                    <span className="hero-install-label">Install</span>
+                    <span className="hero-install-label">Quick Start</span>
                     <code className="hero-install-code">
-                        <span className="hero-install-prefix">npm</span> install robindoc
+                        <span className="hero-install-prefix">npx</span> create-robindoc-app
                     </code>
                 </div>
             </div>
