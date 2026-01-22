@@ -1,0 +1,46 @@
+{
+  "name": "create-robindoc-app",
+  "version": "0.1.0",
+  "description": "CLI to bootstrap a minimal Next.js app using robindoc",
+  "bin": "./lib/cli.js",
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w"
+  },
+  "files": [
+    "lib",
+    "templates"
+  ],
+  "keywords": [
+    "robindoc",
+    "create-app",
+    "nextjs",
+    "documentation"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/alexdln/robindoc.git"
+  },
+  "author": {
+    "name": "Alex Savelyev",
+    "email": "dev@alexdln.com",
+    "url": "https://github.com/alexdln/"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "4.1.2",
+    "inquirer": "13.1.0",
+    "yargs": "18.0.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "29.0.0",
+    "@rollup/plugin-terser": "0.4.4",
+    "@rollup/plugin-typescript": "12.3.0",
+    "@types/inquirer": "9.0.9",
+    "@types/node": "25.0.8",
+    "@types/yargs": "17.0.35",
+    "rollup": "4.55.1",
+    "ts-patch": "3.3.0",
+    "typescript": "5.9.3"
+  }
+}

@@ -20,6 +20,7 @@ export const { Page, Sidebar, getStaticParams, getMetadata, getPageData, getPage
             items: ["auto"],
             configuration: {
                 basePath: "/core",
+                spreadedLevel: 1,
                 sourceRoot: "https://github.com/vercel/next.js/tree/canary/contributing/core",
             },
         },
@@ -29,6 +30,7 @@ export const { Page, Sidebar, getStaticParams, getMetadata, getPageData, getPage
             items: ["auto"],
             configuration: {
                 basePath: "/docs",
+                spreadedLevel: 1,
                 sourceRoot: "https://github.com/vercel/next.js/tree/canary/contributing/docs",
             },
         },
@@ -38,6 +40,7 @@ export const { Page, Sidebar, getStaticParams, getMetadata, getPageData, getPage
             items: ["auto"],
             configuration: {
                 basePath: "/repository",
+                spreadedLevel: 1,
                 sourceRoot: "https://github.com/vercel/next.js/tree/canary/contributing/repository",
             },
         },
