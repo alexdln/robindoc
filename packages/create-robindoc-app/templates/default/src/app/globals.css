@@ -1,0 +1,41 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.home-container {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.home-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.home-card {
+  background-color: var(--r-main-100);
+  border-radius: 8px;
+  padding: 8px 20px;
+  display: block;
+  text-decoration: none;
+  transition: transform 0.2s ease;
+  color: inherit;
+  width: 375px;
+  max-width: 100%;
+}
+
+.home-card:hover {
+  transform: translateY(-2px);
+}

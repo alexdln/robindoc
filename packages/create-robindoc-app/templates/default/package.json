@@ -1,0 +1,26 @@
+{
+  "name": "robindoc-app",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm run prebuild && next dev",
+    "prebuild": "robindoc-minisearch --template src/app/docs/robindoc.ts",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "next": "16.1.4",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "robindoc": "latest",
+    "@robindoc/minisearch": "latest",
+    "@robindoc/next": "latest",
+    "sass": "1.97.2"
+  },
+  "devDependencies": {
+    "@types/node": "25.0.8",
+    "@types/react": "19.2.8",
+    "@types/react-dom": "19.2.3",
+    "typescript": "5.9.3",
+    "tsx": "4.21.0"
+  }
+}

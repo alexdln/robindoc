@@ -42,6 +42,12 @@ jobs:
           cp ../../LICENSE .
         working-directory: ./packages/robindoc-next
 
+      - name: Build create-robindoc-app
+        run: |
+          pnpm run build
+          cp ../../LICENSE .
+        working-directory: ./packages/create-robindoc-app
+
       - name: Publish robindoc on main
         if: "!contains(github.ref_name, 'canary')"
         run: |
@@ -89,3 +95,19 @@ jobs:
           npm version --no-git-tag-version ${{github.ref_name}}
           npm publish --tag canary --access public
         working-directory: ./packages/robindoc-next
+
+      - name: Publish create-robindoc-app on main
+        if: "!contains(github.ref_name, 'canary')"
+        run: |
+          npm set //registry.npmjs.org/:_authToken=${{secrets.NPM_TOKEN}}
+          npm version --no-git-tag-version ${{github.ref_name}}
+          npm publish --access public
+        working-directory: ./packages/create-robindoc-app
+
+      - name: Publish create-robindoc-app on canary
+        if: contains(github.ref_name, 'canary')
+        run: |
+          npm set //registry.npmjs.org/:_authToken=${{secrets.NPM_TOKEN}}
+          npm version --no-git-tag-version ${{github.ref_name}}
+          npm publish --tag canary --access public
+        working-directory: ./packages/create-robindoc-app
