@@ -22,7 +22,7 @@ export const ThemeSwitcher: React.FC<ThemeSwitcherProps> = ({ translations }) =>
 
         if (!root) return;
 
-        localStorage.setItem("theme", theme);
+        localStorage.setItem("r-theme", theme);
         root.classList.remove("r-theme-light", "r-theme-dark", "r-theme-system");
         if (theme === "system") {
             root.classList.add(`r-theme-system`);

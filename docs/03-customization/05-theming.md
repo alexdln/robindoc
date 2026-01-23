@@ -97,3 +97,17 @@ If you need different colors for dark mode, set them at the inverted level withi
 ```
 
 For example, to customize `--r-main-50` in dark mode, set `--rb-main-950` to your desired color for the `.r-theme-dark` class.
+
+## Checking Current Theme
+
+To programmatically check the current theme preference, use the `getTheme()` helper function:
+
+```jsx filename="example.jsx" switcher tab="JavaScript" clone="ts|TypeScript|example.tsx"
+import { getTheme } from "robindoc/lib/core/helpers/theme";
+
+const currentTheme = getTheme();
+// Returns: "light" | "dark" | "system"
+```
+
+> [!NOTE]
+> For more information about preferences and helper functions, see the [Preferences](./06-preferences.md) documentation.

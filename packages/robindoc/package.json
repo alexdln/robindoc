@@ -9,8 +9,7 @@
     "dev": "rollup -c -w"
   },
   "files": [
-    "lib",
-    "assets"
+    "lib"
   ],
   "keywords": [
     "documentation",

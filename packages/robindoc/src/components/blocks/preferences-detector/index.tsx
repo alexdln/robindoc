@@ -2,15 +2,23 @@
 
 import React, { useEffect } from "react";
 
-const clientLogic = () => {
+import { getTheme } from "@src/core/helpers/theme";
+import { getTabs } from "@src/core/helpers/tabs";
+
+const clientLogic = (theme: string, tabs: string[]) => {
     const root = document.querySelector(".r-root");
 
     if (!root || root.classList.contains("r-ready")) return;
 
+    root.classList.forEach((className) => {
+        if (className.startsWith(`r-theme-`) || className.startsWith(`r-tabs-global`)) {
+            root.classList.remove(className);
+        }
+    });
+
     root.classList.add("r-ready");
-    const userTheme = localStorage.getItem("theme");
-    if (userTheme && ["light", "dark"].includes(userTheme)) {
-        root.classList.add(`r-theme-${userTheme}`);
+    if (theme && ["light", "dark"].includes(theme)) {
+        root.classList.add(`r-theme-${theme}`);
     } else {
         root.classList.add(`r-theme-system`);
         if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
@@ -20,36 +28,32 @@ const clientLogic = () => {
         }
     }
 
-    const store = localStorage.getItem("r-tabs");
-    const items = store?.split(";").filter((item) => item && /[\w-]+=[\w]+/.test(item)) || [];
-    const classNames = Array.from(root.classList);
-    classNames.forEach((className) => {
-        if (className.startsWith(`r-tabs-global`)) {
-            root.classList.remove(className);
-        }
-    });
-    items.forEach((item) => {
+    tabs.forEach((item) => {
         const [tabsKey, tab] = item.split("=");
         root.classList.add(`r-tabs-global__${tabsKey}`, `r-tabs-global__${tabsKey}_${tab}`);
     });
 };
 
-export const ThemeDetector: React.FC = () => {
+export const PreferencesDetector: React.FC = () => {
     useEffect(() => {
         const root = document.querySelector(".r-root");
         if (!root || root.classList.contains("r-ready")) return;
-        clientLogic();
+        clientLogic(getTheme(), getTabs());
 
         return () => {
-            root.classList.remove("r-ready");
+            root.classList.forEach((className) => {
+                if (className.startsWith("r-theme-") || className.startsWith("r-tabs-global")) {
+                    root.classList.remove(className);
+                }
+            });
         };
     }, []);
 
     return (
         <script
-            id="detect-theme"
+            id="detect-preferences"
             dangerouslySetInnerHTML={{
-                __html: `(${clientLogic})()`,
+                __html: `(${clientLogic})((${getTheme})(), (${getTabs})())`,
             }}
             async
         />
