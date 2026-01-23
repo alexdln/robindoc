@@ -1,7 +1,7 @@
 import React from "react";
 
 import { NavigateProvider } from "@src/components/stores/navigate/provider";
-import { ThemeDetector } from "@src/components/blocks/theme-detector";
+import { PreferencesDetector } from "@src/components/blocks/preferences-detector";
 import { NoJs } from "@src/components/blocks/no-js";
 
 import "./robin-provider.scss";
@@ -15,7 +15,7 @@ export const RobinProvider: React.FC<React.PropsWithChildren<RobinProviderProps>
     component: Component = "div",
 }) => (
     <Component suppressHydrationWarning className="r-root">
-        <ThemeDetector />
+        <PreferencesDetector />
         <NavigateProvider>{children}</NavigateProvider>
         <NoJs />
     </Component>
