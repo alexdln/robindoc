@@ -1,9 +1,11 @@
 import React from "react";
 
+import { type TreeItem } from "@src/components/elements/sidebar/types";
 import { Article as ArticleBase, type ArticleProps as ArticlePropsBase } from "@src/components/elements/article";
 import { Sidebar as SidebarBase, type SidebarProps as SidebarPropsBase } from "@src/components/elements/sidebar";
 
 import { type StructureTemplate, type Options } from "../types/initialize";
+import { type Pages } from "../types/content";
 import { parseStructure } from "./parse-structure";
 import { getConfiguration } from "./get-configuration";
 import { getMetadata as getMetadataBase } from "./get-metadata";
@@ -15,6 +17,8 @@ type PageProps = Omit<Partial<ArticlePropsBase>, "uri" | "content" | "provider" 
 };
 
 type SidebarProps = Omit<SidebarPropsBase, "tree">;
+
+type StructureParsedData = Promise<{ pages: Pages; tree: TreeItem[] }> | { pages: Pages; tree: TreeItem[] };
 
 const loadStructure = async (structureTemplate: StructureTemplate) => {
     let structure;
@@ -30,7 +34,10 @@ const loadStructure = async (structureTemplate: StructureTemplate) => {
 };
 
 export const initializeRobindoc = (structureTemplate: StructureTemplate, options: Options = {}) => {
-    const structureParsedPromise = loadStructure(structureTemplate);
+    let structureParsedPromise: StructureParsedData = loadStructure(structureTemplate).then((data) => {
+        structureParsedPromise = data;
+        return data;
+    });
     const matchingRules = options.matcher?.map((rule) => new RegExp(`^${rule.replace(/^\^|\$$/g, "")}$`));
 
     const Page: React.FC<PageProps> = async ({ pathname, ...props }) => {
@@ -40,6 +47,8 @@ export const initializeRobindoc = (structureTemplate: StructureTemplate, options
             if (options.processError) return options.processError(404, errorMessage) || null;
             throw new Error(errorMessage);
         }
+
+        if (!options.cache) await revalidate(true);
 
         const { pages } = await structureParsedPromise;
         const pageInstruction = pages[pathnameNormalized];
@@ -82,6 +91,8 @@ export const initializeRobindoc = (structureTemplate: StructureTemplate, options
     };
 
     const Sidebar: React.FC<SidebarProps> = async (props) => {
+        if (!options.cache) await revalidate(true);
+
         const { tree } = await structureParsedPromise;
 
         return <SidebarBase tree={tree} {...props} />;
@@ -91,6 +102,8 @@ export const initializeRobindoc = (structureTemplate: StructureTemplate, options
         prefix: string = "",
         segmentsParamKey: T = "segments" as T,
     ) => {
+        if (!options.cache) await revalidate(true);
+
         const { pages } = await structureParsedPromise;
         const pagesArr = Object.keys(pages);
         const prefixWithoutTrailingSlash = removeTrailingSlash(prefix);
@@ -113,6 +126,8 @@ export const initializeRobindoc = (structureTemplate: StructureTemplate, options
             if (options.processError) return options.processError(404, errorMessage) || null;
             throw new Error(errorMessage);
         }
+
+        if (!options.cache) await revalidate(true);
 
         const { pages } = await structureParsedPromise;
         const pageInstruction = pages[pathnameNormalized];
@@ -138,6 +153,8 @@ export const initializeRobindoc = (structureTemplate: StructureTemplate, options
             throw new Error(errorMessage);
         }
 
+        if (!options.cache) await revalidate(true);
+
         const { pages } = await structureParsedPromise;
         const pageInstruction = pages[pathnameNormalized];
 
@@ -161,6 +178,8 @@ export const initializeRobindoc = (structureTemplate: StructureTemplate, options
             throw new Error(errorMessage);
         }
 
+        if (!options.cache) await revalidate(true);
+
         const { pages } = await structureParsedPromise;
         const pageInstruction = pages[pathnameNormalized];
 
@@ -173,5 +192,20 @@ export const initializeRobindoc = (structureTemplate: StructureTemplate, options
         return pageInstruction;
     };
 
-    return { Page, Sidebar, getStaticParams, getMetadata, getPageData, getPageInstruction };
+    const revalidate = async (background?: boolean) => {
+        if ("then" in structureParsedPromise) return structureParsedPromise;
+
+        if (background) {
+            const newData = await loadStructure(structureTemplate);
+            structureParsedPromise = newData;
+        } else {
+            structureParsedPromise = loadStructure(structureTemplate).then((data) => {
+                structureParsedPromise = data;
+                return data;
+            });
+        }
+        return structureParsedPromise;
+    };
+
+    return { Page, Sidebar, getStaticParams, getMetadata, getPageData, getPageInstruction, revalidate };
 };

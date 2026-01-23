@@ -12,5 +12,6 @@ export const { Page, Sidebar, getPageData, getMetadata, getStaticParams, getPage
     {
         processError: notFound,
         matcher: ["/(?!.*\\..+).*"],
+        cache: true,
     },
 );
