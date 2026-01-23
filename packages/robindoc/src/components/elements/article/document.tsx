@@ -191,18 +191,18 @@ export const Document: React.FC<ContentProps> = ({
                         <Table>
                             <Thead>
                                 <Tr>
-                                    {token.header.map((t: Tokens.Text, index: number) => (
-                                        <Th key={t.text + index}>
+                                    {token.header.map((t: Tokens.TableCell, index: number) => (
+                                        <Th key={t.text + index} align={t.align}>
                                             {t.tokens ? <DocumentToken token={t.tokens} /> : t.text}
                                         </Th>
                                     ))}
                                 </Tr>
                             </Thead>
                             <Tbody>
-                                {token.rows.map((row: Tokens.Text[], rowIndex: number) => (
+                                {token.rows.map((row: Tokens.TableCell[], rowIndex: number) => (
                                     <Tr key={rowIndex}>
                                         {row.map((elem, elemIndex) => (
-                                            <Td key={elem.text + elemIndex}>
+                                            <Td key={elem.text + elemIndex} align={elem.align}>
                                                 {elem.tokens ? <DocumentToken token={elem.tokens} /> : elem.text}
                                             </Td>
                                         ))}
@@ -404,6 +404,9 @@ export const Document: React.FC<ContentProps> = ({
                 return null;
             // br are inserted between elements. In our case, sufficient indentation is set everywhere, so we ignore them
             case "br":
+                return null;
+            // checkbox are rendered as part of the task list item, so we ignore them
+            case "checkbox":
                 return null;
             default:
                 if (!token.type && "raw" in token) return token.raw;

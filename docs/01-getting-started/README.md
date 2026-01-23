@@ -1,4 +1,4 @@
-# Getting Started 22
+# Getting Started
 
 To start using Robindoc, follow these steps:
 

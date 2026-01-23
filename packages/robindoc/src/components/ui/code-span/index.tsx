@@ -9,5 +9,5 @@ interface CodeSpanProps {
 }
 
 export const CodeSpan: React.FC<CodeSpanProps> = ({ className, code }) => {
-    return <code className={clsx("r-code-span", className)} dangerouslySetInnerHTML={{ __html: code }} />;
+    return <code className={clsx("r-code-span", className)}>{code}</code>;
 };
