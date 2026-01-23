@@ -9,5 +9,10 @@ However, in all non-standard situations you can [use JSX](../01-getting-started/
 ## Current extensions
 
 - [Blockquotes](./01-blockquotes.md)
-
-- _Documentation under development_
+- [Code Blocks](./02-code-blocks.md)
+- [Links](./03-links.md)
+- [Headings](./04-headings.md)
+- [Text Formatting](./05-text-formatting.md)
+- [Lists](./06-lists.md)
+- [Tables](./07-tables.md)
+- [HTML](./08-html.md)
