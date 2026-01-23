@@ -4,7 +4,7 @@ To use Robindoc with all its features, you need to initialize it. To do this, yo
 
 ## Calling the Method
 
-The method will return dynamic components [`Page`](../03-customization/01-elements/page.md) and [`Sidebar`](../03-customization/01-elements/sidebar.md), as well as the methods [`getStaticParams`](../03-customization/02-tools/get-static-params.md), [`getMetadata`](../03-customization/02-tools/get-metadata.md), and [`getPageData`](../03-customization/02-tools/get-page-data.md).
+The method will return dynamic components [`Page`](../03-customization/01-elements/page.md) and [`Sidebar`](../03-customization/01-elements/sidebar.md), as well as the methods [`getStaticParams`](../03-customization/02-tools/get-static-params.md), [`getMetadata`](../03-customization/02-tools/get-metadata.md), [`getPageData`](../03-customization/02-tools/get-page-data.md), and [`revalidate`](../03-customization/02-tools/revalidate.md).
 
 ```tsx filename="app/docs/robindoc.ts" tab="TypeScript" switcher clone="jsx|JavaScript|app/docs/robindoc.js"
 import { initializeRobindoc } from "robindoc";
@@ -38,6 +38,14 @@ The function receives two parameters:
 
 An array of regular expression patterns as strings to validate routes before processing. If a route doesn't match any of the patterns, the error handler is called immediately without parsing the documentation structure. This helps return errors much faster and improves performance.
 
+### `cache`
+
+Controls whether the parsed documentation structure should be cached in memory across requests. When enabled (default: `false`), Robindoc creates an in-memory cache of your documentation structure after the first load, significantly improving performance for subsequent requests.
+
+> **Note**: In serverless environments, caching may be less critical since each function invocation might be a fresh process. However, if your platform reuses warm instances, caching still provides performance benefits.
+
+For detailed information about caching, revalidation, and best practices, see the [Revalidation and Caching](../03-customization/02-tools/revalidate.md) guide.
+
 **Recommended configuration for Next.js:**
 
 ```tsx filename="app/docs/robindoc.ts" tab="TypeScript" switcher clone="jsx|JavaScript|app/docs/robindoc.js"
@@ -57,6 +65,7 @@ export const { Page, Sidebar, getStaticParams, getMetadata, getPageData } =
     {
       processError: notFound,
       matcher: ["/(?!.*\\..+).*"],
+      cache: process.env.NODE_ENV === "production",
     },
   );
 ```
@@ -64,6 +73,7 @@ export const { Page, Sidebar, getStaticParams, getMetadata, getPageData } =
 In this example:
 - `processError: notFound` uses Next.js's `notFound()` function to handle 404 errors
 - `matcher: ["/(?!.*\\..+).*"]` ensures only routes that don't contain file extensions (like `.ico`, `.md`, etc.) are processed, preventing static asset requests from being handled and processed by Robindoc
+- `cache: process.env.NODE_ENV === "production"` enabled in-memory caching in production environment
 
 ## File Location
 
