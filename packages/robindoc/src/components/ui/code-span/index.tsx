@@ -3,7 +3,7 @@ import clsx from "clsx";
 
 import "./code-span.scss";
 
-interface CodeSpanProps {
+export interface CodeSpanProps {
     code: string;
     className?: string;
 }

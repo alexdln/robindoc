@@ -21,6 +21,9 @@ const Docs = async ({ params }: { params: Promise<{ segments?: string[] }> }) =>
             config={{
                 publicDirs: ["public"],
             }}
+            tags={{
+                Paragraph: (props) => <p {...props} data-test="test" />,
+            }}
             editUri={`https://github.com/alexdln/robindoc/edit/main/site/${pageInstriction.origPath}`}
         />
     );

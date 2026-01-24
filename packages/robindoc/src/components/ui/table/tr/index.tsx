@@ -1,7 +1,7 @@
 import React from "react";
 import clsx from "clsx";
 
-interface TrProps {
+export interface TrProps {
     className?: string;
 }
 

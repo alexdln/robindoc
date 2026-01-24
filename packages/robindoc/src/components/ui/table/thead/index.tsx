@@ -3,7 +3,7 @@ import clsx from "clsx";
 
 import "./thead.scss";
 
-interface TheadProps {
+export interface TheadProps {
     className?: string;
 }
 

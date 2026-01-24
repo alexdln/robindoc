@@ -3,7 +3,7 @@ import clsx from "clsx";
 
 import "./heading.scss";
 
-interface HeadingProps extends React.HTMLAttributes<HTMLHeadingElement> {
+export interface HeadingProps extends React.HTMLAttributes<HTMLHeadingElement> {
     component: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
     className?: string;
 }

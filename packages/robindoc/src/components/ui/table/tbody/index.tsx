@@ -1,7 +1,7 @@
 import React from "react";
 import clsx from "clsx";
 
-interface TbodyProps {
+export interface TbodyProps {
     className?: string;
 }
 

@@ -1,7 +1,7 @@
 import React from "react";
 import clsx from "clsx";
 
-interface EmProps {
+export interface EmProps {
     className?: string;
 }
 

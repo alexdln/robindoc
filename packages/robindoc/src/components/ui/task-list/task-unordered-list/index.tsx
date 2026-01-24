@@ -5,7 +5,7 @@ import { UnorderedList } from "../../list";
 
 import "./task-unordered-list.scss";
 
-interface TaskUnorderedListProps {
+export interface TaskUnorderedListProps {
     className?: string;
 }
 

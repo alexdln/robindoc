@@ -1,7 +1,7 @@
 import React from "react";
 import clsx from "clsx";
 
-interface StrongProps {
+export interface StrongProps {
     className?: string;
 }
 

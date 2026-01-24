@@ -3,7 +3,7 @@ import clsx from "clsx";
 
 import "./block.scss";
 
-interface BlockProps {
+export interface BlockProps {
     className?: string;
 }
 
