@@ -93,3 +93,4 @@ This is ~~deleted **bold** text~~.
 - The `Strong`, `Em`, and `Del` components are semantic HTML elements (`<strong>`, `<em>`, `<del>`) for accessibility
 - Paragraphs use the `Paragraph` component with consistent spacing and typography
 - Text tokens are recursively processed, allowing complex nested structures
+- All text formatting components (`Paragraph`, `Strong`, `Em`, `Del`, `CodeSpan`) can be customized by overwriting tags. See [Tags](../03-customization/07-tags.md) for more details

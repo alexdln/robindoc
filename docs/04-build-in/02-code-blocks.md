@@ -90,3 +90,7 @@ console.log(example);
 const example = "Code Blocks Example";
 console.log(example);
 ```
+
+## Customization
+
+Code block components (`CodeSpan`, `CodeBlock`, `CodeSection`, and `Tabs`) can be customized by overwriting tags. See [Tags](../03-customization/07-tags.md) for more details.

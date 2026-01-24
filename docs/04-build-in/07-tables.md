@@ -87,3 +87,4 @@ Result:
 - Tables are wrapped in a `Block` component for consistent spacing and layout
 - Table structure uses semantic HTML: `<table>`, `<thead>`, `<tbody>`, `<tr>`, `<th>`, `<td>`
 - Cell content is processed recursively, allowing nested markdown tokens
+- All table components (`Table`, `Thead`, `Tbody`, `Tr`, `Th`, `Td`, `Block`) can be customized by overwriting tags. See [Tags](../03-customization/07-tags.md) for more details

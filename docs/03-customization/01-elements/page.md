@@ -31,6 +31,8 @@ All customization in Robindoc happens through the structure and props of the com
 
 `components` - an object of allowable JSX or Robin components. Read more on the page [Writing MD](../../01-getting-started/02-writing-md.md);
 
+`tags` - an object of custom tag components to overwrite default markdown element rendering. Read more on the [Tags](../07-tags.md) page;
+
 `translations` [`{ [key: string]: string }`] - translations for the current block. The key is the term identifier, and the value is the corresponding translation. _For the latest list of terms, check the editor hints_.
 
 ### Overwriting Props

@@ -6,6 +6,9 @@ Since the framework is focused specifically on markdown. This makes it possible 
 
 However, in all non-standard situations you can [use JSX](../01-getting-started/02-writing-md.md).
 
+> [!NOTE]
+> All built-in markdown elements can be customized by overwriting their rendering components. See [Tags](../03-customization/07-tags.md) for more details.
+
 ## Current extensions
 
 - [Blockquotes](./01-blockquotes.md)
