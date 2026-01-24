@@ -10,6 +10,22 @@ interface RobinProviderProps {
     component?: React.ElementType;
 }
 
+/**
+ * Root provider component that wraps the entire Robindoc application.
+ * Required for proper functionality of preferences, navigation, and other features.
+ *
+ * @example
+ * ```tsx
+ * <RobinProvider>
+ *   <Header logo={<Logo />} />
+ *   <DocsContainer>
+ *     <Page pathname="/docs" />
+ *   </DocsContainer>
+ * </RobinProvider>
+ * ```
+ *
+ * @see {@link https://robindoc.com/docs/customization/elements Elements customization}
+ */
 export const RobinProvider: React.FC<React.PropsWithChildren<RobinProviderProps>> = ({
     children,
     component: Component = "div",

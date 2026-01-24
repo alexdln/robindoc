@@ -27,6 +27,21 @@ const loadSearchIndex = async (indexUrl: string): Promise<MiniSearch<SearchIndex
     return searchIndex;
 };
 
+/**
+ * Creates a searcher function that loads and queries a static search index.
+ *
+ * @example
+ * ```ts
+ * import { createStaticSearcher } from "@robindoc/minisearch";
+ *
+ * const searcher = createStaticSearcher("/search-index.json");
+ *
+ * // Use with Header component
+ * <Header searcher={searcher} />
+ * ```
+ *
+ * @see {@link https://robindoc.com/docs/customization/search Search integration}
+ */
 export const createStaticSearcher = (indexUrl: string): Searcher => {
     return async (search: string, abortController: AbortController): Promise<SearchItem[]> => {
         if (!search.trim()) return [];

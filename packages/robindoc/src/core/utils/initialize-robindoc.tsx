@@ -33,6 +33,20 @@ const loadStructure = async (structureTemplate: StructureTemplate) => {
     return parseStructure(structure.items || [], configuration);
 };
 
+/**
+ * Initializes Robindoc and returns components for rendering documentation pages.
+ *
+ * @example
+ * ```ts
+ * export const { Page, Sidebar } = initializeRobindoc({
+ *   configuration: { sourceRoot: "./docs" },
+ *   items: "auto"
+ * });
+ * ```
+ *
+ * @see {@link https://robindoc.com/docs/getting-started/initialization Initialization guide}
+ * @see {@link https://robindoc.com/docs/structure/structure Structure configuration}
+ */
 export const initializeRobindoc = (structureTemplate: StructureTemplate, options: Options = {}) => {
     let structureParsedPromise: StructureParsedData = loadStructure(structureTemplate).then((data) => {
         structureParsedPromise = data;
@@ -40,6 +54,12 @@ export const initializeRobindoc = (structureTemplate: StructureTemplate, options
     });
     const matchingRules = options.matcher?.map((rule) => new RegExp(`^${rule.replace(/^\^|\$$/g, "")}$`));
 
+    /**
+     * Renders a documentation page for the given pathname.
+     *
+     * @see {@link https://robindoc.com/docs/customization/elements/page Page customization}
+     * @see {@link https://robindoc.com/docs/customization/tags Tags customization}
+     */
     const Page: React.FC<PageProps> = async ({ pathname, ...props }) => {
         const pathnameNormalized = normalizePathname(pathname);
         if (matchingRules && !matchingRules.every((rule) => rule.test(pathname))) {
@@ -90,6 +110,11 @@ export const initializeRobindoc = (structureTemplate: StructureTemplate, options
         );
     };
 
+    /**
+     * Renders the navigation sidebar based on the documentation structure.
+     *
+     * @see {@link https://robindoc.com/docs/customization/elements Elements customization}
+     */
     const Sidebar: React.FC<SidebarProps> = async (props) => {
         if (!options.cache) await revalidate(true);
 
@@ -98,6 +123,18 @@ export const initializeRobindoc = (structureTemplate: StructureTemplate, options
         return <SidebarBase tree={tree} {...props} />;
     };
 
+    /**
+     * Generates static params for dynamic routes.
+     *
+     * @example
+     * ```ts
+     * export async function generateStaticParams() {
+     *   return await getStaticParams("/docs");
+     * }
+     * ```
+     *
+     * @see {@link https://robindoc.com/docs/customization/tools/get-static-params getStaticParams}
+     */
     const getStaticParams = async <T extends string = "segments">(
         prefix: string = "",
         segmentsParamKey: T = "segments" as T,
@@ -119,6 +156,18 @@ export const initializeRobindoc = (structureTemplate: StructureTemplate, options
         }, []);
     };
 
+    /**
+     * Generates page metadata.
+     *
+     * @example
+     * ```ts
+     * export async function generateMetadata({ params }) {
+     *   return await getMetadata(`/docs/${params.segments.join("/")}`);
+     * }
+     * ```
+     *
+     * @see {@link https://robindoc.com/docs/customization/tools/get-metadata getMetadata}
+     */
     const getMetadata = async (pathname: string) => {
         const pathnameNormalized = normalizePathname(pathname);
         if (matchingRules && !matchingRules.every((rule) => rule.test(pathname))) {
@@ -145,6 +194,11 @@ export const initializeRobindoc = (structureTemplate: StructureTemplate, options
         return metadata;
     };
 
+    /**
+     * Retrieves raw page data (title and markdown content).
+     *
+     * @see {@link https://robindoc.com/docs/customization/tools/get-page-data getPageData}
+     */
     const getPageData = async (pathname: string) => {
         const pathnameNormalized = normalizePathname(pathname);
         if (matchingRules && !matchingRules.every((rule) => rule.test(pathname))) {
@@ -170,6 +224,9 @@ export const initializeRobindoc = (structureTemplate: StructureTemplate, options
         return { title, raw: data };
     };
 
+    /**
+     * Retrieves the page instruction object for a given pathname.
+     */
     const getPageInstruction = async (pathname: string) => {
         const pathnameNormalized = normalizePathname(pathname);
         if (matchingRules && !matchingRules.every((rule) => rule.test(pathname))) {
@@ -192,6 +249,11 @@ export const initializeRobindoc = (structureTemplate: StructureTemplate, options
         return pageInstruction;
     };
 
+    /**
+     * Manually revalidates the cached documentation structure.
+     *
+     * @see {@link https://robindoc.com/docs/customization/tools/revalidate revalidate}
+     */
     const revalidate = async (background?: boolean) => {
         if ("then" in structureParsedPromise) return structureParsedPromise;
 
