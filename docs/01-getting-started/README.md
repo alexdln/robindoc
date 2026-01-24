@@ -4,11 +4,13 @@ To start using Robindoc, follow these steps:
 
 1. [Install Robindoc](./01-installation.md);
 
-2. [Initialize Robindoc](./03-initialization.md);
+2. [Learn how to write markdown](./02-writing-md.md);
 
-3. [Configure documentation pages](./04-app-organization.md)
+3. [Initialize Robindoc](./03-initialization.md);
 
-4. [Set up Next.js Integration](./05-nextjs-integration.md) (for Next.js apps);
+4. [Configure documentation pages](./04-app-organization.md)
+
+5. [Set up Next.js Integration](./05-nextjs-integration.md) (for Next.js apps);
 
 ## Requirements
 

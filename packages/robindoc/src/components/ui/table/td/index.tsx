@@ -3,7 +3,7 @@ import clsx from "clsx";
 
 import "./td.scss";
 
-interface TdProps {
+export interface TdProps {
     className?: string;
     align?: "left" | "center" | "right" | null;
 }

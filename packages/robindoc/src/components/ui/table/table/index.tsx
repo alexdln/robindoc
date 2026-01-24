@@ -3,7 +3,7 @@ import clsx from "clsx";
 
 import "./table.scss";
 
-interface TableProps {
+export interface TableProps {
     className?: string;
 }
 

@@ -57,3 +57,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 - **Prefer relative paths for internal docs** (for example, `/docs/intro`) so they take advantage of SPA navigation and stay inside your site.
 - **Avoid hard-coding full absolute URLs** for internal pages (`https://your-site.com/docs/...`), or they will be treated as external and opened in a new tab.
 - **Let Robindoc manage external behavior** — you usually do not need to add `target="_blank"` or `rel` in markdown; they are applied automatically when needed.
+
+## Customization
+
+The `ContentLink` component can be customized by overwriting tags. See [Tags](../03-customization/07-tags.md) for more details.

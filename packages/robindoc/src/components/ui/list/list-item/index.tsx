@@ -3,7 +3,7 @@ import clsx from "clsx";
 
 import "./list-item.scss";
 
-interface ListItemProps {
+export interface ListItemProps {
     className?: string;
 }
 

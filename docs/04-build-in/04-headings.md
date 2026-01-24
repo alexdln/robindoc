@@ -52,6 +52,7 @@ You can link to these headings directly:
 - Only H2 and H3 headings are tracked for navigation purposes (see [App Organization](../01-getting-started/04-app-organization.md))
 - Heading tokens support nested markdown formatting (bold, italic, inline code, etc.)
 - The `AnchorHeading` component wraps headings with IDs, while regular `Heading` is used for others
+- Both `Heading` and `AnchorHeading` components can be customized by overwriting tags. See [Tags](../03-customization/07-tags.md) for more details
 
 ## Important Notes
 

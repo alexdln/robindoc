@@ -1,26 +1,20 @@
-import "./article.scss";
 import React from "react";
 
-import { type Components } from "@src/core/types/content";
 import { type BaseProvider } from "@src/core/providers/base";
 import { loadContent } from "@src/core/utils/load-content";
 import { ContentsProvider } from "@src/components/stores/contents/provider";
 import { Contents, type ContentsProps } from "@src/components/blocks/contents";
 import { Breadcrumbs, type BreadcrumbsProps } from "@src/components/blocks/breadcrumbs";
 import { Pagination, type PaginationProps } from "@src/components/blocks/pagination";
-import { parseMarkdown } from "./utils";
-import { Document } from "./document";
 import { LastModified } from "@src/components/blocks/last-modified";
+import { Document, type DocumentProps } from "./document";
+import { parseMarkdown } from "./utils";
 
-export type ContentProps = {
+import "./article.scss";
+
+type ArticleContentProps = Pick<DocumentProps, "pathname" | "components" | "config" | "pages" | "tags"> & {
     title: string;
-    components?: Components;
-    config?: {
-        publicDirs?: string[];
-    };
     provider?: BaseProvider;
-    pathname: string;
-    pages?: { clientPath: string; origPath: string }[];
     translations?: {
         /** Last modified on */
         lastModifiedOn?: string;
@@ -30,10 +24,11 @@ export type ContentProps = {
 export type ArticleProps = Partial<PaginationProps> &
     Partial<BreadcrumbsProps> &
     Omit<ContentsProps, "headings"> &
-    ContentProps;
+    ArticleContentProps;
 
 export const Article: React.FC<ArticleProps> = async ({
     components,
+    tags,
     content,
     uri,
     config = {},
@@ -79,6 +74,7 @@ export const Article: React.FC<ArticleProps> = async ({
                     targetProvider={targetProvider}
                     pathname={pathname}
                     uri={uri}
+                    tags={tags}
                 />
                 {lastModified && <LastModified date={lastModified}>{lastModifiedOn}</LastModified>}
             </div>

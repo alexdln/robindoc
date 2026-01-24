@@ -41,3 +41,7 @@ Robindoc additionally supports the [GitHub alerts format](https://docs.github.co
 
 > [!CAUTION]
 > Advises about risks or negative outcomes of certain actions.
+
+## Customization
+
+The `Blockquote` component can be customized by overwriting tags. See [Tags](../03-customization/07-tags.md) for more details.

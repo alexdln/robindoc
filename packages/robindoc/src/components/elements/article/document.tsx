@@ -1,27 +1,10 @@
-import { AnchorHeading } from "@src/components/blocks/anchor-heading";
-import { CodeSection } from "@src/components/blocks/code-section";
-import { NavContentLink } from "@src/components/blocks/nav-content-link";
-import { Block } from "@src/components/ui/block";
-import { Blockquote } from "@src/components/ui/blockquote";
-import { CodeBlock } from "@src/components/ui/code-block";
-import { CodeSpan } from "@src/components/ui/code-span";
-import { Del } from "@src/components/ui/del";
-import { Em } from "@src/components/ui/em";
-import { Heading } from "@src/components/ui/heading";
-import { Hr } from "@src/components/ui/hr";
-import { Img } from "@src/components/ui/img";
-import { ListItem, OrderedList, UnorderedList } from "@src/components/ui/list";
-import { Paragraph } from "@src/components/ui/paragraph";
-import { Strong } from "@src/components/ui/strong";
-import { Table, Tbody, Td, Th, Thead, Tr } from "@src/components/ui/table";
-import { Tabs } from "@src/components/ui/tabs";
-import { TaskListItem, TaskOrderedList, TaskUnorderedList } from "@src/components/ui/task-list";
+import { type Token, type Tokens, type TokensList } from "marked";
+import { type BundledLanguage } from "shiki";
+import React from "react";
+import parse, { attributesToProps, DOMNode, domToReact, HTMLReactParserOptions, Text } from "html-react-parser";
+
 import { type BaseProvider } from "@src/core/providers/base";
 import { type Components, type RobinProps } from "@src/core/types/content";
-import parse, { attributesToProps, DOMNode, domToReact, HTMLReactParserOptions, Text } from "html-react-parser";
-import { type Token, type Tokens, type TokensList } from "marked";
-import React from "react";
-import { type BundledLanguage } from "shiki";
 
 import { type PagesType } from "./types";
 import {
@@ -34,19 +17,30 @@ import {
     validateComponentName,
     type AnchorData,
 } from "./utils";
+import { DEFAULT_TAGS } from "./tags";
 
-interface DocumentJSXProps extends Omit<ContentProps, "tokens" | "headings"> {
+interface DocumentJSXProps extends Omit<DocumentProps, "tokens" | "headings"> {
     raw: string;
     pages?: PagesType;
+    tags: typeof DEFAULT_TAGS;
 }
 
-export const DocumentJSX: React.FC<DocumentJSXProps> = ({ raw, components, ...baseProps }) => {
+const DocumentJSX: React.FC<DocumentJSXProps> = ({ raw, components, tags: Tags, ...baseProps }) => {
     const parseOptions: HTMLReactParserOptions = {
         replace(domNode) {
             if (domNode instanceof Text && domNode.data) {
                 const { headings, tokens } = parseMarkdown(domNode.data);
 
-                return <Document headings={headings} tokens={tokens} components={components} subtree {...baseProps} />;
+                return (
+                    <Document
+                        headings={headings}
+                        tokens={tokens}
+                        components={components}
+                        tags={Tags}
+                        subtree
+                        {...baseProps}
+                    />
+                );
             }
 
             if (!("name" in domNode)) return <></>;
@@ -57,9 +51,9 @@ export const DocumentJSX: React.FC<DocumentJSXProps> = ({ raw, components, ...ba
                 if (href === "") return domToReact(domNode.children as DOMNode[], parseOptions);
 
                 return (
-                    <NavContentLink {...attributesToProps(domNode.attribs)} href={href} external={external}>
+                    <Tags.ContentLink {...attributesToProps(domNode.attribs)} href={href} external={external}>
                         {domToReact(domNode.children as DOMNode[], parseOptions)}
-                    </NavContentLink>
+                    </Tags.ContentLink>
                 );
             }
 
@@ -86,7 +80,7 @@ export const DocumentJSX: React.FC<DocumentJSXProps> = ({ raw, components, ...ba
     return parse(raw, parseOptions);
 };
 
-export type ContentProps = {
+export type DocumentProps = {
     pathname: string;
     components?: Components;
     config?: {
@@ -98,11 +92,13 @@ export type ContentProps = {
     headings: AnchorData[];
     subtree?: boolean;
     pages?: PagesType;
+    tags?: Partial<typeof DEFAULT_TAGS>;
 };
 
-export const Document: React.FC<ContentProps> = ({
+export const Document: React.FC<DocumentProps> = ({
     pathname,
     components,
+    tags: userTags = {},
     uri,
     targetProvider,
     tokens,
@@ -112,6 +108,7 @@ export const Document: React.FC<ContentProps> = ({
     pages,
 }) => {
     const { publicDirs } = config;
+    const Tags = { ...DEFAULT_TAGS, ...userTags };
 
     let robin:
         | null
@@ -131,7 +128,7 @@ export const Document: React.FC<ContentProps> = ({
 
             return (
                 <>
-                    <Tabs type="code" tabsData={tabsData} insertStyles={!isInsertedKey} blockKey={tabsKey} />
+                    <Tags.Tabs type="code" tabsData={tabsData} insertStyles={!isInsertedKey} blockKey={tabsKey} />
                     <DocumentToken token={token} />
                 </>
             );
@@ -174,43 +171,43 @@ export const Document: React.FC<ContentProps> = ({
                 const predefinedData = headings.find((heading) => heading.token === token);
                 if (predefinedData?.id) {
                     return (
-                        <AnchorHeading component={Component} id={predefinedData.id}>
+                        <Tags.AnchorHeading component={Component} id={predefinedData.id}>
                             {token.tokens ? <DocumentToken token={token.tokens} /> : token.raw}
-                        </AnchorHeading>
-                    );
-                } else {
-                    return (
-                        <Heading component={Component} id={token.depth === 1 ? "main-content" : undefined}>
-                            {token.tokens ? <DocumentToken token={token.tokens} /> : token.raw}
-                        </Heading>
+                        </Tags.AnchorHeading>
                     );
                 }
+
+                return (
+                    <Tags.Heading component={Component} id={token.depth === 1 ? "main-content" : undefined}>
+                        {token.tokens ? <DocumentToken token={token.tokens} /> : token.raw}
+                    </Tags.Heading>
+                );
             case "table":
                 return (
-                    <Block>
-                        <Table>
-                            <Thead>
-                                <Tr>
+                    <Tags.Block>
+                        <Tags.Table>
+                            <Tags.Thead>
+                                <Tags.Tr>
                                     {token.header.map((t: Tokens.TableCell, index: number) => (
-                                        <Th key={t.text + index} align={t.align}>
+                                        <Tags.Th key={t.text + index} align={t.align}>
                                             {t.tokens ? <DocumentToken token={t.tokens} /> : t.text}
-                                        </Th>
+                                        </Tags.Th>
                                     ))}
-                                </Tr>
-                            </Thead>
-                            <Tbody>
+                                </Tags.Tr>
+                            </Tags.Thead>
+                            <Tags.Tbody>
                                 {token.rows.map((row: Tokens.TableCell[], rowIndex: number) => (
-                                    <Tr key={rowIndex}>
+                                    <Tags.Tr key={rowIndex}>
                                         {row.map((elem, elemIndex) => (
-                                            <Td key={elem.text + elemIndex} align={elem.align}>
+                                            <Tags.Td key={elem.text + elemIndex} align={elem.align}>
                                                 {elem.tokens ? <DocumentToken token={elem.tokens} /> : elem.text}
-                                            </Td>
+                                            </Tags.Td>
                                         ))}
-                                    </Tr>
+                                    </Tags.Tr>
                                 ))}
-                            </Tbody>
-                        </Table>
-                    </Block>
+                            </Tags.Tbody>
+                        </Tags.Table>
+                    </Tags.Block>
                 );
             case "link":
                 const { href, external } = formatLinkHref(token.href, pathname, pages);
@@ -218,17 +215,15 @@ export const Document: React.FC<ContentProps> = ({
                 if (href === "") return token.tokens ? <DocumentToken token={token.tokens} /> : token.raw;
 
                 return (
-                    <NavContentLink href={href} external={external}>
+                    <Tags.ContentLink href={href} external={external}>
                         {token.tokens ? <DocumentToken token={token.tokens} /> : token.raw}
-                    </NavContentLink>
+                    </Tags.ContentLink>
                 );
-            case "space":
-                return null;
             case "hr":
-                return <Hr />;
+                return <Tags.Hr />;
             case "image":
                 return (
-                    <Img
+                    <Tags.Img
                         src={token.href}
                         publicDirs={publicDirs}
                         provider={targetProvider}
@@ -245,34 +240,36 @@ export const Document: React.FC<ContentProps> = ({
                     return <DocumentToken token={{ ...token, type: "html" }} />;
                 }
 
-                return <Paragraph>{token.tokens ? <DocumentToken token={token.tokens} /> : token.raw}</Paragraph>;
+                return (
+                    <Tags.Paragraph>{token.tokens ? <DocumentToken token={token.tokens} /> : token.raw}</Tags.Paragraph>
+                );
             case "strong":
-                return <Strong>{token.tokens ? <DocumentToken token={token.tokens} /> : token.raw}</Strong>;
+                return <Tags.Strong>{token.tokens ? <DocumentToken token={token.tokens} /> : token.raw}</Tags.Strong>;
             case "del":
-                return <Del>{token.tokens ? <DocumentToken token={token.tokens} /> : token.raw}</Del>;
+                return <Tags.Del>{token.tokens ? <DocumentToken token={token.tokens} /> : token.raw}</Tags.Del>;
             case "em":
-                return <Em>{token.tokens ? <DocumentToken token={token.tokens} /> : token.raw}</Em>;
+                return <Tags.Em>{token.tokens ? <DocumentToken token={token.tokens} /> : token.raw}</Tags.Em>;
             case "blockquote":
                 const { token: blockquoteToken, type } = parseBlockqoute(token);
 
                 return (
-                    <Blockquote type={type}>
+                    <Tags.Blockquote type={type}>
                         {blockquoteToken.tokens ? (
                             <DocumentToken token={blockquoteToken.tokens} />
                         ) : (
                             blockquoteToken.raw
                         )}
-                    </Blockquote>
+                    </Tags.Blockquote>
                 );
             case "codespan":
                 const inlineCode = token.raw.replace(/^`|`$/g, "");
                 const hightlightMatch = inlineCode.match(/(.+){:([a-zA-Z]+)}$/);
                 if (hightlightMatch) {
                     const [, raw, lang] = hightlightMatch;
-                    return <CodeBlock code={raw} lang={lang as BundledLanguage} inline />;
+                    return <Tags.CodeBlock code={raw} lang={lang as BundledLanguage} inline />;
                 }
 
-                return <CodeSpan code={inlineCode} />;
+                return <Tags.CodeSpan code={inlineCode} />;
             case "code":
                 const { lang, configuration } = parseCodeLang(token.lang);
                 if (configuration.switcher && lang) {
@@ -280,7 +277,7 @@ export const Document: React.FC<ContentProps> = ({
                     codeQueue[tabKey] = {
                         tabName: (configuration.tab || lang).toString(),
                         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                        element: <CodeSection lang={lang as any} code={token.text} {...configuration} />,
+                        element: <Tags.CodeSection lang={lang as any} code={token.text} {...configuration} />,
                     };
 
                     if (typeof configuration.clone === "string") {
@@ -293,7 +290,7 @@ export const Document: React.FC<ContentProps> = ({
                             codeQueue[copyTabKey] = {
                                 tabName: (copyTab || copyLang).toString(),
                                 element: (
-                                    <CodeSection
+                                    <Tags.CodeSection
                                         // eslint-disable-next-line @typescript-eslint/no-explicit-any
                                         lang={copyLang as any}
                                         code={token.text}
@@ -308,31 +305,31 @@ export const Document: React.FC<ContentProps> = ({
                 }
 
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                return <CodeSection lang={lang as any} code={token.text} {...configuration} />;
+                return <Tags.CodeSection lang={lang as any} code={token.text} {...configuration} />;
             case "escape":
                 return token.text;
             case "list":
                 const isTaskList = token.items.every((i: Tokens.ListItem) => i.task);
                 if (isTaskList) {
-                    const ListComponent = token.ordered ? TaskOrderedList : TaskUnorderedList;
+                    const ListComponent = token.ordered ? Tags.TaskOrderedList : Tags.TaskUnorderedList;
                     return (
                         <ListComponent start={token.start}>
                             {token.items.map((elem: Tokens.ListItem, index: number) => (
-                                <TaskListItem key={elem.raw + index} defaultChecked={elem.checked}>
+                                <Tags.TaskListItem key={elem.raw + index} defaultChecked={elem.checked}>
                                     {elem.tokens ? <DocumentToken token={elem.tokens} /> : elem.raw}
-                                </TaskListItem>
+                                </Tags.TaskListItem>
                             ))}
                         </ListComponent>
                     );
                 }
 
-                const ListComponent = token.ordered ? OrderedList : UnorderedList;
+                const ListComponent = token.ordered ? Tags.OrderedList : Tags.UnorderedList;
                 return (
                     <ListComponent start={token.start}>
                         {token.items.map((elem: Tokens.ListItem, index: number) => (
-                            <ListItem key={elem.raw + index}>
+                            <Tags.ListItem key={elem.raw + index}>
                                 {elem.tokens ? <DocumentToken token={elem.tokens} /> : elem.raw}
-                            </ListItem>
+                            </Tags.ListItem>
                         ))}
                     </ListComponent>
                 );
@@ -392,6 +389,7 @@ export const Document: React.FC<ContentProps> = ({
                         pathname={pathname}
                         uri={uri}
                         pages={pages}
+                        tags={Tags}
                     />
                 );
             case "text":
@@ -399,6 +397,8 @@ export const Document: React.FC<ContentProps> = ({
                     return <DocumentToken token={token.tokens || []} />;
                 }
                 return token.raw;
+            case "space":
+                return null;
             // Definitions should not be rendered, they are used only as comments or meta data
             case "def":
                 return null;

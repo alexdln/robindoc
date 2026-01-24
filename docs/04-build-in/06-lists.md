@@ -128,3 +128,4 @@ Result:
 - **Task List Detection**: A list is considered a task list only if **all** items have checkboxes. Mixed lists (some with checkboxes, some without) are rendered as regular lists
 - **Ordered List Start**: The `start` attribute is automatically extracted from the first list item's number
 - **Styling**: Lists can be customized through [theming](../03-customization/05-theming.md) using CSS classes like `r-list`, `r-list-item`, `r-task-list`, etc.
+- **Component Customization**: All list components (`OrderedList`, `UnorderedList`, `ListItem`, `TaskOrderedList`, `TaskUnorderedList`, `TaskListItem`) can be customized by overwriting tags. See [Tags](../03-customization/07-tags.md) for more details

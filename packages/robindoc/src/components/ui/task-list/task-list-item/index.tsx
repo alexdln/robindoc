@@ -5,7 +5,7 @@ import { ListItem } from "../../list";
 
 import "./task-list-item.scss";
 
-interface TaskListItemProps {
+export interface TaskListItemProps {
     className?: string;
     defaultChecked?: boolean;
 }

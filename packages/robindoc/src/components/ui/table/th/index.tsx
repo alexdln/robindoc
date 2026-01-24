@@ -3,7 +3,7 @@ import clsx from "clsx";
 
 import "./th.scss";
 
-interface ThProps {
+export interface ThProps {
     className?: string;
     align?: "left" | "center" | "right" | null;
 }

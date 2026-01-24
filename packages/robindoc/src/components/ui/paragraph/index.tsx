@@ -3,7 +3,7 @@ import clsx from "clsx";
 
 import "./paragraph.scss";
 
-interface ParagraphProps {
+export interface ParagraphProps {
     className?: string;
 }
 

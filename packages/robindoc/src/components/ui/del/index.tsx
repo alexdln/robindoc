@@ -1,7 +1,7 @@
 import React from "react";
 import clsx from "clsx";
 
-interface DelProps {
+export interface DelProps {
     className?: string;
 }
 

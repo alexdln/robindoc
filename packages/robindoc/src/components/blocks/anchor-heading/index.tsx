@@ -6,7 +6,7 @@ import { Heading } from "@src/components/ui/heading";
 
 import "./anchor-heading.scss";
 
-interface AnchorHeadingProps extends React.PropsWithChildren {
+export interface AnchorHeadingProps extends React.PropsWithChildren {
     id: string;
     component: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 }

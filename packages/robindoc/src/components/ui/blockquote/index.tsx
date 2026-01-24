@@ -7,7 +7,7 @@ import "./blockquote.scss";
 
 export type BlockquoteType = "note" | "tip" | "important" | "warning" | "caution";
 
-interface BlockquoteProps {
+export interface BlockquoteProps {
     className?: string;
     type?: BlockquoteType | null;
 }

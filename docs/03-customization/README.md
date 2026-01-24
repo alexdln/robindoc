@@ -1,6 +1,14 @@
 # Customization
 
-Page layout consists of [special blocks](./01-elements/README.md). For additional customization, you may use [special utilities](./02-tools/README.md).
+Robindoc provides multiple ways to customize your documentation:
+
+- **[Elements](./01-elements/README.md)** - Customize page layout components (Header, Footer, Sidebar, Page, etc.)
+- **[Tools](./02-tools/README.md)** - Utilities for page generation (getMetadata, getStaticParams, etc.)
+- **[Internationalization](./03-internationalization.md)** - Configure translations and multi-language support
+- **[Search](./04-search.md)** - Set up search functionality
+- **[Theming](./05-theming.md)** - Customize colors and visual appearance
+- **[Preferences](./06-preferences.md)** - Configure user preferences (theme, etc.)
+- **[Tags](./07-tags.md)** - Overwrite markdown element rendering components
 
 All styles are collected separately and are included once for the entire application from `robindoc/lib/styles.css`:
 

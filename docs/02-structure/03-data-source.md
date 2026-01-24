@@ -21,7 +21,7 @@ export const { Page, Sidebar } = initializeRobindoc(async () => ({
 }));
 ```
 
-Just specify the path to the data source (relative path or Git repository URL) in your structure, and Robindoc will determine the source itself. The built-in solutions are fully configured to generate all necessary data - including [automatic structure generation](./02-items.md), [fetching all available pages](../03-customization/02-tools/README.md), and [generating the content itself](../01-getting-started/README.md).
+Just specify the path to the data source (relative path or Git repository URL) in your structure, and Robindoc will determine the source itself. The built-in solutions are fully configured to generate all necessary data - including [automatic structure generation](./02-items.md), [fetching all available pages](../03-customization/02-tools/README.md), and [page rendering](../03-customization/01-elements/page.md).
 
 In the case of a remote Git repository, you can specify URLs for individual branches or commits. For both public and private projects. For private ones, you need to additionally provide a `gitToken`. It is also recommended to provide a `gitToken` for public projects, as GitHub has very low limits for anonymous requests.
 

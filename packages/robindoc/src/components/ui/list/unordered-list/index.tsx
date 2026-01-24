@@ -3,7 +3,7 @@ import clsx from "clsx";
 
 import "./unordered-list.scss";
 
-interface UnorderedListProps {
+export interface UnorderedListProps {
     className?: string;
 }
 
