@@ -26,6 +26,14 @@ export type ArticleProps = Partial<PaginationProps> &
     Omit<ContentsProps, "headings"> &
     ArticleContentProps;
 
+/**
+ * Article component for rendering markdown content.
+ * Handles parsing, rendering, and all page features (breadcrumbs, TOC, pagination).
+ *
+ * @see {@link https://robindoc.com/docs/customization/elements/page Page customization}
+ * @see {@link https://robindoc.com/docs/customization/tags Tags customization}
+ * @see {@link https://robindoc.com/docs/structure/data-source Data sources}
+ */
 export const Article: React.FC<ArticleProps> = async ({
     components,
     tags,

@@ -10,6 +10,11 @@ export type FooterProps = {
     hidePoweredBy?: boolean;
 };
 
+/**
+ * Footer component for documentation site.
+ *
+ * @see {@link https://robindoc.com/docs/customization/elements/footer Footer customization}
+ */
 export const Footer: React.FC<FooterProps> = ({ copyright, hidePoweredBy }) => (
     <footer className="r-footer">
         <Container className="r-footer-container">

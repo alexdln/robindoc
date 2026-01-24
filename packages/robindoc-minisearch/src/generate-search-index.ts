@@ -65,6 +65,24 @@ const parseMarkdownContent = (rawContent: string) => {
     };
 };
 
+/**
+ * Generates a static search index from all documentation pages.
+ * Processes markdown content and creates a MiniSearch index file.
+ *
+ * @example
+ * ```ts
+ * import { generateSearchIndex } from "@robindoc/minisearch";
+ * import { getStaticParams, getPageData } from "./robindoc";
+ *
+ * await generateSearchIndex(
+ *   getStaticParams,
+ *   getPageData,
+ *   "./public/search-index.json"
+ * );
+ * ```
+ *
+ * @see {@link https://robindoc.com/docs/customization/search Search integration}
+ */
 export const generateSearchIndex = async (
     getStaticParams: GetStaticParamsFunction,
     getPageData: GetPageDataFunction,
