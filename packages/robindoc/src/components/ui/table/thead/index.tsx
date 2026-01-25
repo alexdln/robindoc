@@ -1,8 +1,6 @@
 import React from "react";
 import clsx from "clsx";
 
-import "./thead.scss";
-
 export interface TheadProps {
     className?: string;
 }

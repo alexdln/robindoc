@@ -29,7 +29,7 @@ module.exports = {
         "shiki",
         "fs",
         "fs/promises",
-        "glob",
+        "tinyglobby",
         "clsx",
     ],
     plugins: [

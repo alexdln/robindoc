@@ -1,7 +1,10 @@
 .r-td {
-  padding: 6px 12px;
-  border-bottom: 1px solid var(--r-main-400);
+  padding: 8px 12px;
   border-collapse: collapse;
+
+  &:not(:last-child) {
+    border-right: 1px solid var(--r-main-200);
+  }
 }
 
 .r-td_left {

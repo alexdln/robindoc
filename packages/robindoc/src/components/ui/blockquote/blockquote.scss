@@ -1,13 +1,14 @@
 .r-blockquote {
-  background-color: var(--r-main-100);
-  padding: 8px 12px 8px 20px;
-  border-left: 6px solid var(--r-main-600);
+  padding: 4px 12px 4px 20px;
+  border: 4px solid var(--r-main-100);
+  border-left: 4px solid var(--r-main-600);
   border-top-right-radius: 2px;
   border-bottom-right-radius: 2px;
   font: inherit;
   margin-inline: 0;
   margin-block-start: 1em;
   margin-block-end: 1em;
+  border-radius: 8px;
 }
 
 .r-blockquote-title {
