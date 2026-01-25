@@ -5,7 +5,12 @@
 }
 
 .r-footer-container.r-footer-container {
-  padding: 16px 24px;
+  padding: 16px 12px;
+
+  @media screen and (width >=vars.$md) {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
 }
 
 .r-footer-row {
