@@ -1,5 +1,5 @@
 import { readFile } from "fs/promises";
-import { glob } from "glob";
+import { glob } from "tinyglobby";
 import path from "path";
 
 import { type BranchFiles } from "../types/content";
@@ -56,7 +56,7 @@ export class FileSystemProvider extends BaseProvider {
 
     private async loadFiles(pathname?: string) {
         const pathnameClean = pathname?.replace(/^\//, "");
-        const files = await glob(["**/*.{md,mdx}", "**/structure.json"], { cwd: this.sourceRoot, posix: true });
+        const files = await glob(["**/*.{md,mdx}", "**/structure.json"], { cwd: this.sourceRoot });
 
         const fileTree = files.reduce<BranchFiles>(
             (acc, item) => {
