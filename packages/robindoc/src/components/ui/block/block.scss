@@ -1,4 +1,5 @@
 .r-block {
+  position: relative;
   width: 100%;
   overflow: auto;
   margin-block-start: 12px;
@@ -6,4 +7,5 @@
   scrollbar-width: thin;
   scrollbar-color: var(--r-main-200) transparent;
   box-sizing: border-box;
+  z-index: 1;
 }
