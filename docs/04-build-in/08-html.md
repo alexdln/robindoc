@@ -35,10 +35,10 @@ Robindoc allows you to use custom React components through HTML syntax. Componen
 - **Warnings**: Unknown or incorrectly named components trigger console warnings and are not rendered
 
 ```md
-<!-- ✅ Correct -->
+<!-- Correct -->
 <MyComponent />
 
-<!-- ❌ Incorrect - will show warning -->
+<!-- Incorrect - will show warning -->
 <myComponent />
 <my-component />
 ```

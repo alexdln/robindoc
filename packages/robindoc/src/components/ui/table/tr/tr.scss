@@ -1,0 +1,7 @@
+.r-tr {
+  border-collapse: collapse;
+
+  &:not(:first-child) {
+    border-top: 1px solid var(--r-main-200);
+  }
+}

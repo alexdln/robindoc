@@ -1,6 +1,20 @@
 .r-table {
+  position: relative;
   min-width: 100%;
   text-align: left;
   border-collapse: collapse;
   box-sizing: border-box;
+  background-color: var(--r-main-50);
+  margin: 4px;
+  border-radius: 6px;
+
+  &::before {
+    content: "";
+    inset: -4px;
+    position: absolute;
+    background-color: var(--r-main-100);
+    z-index: -1;
+    border-radius: 8px;
+    border: 1px solid var(--r-main-200);
+  }
 }

@@ -1,6 +1,8 @@
 import React from "react";
 import clsx from "clsx";
 
+import "./tr.scss";
+
 export interface TrProps {
     className?: string;
 }
