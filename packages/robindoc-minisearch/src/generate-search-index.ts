@@ -118,7 +118,7 @@ export const generateSearchIndex = async (
 
     const searchIndex = new MiniSearch<SearchIndexItem>({
         fields: ["title", "content", "headings", "description"],
-        storeFields: ["id", "title", "href", "headings", "description"],
+        storeFields: ["id", "title", "href", "headings", "description", "content"],
         searchOptions: {
             boost: { title: 5, headings: 3, description: 2 },
             fuzzy: 0.2,
