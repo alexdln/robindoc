@@ -7,10 +7,18 @@ import matter from "gray-matter";
 import { type GetPageDataFunction, type GetStaticParamsFunction, type SearchIndexItem } from "./types";
 
 const parseTokenText = (token: Token): string => {
-    if (!token) return "";
+    if (!token || token.type === "html") return "";
 
     if ("tokens" in token) {
         return token.tokens?.map((el: Token) => parseTokenText(el)).join("") || "";
+    }
+
+    if ("items" in token) {
+        return token.items?.map((el: Token) => parseTokenText(el)).join(" ") || "";
+    }
+
+    if ("rows" in token) {
+        return token.rows?.map((el: Token[]) => el.map((el: Token) => parseTokenText(el)).join(" ")).join(" ") || "";
     }
 
     if ("text" in token) {
