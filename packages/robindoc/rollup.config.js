@@ -18,7 +18,9 @@ module.exports = {
         },
     ],
     external: [
+        "hast-util-to-jsx-runtime",
         "react",
+        "react/jsx-runtime",
         "react-dom",
         "html-react-parser",
         "gray-matter",
@@ -27,6 +29,7 @@ module.exports = {
         "github-slugger",
         "path",
         "shiki",
+        "shiki/bundle/web",
         "fs",
         "fs/promises",
         "tinyglobby",
