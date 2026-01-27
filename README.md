@@ -11,7 +11,7 @@ Read the documentation in a convenient interface at [robindoc.com/docs](https://
 
 <!---robin PackageLinks /-->
 
-Robindoc is a framework for automatically creating documentation websites based on markdown files, built on React.js Server Components.
+Robindoc is a framework for automatically creating documentation websites based on markdown files, built on React Server Components.
 
 ```tsx filename="app/docs/page.tsx" switcher tab="TypeScript" clone="jsx|JavaScript|app/docs/page.jsx"
 const DocumentationPage = () => (
