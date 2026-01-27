@@ -7,7 +7,12 @@ const { default: preserveDirectives } = require("rollup-preserve-directives");
 const copy = require("rollup-plugin-copy");
 
 module.exports = {
-    input: ["src/index.tsx", "src/client.tsx"],
+    input: [
+        "src/index.tsx",
+        "src/client.tsx",
+        "src/components/ui/code-block/index.client.tsx",
+        "src/components/ui/code-block/index.isomorphic.tsx",
+    ],
     output: [
         {
             dir: "lib",
