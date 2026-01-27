@@ -1,4 +1,5 @@
 import React from "react";
+
 import { TabsHeader, type TabsHeaderProps } from "./tabs-header";
 import { TabsStyles } from "./tabs-styles";
 

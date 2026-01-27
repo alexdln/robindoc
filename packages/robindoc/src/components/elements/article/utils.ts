@@ -114,17 +114,21 @@ export const parseBlockqoute = (token: Tokens.Blockquote | Tokens.Generic) => {
     if (typeMatch) {
         const [raw, type] = typeMatch;
         const newToken = { ...token, raw: token.raw.substring(raw.length) };
-        if (newToken.tokens) {
-            const firstToken = { ...newToken.tokens[0] } as Tokens.Paragraph;
+        const newTokenTokens = [...(token.tokens || [])];
+        if (newTokenTokens) {
+            const firstToken = { ...newTokenTokens[0] } as Tokens.Paragraph;
             firstToken.raw = firstToken.raw.substring(type.length + 4);
             firstToken.text = firstToken.text.substring(type.length + 4);
-            if (firstToken.tokens[0]) {
-                const firstSubtoken = { ...firstToken.tokens[0] } as Tokens.Paragraph;
+            newTokenTokens[0] = firstToken;
+            const firstTokenTokens = [...firstToken.tokens];
+            if (firstTokenTokens[0]) {
+                const firstSubtoken = { ...firstTokenTokens[0] } as Tokens.Paragraph;
                 firstSubtoken.raw = firstSubtoken.raw.substring(type.length + 4);
                 firstSubtoken.text = firstSubtoken.text.substring(type.length + 4);
-                firstToken.tokens[0] = firstSubtoken;
+                firstTokenTokens[0] = firstSubtoken;
             }
-            newToken.tokens[0] = firstToken;
+            firstToken.tokens = firstTokenTokens;
+            newToken.tokens = newTokenTokens;
         }
 
         return {

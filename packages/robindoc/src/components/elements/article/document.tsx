@@ -1,7 +1,14 @@
 import { type Token, type Tokens, type TokensList } from "marked";
 import { type BundledLanguage } from "shiki";
 import React from "react";
-import parse, { attributesToProps, DOMNode, domToReact, HTMLReactParserOptions, Text } from "html-react-parser";
+import parse, {
+    attributesToProps,
+    domToReact,
+    Text,
+    type DOMNode,
+    type HTMLReactParserOptions,
+} from "html-react-parser";
+import clsx from "clsx";
 
 import { type BaseProvider } from "@src/core/providers/base";
 import { type Components, type RobinProps } from "@src/core/types/content";
@@ -10,7 +17,6 @@ import { type PagesType } from "./types";
 import {
     formatId,
     formatLinkHref,
-    isNewCodeToken,
     parseBlockqoute,
     parseCodeLang,
     parseMarkdown,
@@ -18,6 +24,7 @@ import {
     type AnchorData,
 } from "./utils";
 import { DEFAULT_TAGS } from "./tags";
+import { TabsProps } from "@src/components/ui/tabs";
 
 interface DocumentJSXProps extends Omit<DocumentProps, "tokens" | "headings"> {
     raw: string;
@@ -114,25 +121,9 @@ export const Document: React.FC<DocumentProps> = ({
         | null
         | { props: RobinProps; childTokens: Token[]; componentName: string; type: "base" }
         | { type: "dummy" } = null;
-    let codeQueue: { [lang: string]: { element: React.ReactNode; tabName: string } } = {};
-    const insertedCodeKeys: string[] = [];
+    const insertedCodeKeys = new Set();
     const DocumentToken: React.FC<{ token: Token | Token[] }> = ({ token }) => {
         if (!token) return null;
-
-        if (isNewCodeToken(token, codeQueue)) {
-            const tabsData = codeQueue;
-            codeQueue = {};
-            const tabsKey = Object.keys(tabsData).sort().join("-");
-            const isInsertedKey = insertedCodeKeys.includes(tabsKey);
-            if (!isInsertedKey) insertedCodeKeys.push(tabsKey);
-
-            return (
-                <>
-                    <Tags.Tabs type="code" tabsData={tabsData} insertStyles={!isInsertedKey} blockKey={tabsKey} />
-                    <DocumentToken token={token} />
-                </>
-            );
-        }
 
         if (robin) {
             if (!Array.isArray(token) && token.type === "html" && token.raw.trim() === "<!---/robin-->") {
@@ -162,7 +153,27 @@ export const Document: React.FC<DocumentProps> = ({
         }
 
         if (Array.isArray(token)) {
-            return token.map((t, index) => <DocumentToken token={t} key={(t as Tokens.Text).raw + index} />);
+            return token.reduce<{ list: React.ReactNode[]; codeQueue: Token[] }>(
+                (acc, t, index) => {
+                    if (t.type === "code" && parseCodeLang(t.lang).configuration.switcher) {
+                        acc.codeQueue.push(t);
+                        return acc;
+                    }
+                    if (acc.codeQueue.length > 0 && t.type !== "space") {
+                        const collectedRaw = acc.codeQueue.map((t) => t.raw).join("");
+                        acc.list.push(
+                            <DocumentToken
+                                token={{ type: "code-group", tabs: acc.codeQueue, raw: collectedRaw }}
+                                key={collectedRaw + index}
+                            />,
+                        );
+                        acc.codeQueue = [];
+                    }
+                    acc.list.push(<DocumentToken token={t} key={(t as Tokens.Text).raw + index} />);
+                    return acc;
+                },
+                { list: [], codeQueue: [] },
+            ).list;
         }
 
         switch (token.type) {
@@ -269,43 +280,59 @@ export const Document: React.FC<DocumentProps> = ({
                     return <Tags.CodeBlock code={raw} lang={lang as BundledLanguage} inline />;
                 }
 
-                return <Tags.CodeSpan code={inlineCode} />;
-            case "code":
-                const { lang, configuration } = parseCodeLang(token.lang);
-                if (configuration.switcher && lang) {
+                return <Tags.CodeSpan>{inlineCode}</Tags.CodeSpan>;
+            case "code-group":
+                const tabsData = token.tabs.reduce((acc: TabsProps["tabsData"], t: Tokens.Code) => {
+                    const { lang, configuration } = parseCodeLang(t.lang || "");
                     const tabKey = typeof configuration.tab === "string" ? formatId(configuration.tab) : lang;
-                    codeQueue[tabKey] = {
+                    acc[tabKey] = {
                         tabName: (configuration.tab || lang).toString(),
-                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                        element: <Tags.CodeSection lang={lang as any} code={token.text} {...configuration} />,
+                        element: <DocumentToken token={t} key={t.raw} />,
                     };
-
                     if (typeof configuration.clone === "string") {
                         const copies = configuration.clone.split(",");
 
                         copies.forEach((copy) => {
-                            const [copyLang, copyTab, copyFileName] = copy.split("|");
+                            const [copyLang, copyTab, filename] = copy.split("|");
                             const copyTabKey = typeof copyTab === "string" ? formatId(copyTab) : copyLang;
-
-                            codeQueue[copyTabKey] = {
-                                tabName: (copyTab || copyLang).toString(),
+                            acc[copyTabKey] = {
+                                tabName: (configuration.tab || lang).toString(),
                                 element: (
-                                    <Tags.CodeSection
-                                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                                        lang={copyLang as any}
-                                        code={token.text}
-                                        {...configuration}
-                                        filename={copyFileName || (configuration.filename as string)}
+                                    <DocumentToken
+                                        token={{
+                                            ...t,
+                                            lang: `${copyLang} switcher tab="${copyTabKey}" filename="${filename}"`,
+                                        }}
+                                        key={t.raw}
                                     />
                                 ),
                             };
                         });
                     }
-                    return null;
-                }
+                    return acc;
+                }, []);
+                const tabsKey = Object.keys(tabsData).sort().join("-");
+                insertedCodeKeys.add(tabsKey);
+                return (
+                    <Tags.Tabs
+                        type="code"
+                        tabsData={tabsData}
+                        insertStyles={!insertedCodeKeys.has(tabsKey) || "useState" in React}
+                        blockKey={tabsKey}
+                    />
+                );
+            case "code":
+                const { lang, configuration } = parseCodeLang(token.lang);
 
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                return <Tags.CodeSection lang={lang as any} code={token.text} {...configuration} />;
+                return (
+                    <Tags.CodeSection code={token.text} {...configuration}>
+                        <Tags.CodeBlock
+                            className={clsx("r-code-section-block", !configuration.filename && "_space-right")}
+                            code={token.text}
+                            lang={lang as BundledLanguage}
+                        />
+                    </Tags.CodeSection>
+                );
             case "escape":
                 return token.text;
             case "list":
@@ -416,6 +443,5 @@ export const Document: React.FC<DocumentProps> = ({
         }
     };
 
-    tokens.push({ type: "text", raw: "" });
-    return <DocumentToken token={tokens} />;
+    return <DocumentToken token={[...tokens, { type: "text", raw: "" }]} />;
 };

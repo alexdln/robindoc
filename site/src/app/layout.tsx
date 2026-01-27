@@ -33,6 +33,7 @@ const RootLayout: React.FC<React.PropsWithChildren> = ({ children }) => (
                         links={[
                             { href: "/docs", title: "Docs" },
                             { href: "/showcase", title: "Showcase" },
+                            { href: "/preview", title: "Preview" },
                         ]}
                         logo={<Logo />}
                         git="https://github.com/alexdln/robindoc"

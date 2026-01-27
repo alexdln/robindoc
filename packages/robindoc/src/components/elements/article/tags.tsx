@@ -3,7 +3,7 @@ import { CodeSection } from "@src/components/blocks/code-section";
 import { NavContentLink } from "@src/components/blocks/nav-content-link";
 import { Block } from "@src/components/ui/block";
 import { Blockquote } from "@src/components/ui/blockquote";
-import { CodeBlock } from "@src/components/ui/code-block";
+import { CodeBlock } from "@src/components/ui/code-block/index.server";
 import { CodeSpan } from "@src/components/ui/code-span";
 import { Del } from "@src/components/ui/del";
 import { Em } from "@src/components/ui/em";

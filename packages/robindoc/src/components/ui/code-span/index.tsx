@@ -3,11 +3,12 @@ import clsx from "clsx";
 
 import "./code-span.scss";
 
-export interface CodeSpanProps {
-    code: string;
-    className?: string;
-}
+export type CodeSpanProps = React.HTMLAttributes<HTMLElement>;
 
-export const CodeSpan: React.FC<CodeSpanProps> = ({ className, code }) => {
-    return <code className={clsx("r-code-span", className)}>{code}</code>;
+export const CodeSpan: React.FC<CodeSpanProps> = ({ className, children, ...props }) => {
+    return (
+        <code className={clsx("r-code-span", className)} {...props}>
+            {children}
+        </code>
+    );
 };

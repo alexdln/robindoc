@@ -1,18 +1,18 @@
 import React from "react";
-import clsx from "clsx";
 
-import { CodeBlock, type CodeBlockProps } from "@src/components/ui/code-block";
+import { type CodeBlockProps } from "@src/components/ui/code-block/index.server";
 import { CopyButton, type CopyButtonProps } from "@src/components/ui/copy-button";
 import { CopyText, type CopyTextProps } from "../../ui/copy-text";
 
 import "./code-section.scss";
 
-export interface CodeSectionProps extends CodeBlockProps {
+export interface CodeSectionProps extends Pick<CodeBlockProps, "code"> {
     filename?: string;
     translations?: CopyButtonProps["translations"] & CopyTextProps["translations"];
+    children?: React.ReactNode;
 }
 
-export const CodeSection: React.FC<CodeSectionProps> = ({ filename, code, ...props }) => (
+export const CodeSection: React.FC<CodeSectionProps> = ({ filename, code, children }) => (
     <div className="r-code-section">
         {filename ? (
             <div className="r-code-section-header">
@@ -22,6 +22,6 @@ export const CodeSection: React.FC<CodeSectionProps> = ({ filename, code, ...pro
         ) : (
             <CopyButton raw={code} className="r-code-section-copy" />
         )}
-        <CodeBlock className={clsx("r-code-section-block", !filename && "_space-right")} code={code} {...props} />
+        {children}
     </div>
 );

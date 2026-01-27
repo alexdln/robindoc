@@ -1,9 +1,9 @@
-import React, { cache } from "react";
+import React, { cache, use } from "react";
 import { createHighlighter, type BuiltinLanguage } from "shiki";
 import clsx from "clsx";
 
-import { githubDynamic } from "./theme";
 import { CodeSpan } from "../code-span";
+import { githubDynamic } from "./theme";
 
 import "./code-block.scss";
 
@@ -24,6 +24,7 @@ const highlighterPromise = initBaseHighlighter();
 
 const getHighlighter = cache(async (language: BuiltinLanguage) => {
     const highlighter = await highlighterPromise;
+    highlighter.loadTheme(githubDynamic);
     const loadedLanguages = highlighter.getLoadedLanguages();
 
     if (!loadedLanguages.includes(language)) {
@@ -33,9 +34,8 @@ const getHighlighter = cache(async (language: BuiltinLanguage) => {
     return highlighter;
 });
 
-export const CodeBlock: React.FC<CodeBlockProps> = async ({ code, lang, className, inline }) => {
-    const highlighter = await getHighlighter(lang);
-    await highlighter.loadTheme(githubDynamic);
+export const CodeBlock: React.FC<CodeBlockProps> = ({ code, lang, className, inline }) => {
+    const highlighter = use(getHighlighter(lang));
 
     const html = highlighter.codeToHtml(code, {
         lang,
@@ -43,14 +43,7 @@ export const CodeBlock: React.FC<CodeBlockProps> = async ({ code, lang, classNam
         structure: "inline",
     });
 
-    if (inline) return <CodeSpan code={html} />;
+    if (inline) return <CodeSpan dangerouslySetInnerHTML={{ __html: html }} />;
 
-    const Component = inline ? "code" : "pre";
-
-    return (
-        <Component
-            className={clsx(inline ? "r-code-span" : "r-code-block", className)}
-            dangerouslySetInnerHTML={{ __html: html }}
-        />
-    );
+    return <pre className={clsx("r-code-block", className)} dangerouslySetInnerHTML={{ __html: html }} />;
 };
