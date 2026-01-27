@@ -18,6 +18,7 @@ import {
     type AnchorData,
 } from "./utils";
 import { DEFAULT_TAGS } from "./tags";
+import clsx from "clsx";
 
 interface DocumentJSXProps extends Omit<DocumentProps, "tokens" | "headings"> {
     raw: string;
@@ -269,15 +270,23 @@ export const Document: React.FC<DocumentProps> = ({
                     return <Tags.CodeBlock code={raw} lang={lang as BundledLanguage} inline />;
                 }
 
-                return <Tags.CodeSpan code={inlineCode} />;
+                return <Tags.CodeSpan>{inlineCode}</Tags.CodeSpan>;
             case "code":
                 const { lang, configuration } = parseCodeLang(token.lang);
                 if (configuration.switcher && lang) {
                     const tabKey = typeof configuration.tab === "string" ? formatId(configuration.tab) : lang;
                     codeQueue[tabKey] = {
                         tabName: (configuration.tab || lang).toString(),
-                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                        element: <Tags.CodeSection lang={lang as any} code={token.text} {...configuration} />,
+
+                        element: (
+                            <Tags.CodeSection code={token.text} {...configuration}>
+                                <Tags.CodeBlock
+                                    className={clsx("r-code-section-block", !configuration.filename && "_space-right")}
+                                    code={token.text}
+                                    lang={lang as BundledLanguage}
+                                />
+                            </Tags.CodeSection>
+                        ),
                     };
 
                     if (typeof configuration.clone === "string") {
@@ -286,17 +295,18 @@ export const Document: React.FC<DocumentProps> = ({
                         copies.forEach((copy) => {
                             const [copyLang, copyTab, copyFileName] = copy.split("|");
                             const copyTabKey = typeof copyTab === "string" ? formatId(copyTab) : copyLang;
+                            const filename = copyFileName || (configuration.filename as string);
 
                             codeQueue[copyTabKey] = {
                                 tabName: (copyTab || copyLang).toString(),
                                 element: (
-                                    <Tags.CodeSection
-                                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                                        lang={copyLang as any}
-                                        code={token.text}
-                                        {...configuration}
-                                        filename={copyFileName || (configuration.filename as string)}
-                                    />
+                                    <Tags.CodeSection code={token.text} {...configuration} filename={filename}>
+                                        <Tags.CodeBlock
+                                            className={clsx("r-code-section-block", !filename && "_space-right")}
+                                            code={token.text}
+                                            lang={lang as BundledLanguage}
+                                        />
+                                    </Tags.CodeSection>
                                 ),
                             };
                         });
@@ -304,8 +314,15 @@ export const Document: React.FC<DocumentProps> = ({
                     return null;
                 }
 
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                return <Tags.CodeSection lang={lang as any} code={token.text} {...configuration} />;
+                return (
+                    <Tags.CodeSection code={token.text} {...configuration}>
+                        <Tags.CodeBlock
+                            className={clsx("r-code-section-block", !configuration.filename && "_space-right")}
+                            code={token.text}
+                            lang={lang as BundledLanguage}
+                        />
+                    </Tags.CodeSection>
+                );
             case "escape":
                 return token.text;
             case "list":
