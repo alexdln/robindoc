@@ -38,7 +38,8 @@
   "dependencies": {
     "minisearch": "7.2.0",
     "marked": "17.0.1",
-    "gray-matter": "^4.0.3"
+    "gray-matter": "^4.0.3",
+    "dotenv": "^16.4.7"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "29.0.0",
