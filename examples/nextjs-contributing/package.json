@@ -9,17 +9,17 @@
     "start": "next start"
   },
   "dependencies": {
-    "match-sorter": "8.2.0",
-    "next": "16.1.1",
-    "react": "19.2.3",
-    "react-dom": "19.2.3",
-    "robindoc": "latest",
     "@robindoc/minisearch": "latest",
-    "@robindoc/next": "latest"
+    "@robindoc/next": "latest",
+    "match-sorter": "8.2.0",
+    "next": "16.1.6",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "robindoc": "latest"
   },
   "devDependencies": {
-    "@types/node": "^25.0.8",
-    "@types/react": "19.2.8",
+    "@types/node": "^25.1.0",
+    "@types/react": "19.2.10",
     "@types/react-dom": "19.2.3",
     "typescript": "5.9.3"
   }
