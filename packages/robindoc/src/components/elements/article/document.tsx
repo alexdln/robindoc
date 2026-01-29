@@ -312,12 +312,13 @@ export const Document: React.FC<DocumentProps> = ({
                     return acc;
                 }, []);
                 const tabsKey = Object.keys(tabsData).sort().join("-");
+                const isInsertedBefore = insertedCodeKeys.has(tabsKey);
                 insertedCodeKeys.add(tabsKey);
                 return (
                     <Tags.Tabs
                         type="code"
                         tabsData={tabsData}
-                        insertStyles={!insertedCodeKeys.has(tabsKey) || "useState" in React}
+                        insertStyles={!isInsertedBefore || "useState" in React}
                         blockKey={tabsKey}
                     />
                 );
