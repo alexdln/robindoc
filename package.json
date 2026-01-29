@@ -33,6 +33,7 @@
     "nextjs-contributing>robindoc": "workspace:*",
     "nextjs-contributing>@robindoc/minisearch": "workspace:*",
     "nextjs-contributing>@robindoc/next": "workspace:*",
+    "site>@robindoc/next": "workspace:*",
     "@robindoc/next>robindoc": "workspace:*"
   },
   "license": "MIT",
