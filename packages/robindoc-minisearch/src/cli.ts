@@ -6,8 +6,11 @@ import { config as dotenvConfig } from "dotenv";
 import { generateSearchIndex } from "./generate-search-index";
 import { pathToFileURL } from "node:url";
 
-dotenvConfig({ path: resolve(process.cwd(), ".env"), override: true });
-dotenvConfig({ path: resolve(process.cwd(), ".env.local"), override: true });
+dotenvConfig({
+    path: [resolve(process.cwd(), ".env"), resolve(process.cwd(), ".env.local")],
+    override: true,
+    quiet: true,
+});
 
 const args = process.argv.slice(2);
 const templateIndex = args.indexOf("--template");
