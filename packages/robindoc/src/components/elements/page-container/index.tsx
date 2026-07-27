@@ -8,7 +8,7 @@ import "./page-container.scss";
  * Generic page container component.
  * Provides basic page layout structure.
  *
- * @see {@link https://robindoc.com/docs/customization/elements/containers Containers}
+ * @see {@link https://robindoc.dev/docs/customization/elements/containers Containers}
  */
 export const PageContainer: React.FC<React.PropsWithChildren> = ({ children }) => {
     return (

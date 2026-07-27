@@ -81,12 +81,12 @@ npm start
 ## Learn More
 
 - Read [How It Works](./how-it-works.md) to understand the app structure
-- Visit the [RobinDoc documentation](https://robindoc.com/docs) for advanced features
-- Check out [configuration options](https://robindoc.com/docs/02-structure) for custom setups
+- Visit the [RobinDoc documentation](https://robindoc.dev/docs) for advanced features
+- Check out [configuration options](https://robindoc.dev/docs/02-structure) for custom setups
 
 ## Need Help?
 
-- Check the [RobinDoc documentation](https://robindoc.com/docs)
+- Check the [RobinDoc documentation](https://robindoc.dev/docs)
 - Review the [example implementations](https://github.com/your-org/robindoc/tree/main/examples)
 - Open an issue on [GitHub](https://github.com/your-org/robindoc/issues)
 

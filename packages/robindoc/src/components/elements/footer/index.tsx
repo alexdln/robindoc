@@ -13,7 +13,7 @@ export type FooterProps = {
 /**
  * Footer component for documentation site.
  *
- * @see {@link https://robindoc.com/docs/customization/elements/footer Footer customization}
+ * @see {@link https://robindoc.dev/docs/customization/elements/footer Footer customization}
  */
 export const Footer: React.FC<FooterProps> = ({ copyright, hidePoweredBy }) => (
     <footer className="r-footer">
@@ -27,7 +27,7 @@ export const Footer: React.FC<FooterProps> = ({ copyright, hidePoweredBy }) => (
                     <div className="r-powered">
                         Powered by{" "}
                         <a
-                            href="https://robindoc.com"
+                            href="https://robindoc.dev"
                             className="r-powered-link"
                             target="_blank"
                             rel="noopener noreferrer"

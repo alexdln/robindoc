@@ -94,7 +94,7 @@ In some cases, you might want to hide content on the site. For example, so that 
 
 <!---robin-->
 
-Read the documentation in a convenient interface at [robindoc.com/docs](https://robindoc.com/docs)
+Read the documentation in a convenient interface at [robindoc.dev/docs](https://robindoc.dev/docs)
 
 <!---/robin-->
 ```

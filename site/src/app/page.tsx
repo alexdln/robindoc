@@ -7,8 +7,6 @@ import { Benefits } from "../components/sections/benefits";
 import { TechnicalHighlights } from "../components/sections/technical-highlights";
 import Showcases from "../components/sections/showcases";
 
-import "./home.scss";
-
 const Home = () => {
     return (
         <PageContainer>

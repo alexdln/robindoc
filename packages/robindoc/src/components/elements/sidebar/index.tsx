@@ -68,7 +68,7 @@ export type SidebarProps = {
  * Sidebar component for documentation navigation.
  * Renders a hierarchical navigation menu based on the documentation structure.
  *
- * @see {@link https://robindoc.com/docs/customization/elements/sidebar Sidebar customization}
+ * @see {@link https://robindoc.dev/docs/customization/elements/sidebar Sidebar customization}
  */
 export const Sidebar: React.FC<SidebarProps> = ({ tree, translations }) => {
     if (!tree?.length) return <div className="r-sidebar" />;

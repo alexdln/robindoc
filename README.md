@@ -5,7 +5,7 @@
 
 <!---robin-->
 
-Read the documentation in a convenient interface at [robindoc.com/docs](https://robindoc.com/docs)
+Read the documentation in a convenient interface at [robindoc.dev/docs](https://robindoc.dev/docs)
 
 <!---/robin-->
 

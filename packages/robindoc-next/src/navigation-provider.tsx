@@ -19,7 +19,7 @@ import { NavigationContext } from "robindoc/lib/client";
  * }
  * ```
  *
- * @see {@link https://robindoc.com/docs/getting-started/nextjs-integration Next.js integration}
+ * @see {@link https://robindoc.dev/docs/getting-started/nextjs-integration Next.js integration}
  */
 export const NavigationProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
     return <NavigationContext.Provider value={{ usePathname, link: Link }}>{children}</NavigationContext.Provider>;

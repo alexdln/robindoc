@@ -6,7 +6,7 @@ const sitemap = async (): Promise<MetadataRoute.Sitemap> => {
     staticParams.push({ segments: [] });
 
     return staticParams.map((staticParam) => ({
-        url: `https://nextjs-dev.robindoc.com/${staticParam.segments.join("/")}`,
+        url: `https://nextjs-dev.robindoc.dev/${staticParam.segments.join("/")}`,
         lastModified: new Date(),
         changeFrequency: "daily",
         priority: 0.7,

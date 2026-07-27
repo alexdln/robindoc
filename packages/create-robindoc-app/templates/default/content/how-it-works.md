@@ -173,5 +173,5 @@ Override CSS variables in `globals.css`:
 
 - Add more Markdown files to `content/`
 - Customize the header and footer in `src/app/layout.tsx`
-- Check out [customization options](https://robindoc.com/docs/customization) for more personalizations
-- Explore [RobinDoc documentation](https://robindoc.com/docs) for advanced features
+- Check out [customization options](https://robindoc.dev/docs/customization) for more personalizations
+- Explore [RobinDoc documentation](https://robindoc.dev/docs) for advanced features

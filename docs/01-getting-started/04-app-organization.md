@@ -398,7 +398,7 @@ const sitemap = async (): Promise<MetadataRoute.Sitemap> => {
   const staticParams = await getStaticParams();
 
   return staticParams.map(({ segments }) => ({
-    url: `https://robindoc.com${segments.join("/")}`,
+    url: `https://robindoc.dev${segments.join("/")}`,
     lastModified: new Date(),
     changeFrequency: "daily",
     priority: 0.7,
@@ -416,7 +416,7 @@ const sitemap = async () => {
   const staticParams = await getStaticParams();
 
   return staticParams.map(({ segments }) => ({
-    url: `https://robindoc.com/${segments.join('/')}`,
+    url: `https://robindoc.dev/${segments.join('/')}`,
     lastModified: new Date(),
     changeFrequency: "daily",
     priority: 0.7,
