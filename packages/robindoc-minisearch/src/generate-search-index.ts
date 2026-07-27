@@ -89,7 +89,7 @@ const parseMarkdownContent = (rawContent: string) => {
  * );
  * ```
  *
- * @see {@link https://robindoc.com/docs/customization/search Search integration}
+ * @see {@link https://robindoc.dev/docs/customization/search Search integration}
  */
 export const generateSearchIndex = async (
     getStaticParams: GetStaticParamsFunction,

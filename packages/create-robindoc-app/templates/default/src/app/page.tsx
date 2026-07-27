@@ -12,7 +12,7 @@ export default function Home() {
                     <p>Learn how this starter app works and customize it to your needs</p>
                 </Link>
 
-                <a href="https://robindoc.com/docs" target="_blank" rel="noopener noreferrer" className="home-card">
+                <a href="https://robindoc.dev/docs" target="_blank" rel="noopener noreferrer" className="home-card">
                     <h3>RobinDoc Documentation</h3>
                     <p>Explore advanced features, configuration options, and customization guides</p>
                 </a>

@@ -33,7 +33,7 @@ const Showcases = () => (
                 <h2 className="showcases-product">Nimpl</h2>
             </a>
             <a
-                href="https://nextjs-dev.robindoc.com/"
+                href="https://nextjs-dev.robindoc.dev/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="showcases-card"

@@ -4,7 +4,7 @@ import { type Structure } from "./structure";
  * Structure template for documentation initialization.
  * Can be a static structure object or an async function that returns one.
  *
- * @see {@link https://robindoc.com/docs/structure/structure Structure documentation}
+ * @see {@link https://robindoc.dev/docs/structure/structure Structure documentation}
  */
 export type StructureTemplate = Structure | (() => Structure | Promise<Structure>);
 

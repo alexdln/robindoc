@@ -24,7 +24,7 @@ interface RobinProviderProps {
  * </RobinProvider>
  * ```
  *
- * @see {@link https://robindoc.com/docs/customization/elements Elements customization}
+ * @see {@link https://robindoc.dev/docs/customization/elements Elements customization}
  */
 export const RobinProvider: React.FC<React.PropsWithChildren<RobinProviderProps>> = ({
     children,

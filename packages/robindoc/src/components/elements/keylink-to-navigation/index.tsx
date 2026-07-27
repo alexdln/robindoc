@@ -15,7 +15,7 @@ export type KeylinkToNavigationProps = {
  * Keyboard-accessible link to return to navigation.
  * Provides quick navigation for keyboard and screen reader users.
  *
- * @see {@link https://robindoc.com/docs/customization/elements/keylinks Keylinks}
+ * @see {@link https://robindoc.dev/docs/customization/elements/keylinks Keylinks}
  */
 export const KeylinkToNavigation: React.FC<KeylinkToNavigationProps> = ({ translations }) => {
     const { returnToNavigation = "Return to navigation" } = translations || {};

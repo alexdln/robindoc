@@ -14,7 +14,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-    metadataBase: new URL("https://robindoc.com"),
+    metadataBase: new URL("https://robindoc.dev"),
     title: "Robindoc",
     description:
         "Robindoc is a framework for automatically creating documentation websites based on markdown files. Write the documentation however you want, Robindoc will build it on top. Fast, simple, easy",

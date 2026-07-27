@@ -35,8 +35,8 @@ export type HeaderProps = {
 /**
  * Header component for documentation site navigation.
  *
- * @see {@link https://robindoc.com/docs/customization/elements/header Header customization}
- * @see {@link https://robindoc.com/docs/customization/search Search integration}
+ * @see {@link https://robindoc.dev/docs/customization/elements/header Header customization}
+ * @see {@link https://robindoc.dev/docs/customization/search Search integration}
  */
 export const Header: React.FC<HeaderProps> = ({ logo, versions, locales, links = [], git, searcher, translations }) => {
     const { menu, ...searchTranslations } = translations || {};

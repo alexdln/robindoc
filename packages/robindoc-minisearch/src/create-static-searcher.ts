@@ -150,7 +150,7 @@ const loadSearchIndex = async (indexUrl: string): Promise<MiniSearch<SearchIndex
  * <Header searcher={searcher} />
  * ```
  *
- * @see {@link https://robindoc.com/docs/customization/search Search integration}
+ * @see {@link https://robindoc.dev/docs/customization/search Search integration}
  */
 export const createStaticSearcher = (indexUrl: string): Searcher => {
     return async (search: string, abortController: AbortController): Promise<SearchItem[]> => {
